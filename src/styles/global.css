@@ -102,8 +102,8 @@ section.pad { padding: 84px 0; }
 .heromain .acts { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
 .heromain .btn-ghost { background: transparent; border-color: rgba(255,255,255,.22); color: #fff; }
 .heromain .btn-ghost:hover { border-color: var(--teal-300); color: var(--teal-300); }
-.heromain .specs { display: flex; gap: 0; margin-top: 42px; border-top: 1px solid var(--line); }
-.heromain .sp { padding: 18px 26px 0 0; margin-right: 26px; border-right: 1px solid var(--line); }
+.heromain .specs { display: flex; gap: 0; margin-top: 46px; border-top: 1px solid rgba(255,255,255,.12); }
+.heromain .sp { padding: 18px 46px 0 0; margin-right: 0; border-right: 1px solid rgba(255,255,255,.12); }
 .heromain .sp:last-child { border-right: 0; }
 .heromain .sp .n { font-family: var(--disp); font-size: 24px; font-weight: 600; color: #fff; }
 .heromain .sp .l { font-size: 10.5px; letter-spacing: .01em; color: var(--teal-300); margin-top: 3px; }
