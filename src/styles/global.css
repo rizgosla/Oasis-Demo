@@ -72,7 +72,7 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 @media(max-width: 760px) { .site-foot .ftop { grid-template-columns: 1fr 1fr; } }
 
 /* ---------- sections ---------- */
-section.pad { padding: 84px 0; }
+section.pad { padding: 56px 0; }
 .shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
 .shead h2 { font-size: clamp(30px, 3.8vw, 46px); font-weight: 600; margin-top: 14px; letter-spacing: -0.025em; }
 .shead p { color: var(--ink-soft); max-width: 420px; font-size: 16.5px; }
