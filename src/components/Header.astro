@@ -1,0 +1,34 @@
+---
+interface Props {
+  page?: string;
+}
+
+const { page = '' } = Astro.props;
+
+const LOGO = 'https://oasisdentalcarehb.com/wp-content/uploads/2025/07/Oasis_Dental_Logo_Green_Header.png';
+const PHONE = '(714) 893-2106';
+const TEL = 'tel:7148932106';
+
+const nav = [
+  { key: 'services', label: 'Services', href: '/services' },
+  { key: 'team', label: 'Our Team', href: '/team' },
+  { key: 'about', label: 'Our Practice', href: '/#difference' },
+  { key: 'reviews', label: 'Reviews', href: '/#reviews' },
+  { key: 'contact', label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src={LOGO} alt="Oasis Dental Care" /></a>
+    <nav class="nav">
+      {nav.map(n => (
+        <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label}</a>
+      ))}
+    </nav>
+    <div class="hcta">
+      <a class="hphone" href={TEL}>{PHONE}</a>
+      <a class="btn" href="/contact">Book now</a>
+    </div>
+  </div>
+</header>
