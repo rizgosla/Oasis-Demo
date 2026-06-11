@@ -50,7 +50,7 @@ h1,h2,h3,h4{font-family:var(--disp);font-weight:600;line-height:1.04;letter-spac
 @media(max-width:780px){.sbar .hide{display:none}}
 
 /* ---------- header ---------- */
-.site-head{position:sticky;top:0;z-index:50;background:rgba(243,246,245,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-l)}
+.site-head{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line-l)}
 .site-head .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
 .brand{font-family:var(--disp);font-weight:600;font-size:20px;letter-spacing:-0.02em;color:var(--ink)}
 .brand img{height:38px}
@@ -81,15 +81,14 @@ section.pad{padding:84px 0}
 .shead p{color:var(--ink-soft);max-width:420px;font-size:16.5px}
 
 /* ---------- page hero (inner pages) ---------- */
-.phero{background:var(--dark);color:#eaf6f3;position:relative;overflow:hidden}
-.phero .grid-ov{opacity:1}
+.phero{background:#fff;color:var(--ink);position:relative;overflow:hidden;border-bottom:1px solid var(--line-l)}
 .phero .wrap{position:relative;padding:54px 0 60px}
-.phero .crumbs{font-size:13px;color:#7fb3ab;display:flex;gap:8px;align-items:center;margin-bottom:22px}
-.phero .crumbs a:hover{color:#fff}
+.phero .crumbs{font-size:13px;color:var(--ink-soft);display:flex;gap:8px;align-items:center;margin-bottom:22px}
+.phero .crumbs a:hover{color:var(--ink)}
 .phero .crumbs .sep{opacity:.5}
-.phero .tag{color:var(--teal-300)}.phero .tag::before{background:var(--teal-300)}
-.phero h1{font-size:clamp(36px,5vw,62px);font-weight:600;letter-spacing:-0.03em;color:#fff;margin-top:14px;max-width:18ch}
-.phero p{color:#a9ccc5;font-size:18px;max-width:560px;margin-top:18px}
+.phero .tag{color:var(--teal)}.phero .tag::before{background:var(--teal)}
+.phero h1{font-size:clamp(36px,5vw,62px);font-weight:600;letter-spacing:-0.03em;color:var(--ink);margin-top:14px;max-width:18ch}
+.phero p{color:var(--ink-soft);font-size:18px;max-width:560px;margin-top:18px}
 .phero .acts{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
 
 /* ---------- two-column content + sidebar (service detail) ---------- */
