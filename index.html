@@ -144,12 +144,33 @@
   .tech .wrap{position:relative}
   .tech .tag{color:var(--teal-300)}.tech .tag::before{background:var(--teal-300)}
   .tech .shead h2{color:#fff}.tech .shead p{color:#a9ccc5}
-  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
-  .tcard{border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--dark-2)}
+  /* card carousel */
+  .tcarousel{position:relative;margin-top:42px}
+  .ttrack-wrap{overflow:hidden}
+  .ttrack{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+  .tcard{flex:0 0 calc(33.333% - 10px);border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--dark-2);margin-right:14px}
   .tcard .num{font-family:var(--mono);font-size:11px;color:var(--teal-300)}
   .tcard h3{font-size:20px;margin-top:16px;color:#fff}
   .tcard p{color:#a9ccc5;font-size:14.5px;margin-top:10px}
-  @media(max-width:860px){.tgrid{grid-template-columns:1fr}}
+  .tcarousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:28px}
+  .tcarousel-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--dark-2);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0}
+  .tcarousel-btn:hover{background:var(--teal-300);border-color:var(--teal-300);color:#000}
+  .tcarousel-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .tdots{display:flex;gap:6px;align-items:center}
+  .tdot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,transform .2s}
+  .tdot.active{background:var(--teal-300);transform:scale(1.4)}
+  @media(max-width:860px){
+    .tcard{flex:0 0 calc(100% - 0px);margin-right:0}
+    .ttrack{gap:14px}
+  }
+  @media(min-width:861px) and (max-width:1100px){
+    .tcard{flex:0 0 calc(50% - 7px);margin-right:0}
+    .ttrack{gap:14px}
+  }
+  @media(min-width:1101px){
+    .tcard{flex:0 0 calc(33.333% - 10px);margin-right:0}
+    .ttrack{gap:14px}
+  }
 
   /* doctor */
   .doc .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:54px;align-items:center}
@@ -317,13 +338,22 @@
       <div><span class="tag">The Oasis difference</span><h2>Built around precision &amp; comfort.</h2></div>
       <p>It's not just the technology — it's how we listen, explain, and treat every patient like a neighbor.</p>
     </div>
-    <div class="tgrid reveal">
-      <div class="tcard"><div class="num">01 — Imaging</div><h3>Digital X-rays &amp; 3D</h3><p>Lower-dose digital imaging and 3D scans mean faster, safer, more accurate diagnosis.</p></div>
-      <div class="tcard"><div class="num">02 — Restorative</div><h3>Same-day crowns</h3><p>In-house technology lets us complete many restorations in a single visit — no second trip.</p></div>
-      <div class="tcard"><div class="num">03 — Safety</div><h3>ADA · CDC · OSHA</h3><p>Rigorous sterilization and infection-control protocols at the heart of everything we do.</p></div>
-      <div class="tcard"><div class="num">04 — Comfort</div><h3>Comfort-driven design</h3><p>Sunlit rooms, calming colors and plush chairs built to help you relax from the moment you arrive.</p></div>
-      <div class="tcard"><div class="num">05 — Scheduling</div><h3>On-time, every time</h3><p>A 2 p.m. cleaning means you're seated at 2 p.m. Your time matters as much as your smile.</p></div>
-      <div class="tcard"><div class="num">06 — Community</div><h3>Rooted in Surf City</h3><p>Proud to serve Huntington Beach families, locals and weekend beachgoers alike.</p></div>
+    <div class="tcarousel reveal" id="tcarousel">
+      <div class="ttrack-wrap">
+        <div class="ttrack" id="ttrack">
+          <div class="tcard"><div class="num">01 — Imaging</div><h3>Digital X-rays &amp; 3D</h3><p>Lower-dose digital imaging and 3D scans mean faster, safer, more accurate diagnosis.</p></div>
+          <div class="tcard"><div class="num">02 — Restorative</div><h3>Same-day crowns</h3><p>In-house technology lets us complete many restorations in a single visit — no second trip.</p></div>
+          <div class="tcard"><div class="num">03 — Safety</div><h3>ADA · CDC · OSHA</h3><p>Rigorous sterilization and infection-control protocols at the heart of everything we do.</p></div>
+          <div class="tcard"><div class="num">04 — Comfort</div><h3>Comfort-driven design</h3><p>Sunlit rooms, calming colors and plush chairs built to help you relax from the moment you arrive.</p></div>
+          <div class="tcard"><div class="num">05 — Scheduling</div><h3>On-time, every time</h3><p>A 2 p.m. cleaning means you're seated at 2 p.m. Your time matters as much as your smile.</p></div>
+          <div class="tcard"><div class="num">06 — Community</div><h3>Rooted in Surf City</h3><p>Proud to serve Huntington Beach families, locals and weekend beachgoers alike.</p></div>
+        </div>
+      </div>
+      <div class="tcarousel-nav">
+        <button class="tcarousel-btn" id="tprev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="tdots" id="tdots"></div>
+        <button class="tcarousel-btn" id="tnext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
     </div>
   </div>
 </section>
@@ -419,6 +449,62 @@
 <script>
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+  /* tech card carousel */
+  (function(){
+    const track=document.getElementById('ttrack');
+    const dotsWrap=document.getElementById('tdots');
+    if(!track)return;
+    const cards=track.querySelectorAll('.tcard');
+    let idx=0;
+
+    function perView(){
+      const w=track.parentElement.offsetWidth;
+      if(w<861)return 1;
+      if(w<1101)return 2;
+      return 3;
+    }
+
+    function totalSlides(){return Math.ceil(cards.length/perView())}
+
+    function buildDots(){
+      dotsWrap.innerHTML='';
+      for(let i=0;i<totalSlides();i++){
+        const d=document.createElement('button');
+        d.className='tdot'+(i===0?' active':'');
+        d.setAttribute('aria-label','Go to slide '+(i+1));
+        d.addEventListener('click',()=>go(i));
+        dotsWrap.appendChild(d);
+      }
+    }
+
+    function go(n){
+      const pv=perView();
+      const max=totalSlides()-1;
+      idx=Math.max(0,Math.min(n,max));
+      const cardW=cards[0].offsetWidth;
+      const gap=14;
+      track.style.transform='translateX(-'+((cardW+gap)*pv*idx)+'px)';
+      dotsWrap.querySelectorAll('.tdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+    }
+
+    buildDots();
+
+    document.getElementById('tprev').addEventListener('click',()=>go(idx-1));
+    document.getElementById('tnext').addEventListener('click',()=>go(idx+1));
+
+    /* touch/swipe */
+    let sx=0;
+    track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+    track.addEventListener('touchend',e=>{
+      const dx=sx-e.changedTouches[0].clientX;
+      if(Math.abs(dx)>40)go(idx+(dx>0?1:-1));
+    });
+
+    /* rebuild on resize */
+    let rt;
+    window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{idx=0;buildDots();go(0)},120)});
+  })();
 </script>
 </body>
 </html>
