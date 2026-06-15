@@ -346,3 +346,46 @@ section.pad { padding: 56px 0; }
 .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
 .reveal.in { opacity: 1; transform: none; }
 @media(prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+
+/* ---------- soft glow (replaces grid overlay in dark/teal sections) ---------- */
+.bg-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 70% at 62% 42%, rgba(95,208,192,.18) 0%, transparent 68%); pointer-events: none; }
+.bg-glow-teal { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 72% 48%, rgba(255,255,255,.16) 0%, transparent 62%); pointer-events: none; }
+
+/* ---------- services two-col layout ---------- */
+.services-layout { display: grid; grid-template-columns: .88fr 1.12fr; gap: 64px; align-items: center; }
+.services-copy h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; }
+.services-copy > p { color: var(--ink-soft); font-size: 16.5px; margin-top: 16px; max-width: 340px; }
+.services-copy .deck-bar { margin-top: 32px; margin-bottom: 28px; justify-content: flex-start; }
+@media(max-width: 860px) { .services-layout { grid-template-columns: 1fr; gap: 36px; } .deck-stage { order: -1; } .services-copy .deck-bar { justify-content: center; } }
+
+/* ---------- service card deck ---------- */
+.deck-stage { position: relative; height: 320px; }
+.svc-card {
+  position: absolute; top: 0; left: 0; right: 0; height: 296px;
+  background: var(--panel); border: 1px solid var(--line-l); border-radius: 20px;
+  padding: 34px 40px 30px; display: flex; flex-direction: column;
+  transition: transform .52s cubic-bezier(.4,0,.2,1), opacity .45s, box-shadow .4s;
+  will-change: transform, opacity;
+}
+.svc-card[data-pos="0"] { transform: translateY(0) scale(1); z-index: 10; opacity: 1; pointer-events: auto; box-shadow: 0 6px 36px rgba(0,0,0,.1); }
+.svc-card[data-pos="1"] { transform: translateY(10px) scale(0.97); z-index: 9; opacity: 0.75; pointer-events: none; }
+.svc-card[data-pos="2"] { transform: translateY(20px) scale(0.94); z-index: 8; opacity: 0.45; pointer-events: none; }
+.svc-card[data-pos="3"] { transform: translateY(26px) scale(0.91); z-index: 7; opacity: 0; pointer-events: none; }
+.svc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+.svc-ic { width: 46px; height: 46px; border-radius: 12px; background: rgba(11,129,116,.09); display: grid; place-items: center; color: var(--teal); flex-shrink: 0; }
+.svc-ic svg { width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+.svc-num { font-size: 11px; color: var(--ink-soft); letter-spacing: .04em; }
+.svc-body { flex: 1; }
+.svc-body h3 { font-size: clamp(21px, 2.3vw, 27px); color: var(--ink); letter-spacing: -0.02em; }
+.svc-body p { color: var(--ink-soft); font-size: 15px; margin-top: 8px; line-height: 1.62; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+.svc-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--disp); font-weight: 600; font-size: 13.5px; color: var(--teal); margin-top: auto; padding-top: 14px; }
+.svc-cta svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
+.svc-cta:hover svg { transform: translateX(4px); }
+.deck-bar { display: flex; align-items: center; gap: 18px; }
+.deck-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line-l); background: var(--panel); color: var(--ink); cursor: pointer; display: grid; place-items: center; transition: border-color .18s, color .18s; flex-shrink: 0; }
+.deck-arrow:hover { border-color: var(--teal); color: var(--teal); }
+.deck-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.deck-dots { display: flex; gap: 7px; align-items: center; }
+.deck-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-l); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
+.deck-dot.on { background: var(--teal); transform: scale(1.35); }
+@media(max-width: 680px) { .deck-stage { height: 310px; } .svc-card { padding: 28px 26px 24px; } .svc-body h3 { font-size: 21px; } }

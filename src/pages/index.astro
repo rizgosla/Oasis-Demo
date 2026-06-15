@@ -45,58 +45,122 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </div>
 
-<!-- services bento -->
+<!-- services card deck -->
 <section class="pad" id="services">
   <div class="wrap">
-    <div class="shead reveal">
-      <div><span class="tag">/ Services</span><h2>Every treatment, one system.</h2></div>
-      <p>A full-service practice — from preventive visits to advanced restorative and cosmetic work, all under one roof in Huntington Beach.</p>
+    <div class="services-layout reveal">
+
+      <!-- left: copy + controls + CTA -->
+      <div class="services-copy">
+        <h2>Every treatment, one system.</h2>
+        <p>A full-service practice — from preventive visits to advanced restorative and cosmetic work, all under one roof in Huntington Beach.</p>
+        <div class="deck-bar">
+          <button class="deck-arrow" id="deckPrev" aria-label="Previous service">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="deck-dots" id="deckDots"></div>
+          <button class="deck-arrow" id="deckNext" aria-label="Next service">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+        <a class="btn btn-out" href="/services">View all 13 services <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+
+      <!-- right: card stack -->
+      <div class="deck-stage" id="serviceDeck">
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/></svg></div>
+            <span class="svc-num">01 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>General Dentistry</h3>
+            <p>Cleanings, exams and gentle checkups — the backbone of a healthy smile. We take time with every patient to keep small issues from becoming big ones.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/><path d="M19 2l.5 1.5 1.5.5-1.5.5L19 6l-.5-1.5L17 4l1.5-.5z"/></svg></div>
+            <span class="svc-num">02 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Cosmetic Dentistry</h3>
+            <p>From veneers to bonding and smile makeovers — precision cosmetic work designed to complement your natural features and give you confidence to smile freely.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/><path d="M9.5 20h5"/></svg></div>
+            <span class="svc-num">03 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Dental Implants</h3>
+            <p>Permanent, natural-looking tooth replacements anchored to the jaw — delivering the strength and comfort of a natural tooth that can last a lifetime.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 14v2.5M12 14.5V18M17 14v2.5"/></svg></div>
+            <span class="svc-num">04 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Invisalign®</h3>
+            <p>Nearly-invisible aligners with a precise digital treatment plan built around your lifestyle. Straighter teeth without the metal, the discomfort or the self-consciousness.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/></svg></div>
+            <span class="svc-num">05 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Crowns &amp; Bridges</h3>
+            <p>Custom-crafted restorations that protect damaged teeth and fill gaps — built to match your natural bite and appearance with lasting durability.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/><path d="M12 10v4M10 14h4"/></svg></div>
+            <span class="svc-num">06 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Emergency Care</h3>
+            <p>Same-day appointments for broken teeth, acute pain and unexpected dental issues. Call us and we'll make room for you — dental emergencies don't keep business hours.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-top">
+            <div class="svc-ic"><svg viewBox="0 0 24 24"><path d="M12 2l2 7h7l-5.5 4 2 7L12 16l-5.5 4 2-7L3 9h7z"/></svg></div>
+            <span class="svc-num">07 / 07</span>
+          </div>
+          <div class="svc-body">
+            <h3>Teeth Whitening</h3>
+            <p>Professional in-office and take-home whitening — safe, effective results that actually last, without the guesswork or sensitivity of over-the-counter kits.</p>
+          </div>
+          <a class="svc-cta" href="/services">Learn more <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+
+      </div>
     </div>
-    <div class="bento reveal">
-      <div class="cell teal wide">
-        <div class="bgico" style="width:160px;height:160px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/></svg></div>
-        <div class="ch"><span class="num">[01]</span></div>
-        <div class="cb"><div><h3>General Dentistry</h3><p>Cleanings, exams and gentle checkups — the backbone of a healthy smile.</p></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/></svg></div></div>
-      </div>
-      <div class="cell">
-        <div class="bgico" style="width:130px;height:130px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/></svg></div>
-        <div class="ch"><span class="num">[02]</span></div>
-        <div class="cb"><div><h3>Cosmetic</h3><span class="arr">View →</span></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/></svg></div></div>
-      </div>
-      <div class="cell">
-        <div class="bgico" style="width:115px;height:115px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/><path d="M9.5 20h5"/></svg></div>
-        <div class="ch"><span class="num">[03]</span></div>
-        <div class="cb"><div><h3>Implants</h3><span class="arr">View →</span></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/><path d="M9.5 20h5"/></svg></div></div>
-      </div>
-      <div class="cell dark feat tall">
-        <div class="grid-ov"></div>
-        <div class="bgico" style="width:148px;height:148px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 14v2.5M12 14.5V18M17 14v2.5"/></svg></div>
-        <div class="ch" style="position:relative"><span class="num">[04]</span></div>
-        <div class="cb" style="position:relative"><div><h3>Invisalign®</h3><p>Nearly-invisible aligners with a precise digital treatment plan built around your lifestyle.</p><span class="arr" style="margin-top:12px">Start your scan →</span></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 14v2.5M12 14.5V18M17 14v2.5"/></svg></div></div>
-      </div>
-      <div class="cell">
-        <div class="bgico" style="width:130px;height:130px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/></svg></div>
-        <div class="ch"><span class="num">[05]</span></div>
-        <div class="cb"><div><h3>Crowns &amp; Bridges</h3><span class="arr">View →</span></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/></svg></div></div>
-      </div>
-      <div class="cell">
-        <div class="bgico" style="width:122px;height:122px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/></svg></div>
-        <div class="ch"><span class="num">[06]</span></div>
-        <div class="cb"><div><h3>Emergency</h3><span class="arr">Same-day →</span></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/></svg></div></div>
-      </div>
-      <div class="cell wide">
-        <div class="bgico" style="width:155px;height:155px;right:0;top:0"><svg viewBox="0 0 24 24"><path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/></svg></div>
-        <div class="ch"><span class="num">[07]</span></div>
-        <div class="cb"><div><h3>Teeth Whitening</h3><p>In-office and take-home options — refresh your smile on your schedule, no guesswork.</p></div><div class="ic"><svg viewBox="0 0 24 24"><path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/></svg></div></div>
-      </div>
-    </div>
-    <div style="margin-top:26px" class="reveal"><a class="btn btn-out" href="/services">View all 13 services <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
   </div>
 </section>
 
 <!-- tech / difference -->
 <section class="pad tech" id="difference">
-  <div class="grid-ov"></div>
+  <div class="bg-glow"></div>
   <div class="wrap">
     <div class="shead reveal">
       <div><span class="tag">The Oasis difference</span><h2>Built around precision &amp; comfort.</h2></div>
@@ -121,7 +185,6 @@ import Layout from '../layouts/Layout.astro';
       <div class="ovl"><span class="nm">Dr. Jason Fu</span><span class="rl" style="font-size:15px">Lead Dentist</span></div>
     </div>
     <div class="reveal">
-      <span class="tag">/ Meet your dentist</span>
       <h2>Advanced expertise, a calm chairside manner.</h2>
       <p>Dr. Fu brings over 25 years of clinical experience to Oasis Dental Care, pairing advanced technique with a patient-focused approach. He takes the time to answer questions and walk you through every option — preventive, restorative or cosmetic.</p>
       <p>Together with Leandre and Edith, our office team, he's built a practice where clinical precision and genuine warmth go hand in hand.</p>
@@ -177,7 +240,7 @@ import Layout from '../layouts/Layout.astro';
 <section class="book" id="book">
   <div class="wrap">
     <div class="bookcard reveal">
-      <div class="grid-ov"></div>
+      <div class="bg-glow-teal"></div>
       <div class="c">
         <span class="tag" style="font-size:15px">New patients welcome</span>
         <h2>Ready when you are.</h2>
@@ -190,5 +253,62 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </section>
+
+<script>
+(function () {
+  const stage = document.getElementById('serviceDeck');
+  if (!stage) return;
+  const cards = [...stage.querySelectorAll('.svc-card')];
+  const dotsEl = document.getElementById('deckDots');
+  const N = cards.length;
+  let cur = 0, busy = false;
+
+  for (let i = 0; i < N; i++) {
+    const d = document.createElement('button');
+    d.className = 'deck-dot';
+    d.setAttribute('aria-label', 'Service ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  }
+
+  function refresh() {
+    cards.forEach((c, i) => {
+      c.dataset.pos = String(Math.min((i - cur + N) % N, 3));
+    });
+    [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === cur));
+  }
+
+  function go(next) {
+    if (busy || next === cur) return;
+    busy = true;
+    const top = cards[cur];
+    top.style.transition = 'transform .38s cubic-bezier(.4,0,1,1), opacity .28s ease-in';
+    top.style.transform = 'scale(0.82) translateY(36px)';
+    top.style.opacity = '0';
+    top.style.zIndex = '0';
+    setTimeout(() => {
+      top.style.transition = 'none';
+      top.style.transform = 'translateY(26px) scale(0.91)';
+      top.style.opacity = '0';
+      top.style.zIndex = '';
+      cur = ((next % N) + N) % N;
+      refresh();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        top.style.cssText = '';
+        busy = false;
+      }));
+    }, 400);
+  }
+
+  document.getElementById('deckNext').addEventListener('click', () => go((cur + 1) % N));
+  document.getElementById('deckPrev').addEventListener('click', () => go((cur - 1 + N) % N));
+
+  let timer = setInterval(() => go((cur + 1) % N), 5500);
+  stage.addEventListener('mouseenter', () => clearInterval(timer));
+  stage.addEventListener('mouseleave', () => { timer = setInterval(() => go((cur + 1) % N), 5500); });
+
+  refresh();
+})();
+</script>
 
 </Layout>
