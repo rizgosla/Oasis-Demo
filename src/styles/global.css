@@ -371,6 +371,9 @@ section.pad { padding: 56px 0; }
 .svc-card[data-pos="1"] { transform: translateY(10px) scale(0.97); z-index: 9; opacity: 0.75; pointer-events: none; }
 .svc-card[data-pos="2"] { transform: translateY(20px) scale(0.94); z-index: 8; opacity: 0.45; pointer-events: none; }
 .svc-card[data-pos="3"] { transform: translateY(26px) scale(0.91); z-index: 7; opacity: 0; pointer-events: none; }
+/* hide content on backing cards — only the front card shows text */
+.svc-card:not([data-pos="0"]) > * { opacity: 0; }
+.svc-card[data-pos="0"] > * { opacity: 1; transition: opacity .24s ease-in .1s; }
 .svc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .svc-ic { width: 46px; height: 46px; border-radius: 12px; background: rgba(11,129,116,.09); display: grid; place-items: center; color: var(--teal); flex-shrink: 0; }
 .svc-ic svg { width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.7; }
