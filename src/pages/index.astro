@@ -271,33 +271,46 @@ import Layout from '../layouts/Layout.astro';
     dotsEl.appendChild(d);
   }
 
-  function refresh() {
-    cards.forEach((c, i) => {
-      c.dataset.pos = String(Math.min((i - cur + N) % N, 3));
-    });
+  function setDots() {
     [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === cur));
   }
 
   function go(next) {
     if (busy || next === cur) return;
     busy = true;
-    const top = cards[cur];
-    top.style.transition = 'transform .38s cubic-bezier(.4,0,1,1), opacity .28s ease-in';
-    top.style.transform = 'scale(0.82) translateY(36px)';
+    const exitIdx = cur;
+    const top = cards[exitIdx];
+
+    // Swipe top card out to the right — keep it visually on top the whole time
+    top.style.transition = 'transform .42s cubic-bezier(.4,0,.6,1), opacity .38s ease-in';
+    top.style.transform = 'translateX(115%)';
     top.style.opacity = '0';
-    top.style.zIndex = '0';
+    top.style.zIndex = '20';
+    top.style.pointerEvents = 'none';
+
+    // Immediately advance cur and shift the cards below forward —
+    // they smoothly animate to their new positions while the top card swipes away
+    cur = ((next % N) + N) % N;
+    cards.forEach((c, i) => {
+      if (i === exitIdx) return;
+      c.dataset.pos = String(Math.min((i - cur + N) % N, 3));
+    });
+    setDots();
+
     setTimeout(() => {
+      // Snap the exited card to back-of-pile instantly (no transition)
       top.style.transition = 'none';
       top.style.transform = 'translateY(26px) scale(0.91)';
       top.style.opacity = '0';
       top.style.zIndex = '';
-      cur = ((next % N) + N) % N;
-      refresh();
+      top.style.pointerEvents = '';
+      top.dataset.pos = String(Math.min((exitIdx - cur + N) % N, 3));
+      // Re-enable CSS so future transitions work normally
       requestAnimationFrame(() => requestAnimationFrame(() => {
         top.style.cssText = '';
         busy = false;
       }));
-    }, 400);
+    }, 450);
   }
 
   document.getElementById('deckNext').addEventListener('click', () => go((cur + 1) % N));
@@ -307,7 +320,9 @@ import Layout from '../layouts/Layout.astro';
   stage.addEventListener('mouseenter', () => clearInterval(timer));
   stage.addEventListener('mouseleave', () => { timer = setInterval(() => go((cur + 1) % N), 5500); });
 
-  refresh();
+  // init
+  cards.forEach((c, i) => { c.dataset.pos = String(Math.min(i, 3)); });
+  setDots();
 })();
 </script>
 
