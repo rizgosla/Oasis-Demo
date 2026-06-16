@@ -391,3 +391,10 @@ section.pad { padding: 56px 0; }
 .deck-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-l); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
 .deck-dot.on { background: var(--teal); transform: scale(1.35); }
 @media(max-width: 680px) { .deck-stage { height: 310px; } .svc-card { padding: 28px 26px 24px; } .svc-body h3 { font-size: 21px; } }
+
+/* ---------- service page image placeholder ---------- */
+.img-ph { width:100%; aspect-ratio:16/9; background:repeating-linear-gradient(135deg,rgba(11,129,116,.04) 0 14px,transparent 14px 28px),var(--dark-2); border-radius:14px; border:1.5px dashed rgba(95,208,192,.28); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; text-align:center; padding:28px; margin:32px 0; }
+.img-ph-ic { width:48px;height:48px;border-radius:12px;border:1.5px solid rgba(95,208,192,.35);display:grid;place-items:center; }
+.img-ph-ic svg { width:24px;height:24px;stroke:var(--teal-300);fill:none;stroke-width:1.5; }
+.img-ph-lbl { font-family:var(--disp);font-weight:600;font-size:15px;color:#eaf6f3; }
+.img-ph-desc { font-size:12.5px;color:#86b3ab;max-width:360px;line-height:1.55; }
