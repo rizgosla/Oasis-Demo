@@ -124,12 +124,12 @@ section.pad { padding: 56px 0; }
 .heromain .tag::before { background: var(--teal); }
 .heromain h1 { font-size: clamp(42px, 5.6vw, 76px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; margin-top: 22px; color: var(--ink); }
 .heromain h1 span { color: var(--teal); }
-.heromain p { color: var(--ink-soft); font-size: 18.5px; max-width: 460px; margin-top: 22px; }
+.heromain p { color: var(--ink-soft); font-size: 18.5px; max-width: 720px; margin-top: 22px; }
 .heromain .acts { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
 .heromain .btn-ghost { background: transparent; border-color: var(--line-l); color: var(--ink); }
 .heromain .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
-.heromain .specs { display: flex; gap: 0; margin-top: auto; border-top: 4px solid var(--line-l); }
-.heromain .sp { padding: 22px 32px 22px 32px; margin-right: 0; border-right: 4px solid var(--line-l); }
+.heromain .specs { display: flex; gap: 0; margin-top: auto; margin-left: calc(var(--gutter) * -1); margin-right: -56px; padding-left: var(--gutter); border-top: 4px solid var(--line); }
+.heromain .sp { padding: 22px 32px 22px 32px; margin-right: 0; border-right: 4px solid var(--line); }
 .heromain .sp:first-child { padding-left: 0; }
 .heromain .sp:last-child { border-right: 0; }
 .heromain .sp .n { font-family: var(--disp); font-size: 24px; font-weight: 600; color: var(--ink); white-space: nowrap; }
