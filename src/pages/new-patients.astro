@@ -204,6 +204,8 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <style>
+#comfort { padding-bottom: 80px; }
+
 /* quick-links bar */
 .np-links {
   background: var(--panel);
@@ -234,7 +236,7 @@ import Layout from '../layouts/Layout.astro';
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   gap: 60px;
-  align-items: start;
+  align-items: stretch;
 }
 @media(max-width: 880px) {
   .np-split { grid-template-columns: 1fr; gap: 36px; }
@@ -288,9 +290,9 @@ import Layout from '../layouts/Layout.astro';
 }
 
 /* media placeholder */
-.np-media { position: relative; }
+.np-media { position: relative; display: flex; flex-direction: column; }
 .ph-block {
-  aspect-ratio: 4/4.8;
+  flex: 1;
   background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2);
   border-radius: 18px;
   position: relative;
