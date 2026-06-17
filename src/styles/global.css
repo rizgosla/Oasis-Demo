@@ -117,8 +117,8 @@ section.pad { padding: 56px 0; }
 .phero .acts { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
 
 /* ---------- homepage hero ---------- */
-.heromain { background: #fff; overflow: hidden; position: relative; color: var(--ink); min-height: min(80vh, 660px); display: flex; flex-direction: column; }
-.heromain .inner { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 0; width: 100%; flex: 1; }
+.heromain { background: #fff; overflow: hidden; position: relative; color: var(--ink); min-height: min(80vh, 660px); display: flex; }
+.heromain .inner { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; grid-template-rows: 1fr auto; gap: 0; width: 100%; }
 .heromain .copy { padding: 72px 56px 72px var(--gutter); display: flex; flex-direction: column; justify-content: center; }
 .heromain .tag { color: var(--teal); }
 .heromain .tag::before { background: var(--teal); }
@@ -128,7 +128,7 @@ section.pad { padding: 56px 0; }
 .heromain .acts { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
 .heromain .btn-ghost { background: transparent; border-color: var(--line-l); color: var(--ink); }
 .heromain .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
-.heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); }
+.heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); grid-row: 1 / 3; }
 .heromain .media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .heromain .media .ph { position: absolute; inset: 24px; border: 1.5px dashed rgba(95,208,192,.32); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 20px; }
 .heromain .media .ph .ic { width: 56px; height: 56px; border-radius: 13px; border: 1.5px solid rgba(95,208,192,.4); display: grid; place-items: center; }
@@ -136,14 +136,15 @@ section.pad { padding: 56px 0; }
 .heromain .media .ph .t { font-family: var(--disp); font-weight: 600; font-size: 19px; color: #eaf6f3; }
 .heromain .media .ph .s { font-size: 13.5px; color: #86b3ab; max-width: 230px; line-height: 1.5; }
 .heromain .media .badge { position: absolute; top: 18px; right: 18px; background: rgba(8,34,31,.82); backdrop-filter: blur(4px); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: 11.5px; letter-spacing: .01em; color: var(--teal-300); display: flex; align-items: center; gap: 8px; }
-@media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); } }
+@media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; grid-template-rows: auto auto auto; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); grid-row: auto; } }
 
 /* ---------- page section links ---------- */
 .page-links { background: var(--panel); border-bottom: 1px solid var(--line-l); padding: 14px 0; }
 .page-links .wrap { display: flex; gap: 6px; flex-wrap: wrap; }
 .page-links a { font-family: var(--disp); font-size: 13.5px; font-weight: 600; color: var(--ink-soft); padding: 8px 16px; border-radius: 6px; transition: .16s; }
 .page-links a:hover { color: var(--teal); background: rgba(11,129,116,.07); }
-.heromain .page-links { border-bottom: none; border-top: 1px solid var(--line-l); }
+/* hero-embedded variant — sits in left grid column, image spans both rows */
+.heromain .page-links { border-bottom: none; border-top: 1px solid var(--line-l); padding: 14px var(--gutter); display: flex; gap: 6px; flex-wrap: wrap; align-content: center; }
 
 /* ---------- marquee strip ---------- */
 .strip { background: #fff; border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); overflow: hidden; }
