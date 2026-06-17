@@ -445,45 +445,46 @@ import Layout from '../layouts/Layout.astro';
 /* forms section */
 .forms-layout {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 40px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: stretch;
 }
 .forms-info {
   display: flex;
   flex-direction: column;
-  align-self: stretch;
+  background: #fff;
+  border: 1px solid #e4e8e7;
+  border-radius: 20px;
+  padding: 44px 40px;
 }
 .forms-h2 {
   font-size: clamp(30px, 3.8vw, 46px);
   font-weight: 600;
   letter-spacing: -0.025em;
   margin-top: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 @media(max-width: 860px) {
   .forms-layout { grid-template-columns: 1fr; }
 }
 .forms-info p {
-  font-size: 16.5px;
+  font-size: 17px;
   color: var(--ink-soft);
-  line-height: 1.65;
-  max-width: 560px;
-  margin-top: auto;
+  line-height: 1.7;
+  margin-top: 0;
 }
 .forms-note {
   display: flex;
   gap: 14px;
   align-items: flex-start;
-  margin-top: auto;
+  margin-top: 28px;
   padding: 18px 20px;
   background: rgba(11,129,116,.07);
   border: 1px solid rgba(11,129,116,.18);
   border-radius: 12px;
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--ink-soft);
   line-height: 1.6;
-  max-width: 560px;
 }
 .forms-note svg {
   width: 20px;
@@ -495,33 +496,42 @@ import Layout from '../layouts/Layout.astro';
   margin-top: 1px;
 }
 .forms-placeholder {
-  aspect-ratio: 16/9;
-  background: var(--panel);
-  border: 1.5px dashed var(--line-l);
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
+  flex: 1;
+  min-height: 320px;
+  background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2);
+  border-radius: 18px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fp-inner {
+  position: absolute;
+  inset: 24px;
+  border: 1.5px dashed rgba(95,208,192,.32);
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
   text-align: center;
-  padding: 32px;
+  padding: 24px;
 }
 .fp-ic {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   border-radius: 14px;
-  background: rgba(11,129,116,.08);
+  border: 1.5px solid rgba(95,208,192,.4);
   display: grid;
   place-items: center;
 }
 .fp-ic svg {
   width: 28px;
   height: 28px;
-  stroke: var(--teal);
+  stroke: var(--teal-300);
   fill: none;
   stroke-width: 1.5;
 }
@@ -529,11 +539,11 @@ import Layout from '../layouts/Layout.astro';
   font-family: var(--disp);
   font-weight: 600;
   font-size: 18px;
-  color: var(--ink);
+  color: #fff;
 }
 .fp-sub {
   font-size: 13.5px;
-  color: var(--ink-soft);
+  color: #9cc4bd;
   max-width: 220px;
   line-height: 1.55;
 }
