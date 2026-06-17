@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <!-- Quick links bar -->
-<div class="np-links">
+<div class="page-links">
   <div class="wrap">
     <a href="#comfort">Care &amp; Comfort</a>
     <a href="#faq">New Patient FAQ</a>
@@ -205,31 +205,6 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 #comfort { padding-bottom: 80px; }
-
-/* quick-links bar */
-.np-links {
-  background: var(--panel);
-  border-bottom: 1px solid var(--line-l);
-  padding: 14px 0;
-}
-.np-links .wrap {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.np-links a {
-  font-family: var(--disp);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--ink-soft);
-  padding: 8px 16px;
-  border-radius: 6px;
-  transition: .16s;
-}
-.np-links a:hover {
-  color: var(--teal);
-  background: rgba(11,129,116,.07);
-}
 
 /* split layout */
 .np-split {
