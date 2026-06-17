@@ -348,7 +348,17 @@ import Layout from '../layouts/Layout.astro';
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
   margin-top: 42px;
+  perspective: 1200px;
 }
+.values-grid.reveal { opacity: 1; transform: none; }
+.values-grid.reveal .vcard { opacity: 0; transform: perspective(900px) rotateY(-20deg) translateY(28px) scale(.92); transform-origin: 90% 60%; }
+.values-grid.reveal.in .vcard { animation: dealIn .65s cubic-bezier(.34, 1.4, .5, 1) forwards; }
+.values-grid.reveal.in .vcard:nth-child(1) { animation-delay: 0ms; }
+.values-grid.reveal.in .vcard:nth-child(2) { animation-delay: 90ms; }
+.values-grid.reveal.in .vcard:nth-child(3) { animation-delay: 180ms; }
+.values-grid.reveal.in .vcard:nth-child(4) { animation-delay: 270ms; }
+.values-grid.reveal.in .vcard:nth-child(5) { animation-delay: 360ms; }
+@media(prefers-reduced-motion: reduce) { .values-grid.reveal .vcard, .values-grid.reveal.in .vcard { opacity: 1; transform: none; animation: none; } }
 @media(max-width: 900px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width: 560px) { .values-grid { grid-template-columns: 1fr; } }
 .vcard {
@@ -356,7 +366,13 @@ import Layout from '../layouts/Layout.astro';
   border-radius: 14px;
   padding: 28px;
   background: var(--dark-2);
+  position: relative;
+  overflow: hidden;
+  transition: background .25s ease, border-color .25s ease, transform .35s ease;
 }
+.vcard::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--teal-300), transparent); transform: translateX(-101%); transition: transform .55s ease; }
+.vcard:hover { background: var(--dark); border-color: var(--teal-300); transform: translateY(-4px); }
+.vcard:hover::after { transform: translateX(0); }
 .v-ic {
   width: 44px;
   height: 44px;

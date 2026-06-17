@@ -253,8 +253,15 @@ section.pad { padding: 56px 0; }
 
 /* ---------- reviews ---------- */
 .rev { background: var(--panel); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); }
-.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 42px; }
-.rc { border: 1px solid var(--line-l); border-radius: 14px; padding: 26px; background: var(--bg); }
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 42px; perspective: 1200px; }
+.rgrid.reveal { opacity: 1; transform: none; }
+.rgrid.reveal .rc { opacity: 0; transform: perspective(900px) rotateY(-20deg) translateY(28px) scale(.92); transform-origin: 90% 60%; }
+.rgrid.reveal.in .rc { animation: dealIn .65s cubic-bezier(.34, 1.4, .5, 1) forwards; }
+.rgrid.reveal.in .rc:nth-child(1) { animation-delay: 0ms; }
+.rgrid.reveal.in .rc:nth-child(2) { animation-delay: 90ms; }
+.rgrid.reveal.in .rc:nth-child(3) { animation-delay: 180ms; }
+@media(prefers-reduced-motion: reduce) { .rgrid.reveal .rc, .rgrid.reveal.in .rc { opacity: 1; transform: none; animation: none; } }
+.rc { border: 1px solid var(--line-l); border-radius: 14px; padding: 26px; background: var(--bg); position: relative; overflow: hidden; }
 .rc .top { display: flex; justify-content: space-between; align-items: center; }
 .rc .st { color: var(--teal); letter-spacing: 1px; font-size: 13px; }
 .rc .src { font-size: 10.5px; letter-spacing: .01em; color: var(--ink-soft); }
