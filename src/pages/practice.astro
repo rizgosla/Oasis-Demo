@@ -27,10 +27,10 @@ import Layout from '../layouts/Layout.astro';
       <div class="practice-copy">
         <span class="tag">Our Mission</span>
         <h2>Care grounded in trust, precision, and respect.</h2>
-        <p>For many years, Oasis Dental Care has served the Huntington Beach community with a warm, personal approach supported by modern techniques and clear communication.</p>
-        <p style="margin-top:16px">Our goal is to provide dependable dental care grounded in professionalism, clarity, and respect for your comfort. We combine experience with up-to-date diagnostic tools such as digital imaging and detailed examinations, helping you make confident, informed decisions about your treatment.</p>
-        <p style="margin-top:16px">Every visit is designed to support long-term oral health through early detection, preventive education, and solutions tailored to your individual needs.</p>
-        <div style="margin-top:28px"><a class="btn" href="/contact">Schedule a visit</a></div>
+        <p style="margin-top:22px">For many years, Oasis Dental Care has served the Huntington Beach community with a warm, personal approach supported by modern techniques and clear communication.</p>
+        <p style="margin-top:14px">Our goal is to provide dependable dental care grounded in professionalism, clarity, and respect for your comfort. We combine experience with up-to-date diagnostic tools such as digital imaging and detailed examinations, helping you make confident, informed decisions about your treatment.</p>
+        <p style="margin-top:14px">Every visit is designed to support long-term oral health through early detection, preventive education, and solutions tailored to your individual needs.</p>
+        <div style="margin-top:32px"><a class="btn" href="/contact">Schedule a visit</a></div>
       </div>
       <div class="practice-media">
         <div class="ph-block">
@@ -199,28 +199,39 @@ import Layout from '../layouts/Layout.astro';
 /* practice page layout */
 .practice-split {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 60px;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 72px;
   align-items: center;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 @media(max-width: 880px) {
   .practice-split { grid-template-columns: 1fr; gap: 36px; }
 }
+.practice-copy { max-width: 620px; }
 .practice-copy h2 {
-  font-size: clamp(28px, 3.6vw, 44px);
+  font-size: clamp(28px, 3.2vw, 40px);
   margin-top: 14px;
   letter-spacing: -0.025em;
+  line-height: 1.15;
 }
 .practice-copy p {
   color: var(--ink-soft);
-  font-size: 16.5px;
-  line-height: 1.65;
+  font-size: 16px;
+  line-height: 1.7;
+  max-width: 56ch;
 }
 .practice-media {
   position: relative;
+  max-width: 460px;
+  width: 100%;
+  justify-self: end;
+}
+@media(max-width: 880px) {
+  .practice-media { justify-self: start; max-width: 100%; }
 }
 .ph-block {
-  aspect-ratio: 4/4.5;
+  aspect-ratio: 1/1;
   background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2);
   border-radius: 18px;
   position: relative;
