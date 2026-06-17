@@ -60,8 +60,31 @@
   nav a{font-family:var(--disp);font-weight:500;font-size:14.5px;color:var(--ink-soft);padding:8px 14px;border-radius:6px}
   nav a:hover{color:var(--ink);background:var(--line-l)}
   .hcta{display:flex;align-items:center;gap:14px}
+  .hcta .btn{white-space:nowrap}
   .hphone{font-family:var(--mono);font-size:14px;font-weight:500;white-space:nowrap}
-  @media(max-width:1020px){nav,.hphone{display:none}}
+  .menuToggle{display:none;background:transparent;border:1px solid var(--line-l);border-radius:8px;width:40px;height:40px;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:.16s;padding:0}
+  .menuToggle:hover{border-color:var(--teal);color:var(--teal)}
+  .menuToggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+  .menuToggle .x1,.menuToggle .x2,.menuToggle .x3{transform-origin:center;transition:transform .25s ease,opacity .2s ease}
+  .menuToggle.open .x1{transform:translateY(5px) rotate(45deg)}
+  .menuToggle.open .x2{opacity:0}
+  .menuToggle.open .x3{transform:translateY(-5px) rotate(-45deg)}
+  .mobileMenu{position:absolute;top:100%;left:0;right:0;background:rgba(243,246,245,.97);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-l);max-height:0;overflow:hidden;transition:max-height .3s ease;visibility:hidden}
+  .mobileMenu.open{max-height:520px;visibility:visible}
+  .mobileMenu .inner{display:flex;flex-direction:column;padding:8px var(--gutter) 18px}
+  .mobileMenu a{font-family:var(--disp);font-weight:500;font-size:16px;color:var(--ink);padding:14px 4px;border-bottom:1px solid var(--line-l);display:flex;justify-content:space-between;align-items:center}
+  .mobileMenu a:last-child{border-bottom:0}
+  .mobileMenu a:hover{color:var(--teal)}
+  .mobileMenu a .arr{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+  @media(max-width:1020px){nav,.hphone{display:none}.menuToggle{display:inline-flex}}
+  @media(max-width:560px){
+    header .wrap{height:64px;gap:10px}
+    .brand img{height:32px}
+    .hcta{gap:8px}
+    .hcta .btn{padding:9px 14px;font-size:13px}
+    .menuToggle{width:38px;height:38px}
+  }
+  @media(min-width:1021px){.mobileMenu{display:none}}
 
   /* hero */
   .hero{padding:0}
@@ -81,8 +104,16 @@
   .heromain .sp{padding:22px 32px 0 32px;margin-right:0;border-right:1px solid var(--line-l)}
   .heromain .sp:first-child{padding-left:0}
   .heromain .sp:last-child{border-right:0}
-  .heromain .sp .n{font-family:var(--disp);font-size:24px;font-weight:600;color:var(--ink)}
-  .heromain .sp .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.01em;;color:var(--teal);margin-top:3px}
+  .heromain .sp .n{font-family:var(--disp);font-size:24px;font-weight:600;color:var(--ink);white-space:nowrap}
+  .heromain .sp .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.01em;;color:var(--teal);margin-top:3px;white-space:nowrap}
+  @media(max-width:560px){
+    .heromain .specs{margin-top:34px;border-top:1px solid var(--line-l);gap:0}
+    .heromain .sp{flex:1 1 0;padding:18px 0 0;border-right:0;text-align:left;position:relative;min-width:0}
+    .heromain .sp+.sp{padding-left:14px;margin-left:14px}
+    .heromain .sp+.sp::before{content:"";position:absolute;left:0;top:22px;bottom:6px;width:1px;background:var(--line-l)}
+    .heromain .sp .n{font-size:18px}
+    .heromain .sp .l{font-size:10px;margin-top:4px}
+  }
   .heromain .media{position:relative;border-left:1px solid var(--line-l);background:repeating-linear-gradient(135deg,rgba(11,129,116,.04) 0 14px,transparent 14px 28px),var(--dark-2)}
   .heromain .media img{width:100%;height:100%;object-fit:cover;object-position:center}
   .heromain .media .ph{position:absolute;inset:24px;border:1.5px dashed rgba(95,208,192,.32);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
@@ -144,33 +175,19 @@
   .tech .wrap{position:relative}
   .tech .tag{color:var(--teal-300)}.tech .tag::before{background:var(--teal-300)}
   .tech .shead h2{color:#fff}.tech .shead p{color:#a9ccc5}
-  /* card carousel */
-  .tcarousel{position:relative;margin-top:42px}
-  .ttrack-wrap{overflow:hidden}
-  .ttrack{display:flex;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-  .tcard{flex:0 0 calc(33.333% - 10px);border:1px solid var(--line);border-radius:14px;padding:28px;background:var(--dark-2);margin-right:14px}
-  .tcard .num{font-family:var(--mono);font-size:11px;color:var(--teal-300)}
-  .tcard h3{font-size:20px;margin-top:16px;color:#fff}
-  .tcard p{color:#a9ccc5;font-size:14.5px;margin-top:10px}
-  .tcarousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:28px}
-  .tcarousel-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--dark-2);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0}
-  .tcarousel-btn:hover{background:var(--teal-300);border-color:var(--teal-300);color:#000}
-  .tcarousel-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .tdots{display:flex;gap:6px;align-items:center}
-  .tdot{width:6px;height:6px;border-radius:50%;background:var(--line);transition:background .2s,transform .2s}
-  .tdot.active{background:var(--teal-300);transform:scale(1.4)}
-  @media(max-width:860px){
-    .tcard{flex:0 0 calc(100% - 0px);margin-right:0}
-    .ttrack{gap:14px}
-  }
-  @media(min-width:861px) and (max-width:1100px){
-    .tcard{flex:0 0 calc(50% - 7px);margin-right:0}
-    .ttrack{gap:14px}
-  }
-  @media(min-width:1101px){
-    .tcard{flex:0 0 calc(33.333% - 10px);margin-right:0}
-    .ttrack{gap:14px}
-  }
+  /* difference card deck */
+  .ddeck{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:42px}
+  .ddeck.reveal{transform:none}
+  .dcard{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--dark-2);opacity:0;transform:scale(.86) translateY(8px);transition:opacity .55s cubic-bezier(.34,1.4,.5,1),transform .55s cubic-bezier(.34,1.4,.5,1),border-color .2s,background .2s;transition-delay:calc(var(--i,0)*70ms);position:relative;overflow:hidden}
+  .ddeck.in .dcard{opacity:1;transform:none}
+  .dcard:hover{border-color:var(--teal-300);background:var(--dark)}
+  .dcard::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal-300),transparent);transform:translateX(-100%);transition:transform .5s ease}
+  .dcard:hover::after{transform:translateX(0)}
+  .dcard .num{font-family:var(--mono);font-size:11px;color:var(--teal-300)}
+  .dcard h3{font-size:18px;margin-top:14px;color:#fff}
+  .dcard p{color:#a9ccc5;font-size:14px;margin-top:8px;line-height:1.5}
+  @media(min-width:861px) and (max-width:1100px){.ddeck{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:860px){.ddeck{grid-template-columns:1fr;gap:10px;margin-top:32px}.dcard{padding:18px 20px}.dcard h3{font-size:17px}.dcard p{font-size:13.5px}}
 
   /* doctor */
   .doc .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:54px;align-items:center}
@@ -267,6 +284,20 @@
     <div class="hcta">
       <a class="hphone" href="tel:7148932106">(714) 893-2106</a>
       <a class="btn" href="#book">Book now</a>
+      <button class="menuToggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24"><line class="x1" x1="4" y1="7" x2="20" y2="7"/><line class="x2" x1="4" y1="12" x2="20" y2="12"/><line class="x3" x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobileMenu" id="mobileMenu">
+    <div class="inner">
+      <a href="index.html">Home <span class="arr">→</span></a>
+      <a href="services.html">Services <span class="arr">→</span></a>
+      <a href="#tech">Technology <span class="arr">↓</span></a>
+      <a href="#doctor">Dr. Fu <span class="arr">↓</span></a>
+      <a href="#reviews">Reviews <span class="arr">↓</span></a>
+      <a href="#location">Visit <span class="arr">↓</span></a>
+      <a href="contact.html">Contact <span class="arr">→</span></a>
     </div>
   </div>
 </header>
@@ -337,22 +368,13 @@
       <div><span class="tag">The Oasis difference</span><h2>Built around precision &amp; comfort.</h2></div>
       <p>It's not just the technology — it's how we listen, explain, and treat every patient like a neighbor.</p>
     </div>
-    <div class="tcarousel reveal" id="tcarousel">
-      <div class="ttrack-wrap">
-        <div class="ttrack" id="ttrack">
-          <div class="tcard"><div class="num">01 — Imaging</div><h3>Digital X-rays &amp; 3D</h3><p>Lower-dose digital imaging and 3D scans mean faster, safer, more accurate diagnosis.</p></div>
-          <div class="tcard"><div class="num">02 — Restorative</div><h3>Same-day crowns</h3><p>In-house technology lets us complete many restorations in a single visit — no second trip.</p></div>
-          <div class="tcard"><div class="num">03 — Safety</div><h3>ADA · CDC · OSHA</h3><p>Rigorous sterilization and infection-control protocols at the heart of everything we do.</p></div>
-          <div class="tcard"><div class="num">04 — Comfort</div><h3>Comfort-driven design</h3><p>Sunlit rooms, calming colors and plush chairs built to help you relax from the moment you arrive.</p></div>
-          <div class="tcard"><div class="num">05 — Scheduling</div><h3>On-time, every time</h3><p>A 2 p.m. cleaning means you're seated at 2 p.m. Your time matters as much as your smile.</p></div>
-          <div class="tcard"><div class="num">06 — Community</div><h3>Rooted in Surf City</h3><p>Proud to serve Huntington Beach families, locals and weekend beachgoers alike.</p></div>
-        </div>
-      </div>
-      <div class="tcarousel-nav">
-        <button class="tcarousel-btn" id="tprev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-        <div class="tdots" id="tdots"></div>
-        <button class="tcarousel-btn" id="tnext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
-      </div>
+    <div class="ddeck reveal">
+      <div class="dcard" style="--i:0"><div class="num">01 — Imaging</div><h3>Digital X-rays &amp; 3D</h3><p>Lower-dose digital imaging and 3D scans mean faster, safer, more accurate diagnosis.</p></div>
+      <div class="dcard" style="--i:1"><div class="num">02 — Restorative</div><h3>Same-day crowns</h3><p>In-house technology lets us complete many restorations in a single visit — no second trip.</p></div>
+      <div class="dcard" style="--i:2"><div class="num">03 — Safety</div><h3>ADA · CDC · OSHA</h3><p>Rigorous sterilization and infection-control protocols at the heart of everything we do.</p></div>
+      <div class="dcard" style="--i:3"><div class="num">04 — Comfort</div><h3>Comfort-driven design</h3><p>Sunlit rooms, calming colors and plush chairs built to help you relax from the moment you arrive.</p></div>
+      <div class="dcard" style="--i:4"><div class="num">05 — Scheduling</div><h3>On-time, every time</h3><p>A 2 p.m. cleaning means you're seated at 2 p.m. Your time matters as much as your smile.</p></div>
+      <div class="dcard" style="--i:5"><div class="num">06 — Community</div><h3>Rooted in Surf City</h3><p>Proud to serve Huntington Beach families, locals and weekend beachgoers alike.</p></div>
     </div>
   </div>
 </section>
@@ -449,60 +471,26 @@
   const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
   document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
 
-  /* tech card carousel */
+  /* mobile menu toggle */
   (function(){
-    const track=document.getElementById('ttrack');
-    const dotsWrap=document.getElementById('tdots');
-    if(!track)return;
-    const cards=track.querySelectorAll('.tcard');
-    let idx=0;
-
-    function perView(){
-      const w=track.parentElement.offsetWidth;
-      if(w<861)return 1;
-      if(w<1101)return 2;
-      return 3;
+    const btn=document.getElementById('menuToggle');
+    const menu=document.getElementById('mobileMenu');
+    if(!btn||!menu)return;
+    function close(){btn.classList.remove('open');menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}
+    function toggle(){
+      const open=!menu.classList.contains('open');
+      btn.classList.toggle('open',open);
+      menu.classList.toggle('open',open);
+      btn.setAttribute('aria-expanded',String(open));
     }
-
-    function totalSlides(){return Math.ceil(cards.length/perView())}
-
-    function buildDots(){
-      dotsWrap.innerHTML='';
-      for(let i=0;i<totalSlides();i++){
-        const d=document.createElement('button');
-        d.className='tdot'+(i===0?' active':'');
-        d.setAttribute('aria-label','Go to slide '+(i+1));
-        d.addEventListener('click',()=>go(i));
-        dotsWrap.appendChild(d);
-      }
-    }
-
-    function go(n){
-      const pv=perView();
-      const max=totalSlides()-1;
-      idx=Math.max(0,Math.min(n,max));
-      const cardW=cards[0].offsetWidth;
-      const gap=14;
-      track.style.transform='translateX(-'+((cardW+gap)*pv*idx)+'px)';
-      dotsWrap.querySelectorAll('.tdot').forEach((d,i)=>d.classList.toggle('active',i===idx));
-    }
-
-    buildDots();
-
-    document.getElementById('tprev').addEventListener('click',()=>go(idx-1));
-    document.getElementById('tnext').addEventListener('click',()=>go(idx+1));
-
-    /* touch/swipe */
-    let sx=0;
-    track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
-    track.addEventListener('touchend',e=>{
-      const dx=sx-e.changedTouches[0].clientX;
-      if(Math.abs(dx)>40)go(idx+(dx>0?1:-1));
+    btn.addEventListener('click',toggle);
+    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+    document.addEventListener('click',e=>{
+      if(!menu.classList.contains('open'))return;
+      if(menu.contains(e.target)||btn.contains(e.target))return;
+      close();
     });
-
-    /* rebuild on resize */
-    let rt;
-    window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{idx=0;buildDots();go(0)},120)});
+    window.addEventListener('resize',()=>{if(window.innerWidth>1020)close()});
   })();
 </script>
 </body>
