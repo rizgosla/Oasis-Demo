@@ -136,7 +136,7 @@ section.pad { padding: 56px 0; }
 .heromain .media .ph .t { font-family: var(--disp); font-weight: 600; font-size: 19px; color: #eaf6f3; }
 .heromain .media .ph .s { font-size: 13.5px; color: #86b3ab; max-width: 230px; line-height: 1.5; }
 .heromain .media .badge { position: absolute; top: 18px; right: 18px; background: rgba(8,34,31,.82); backdrop-filter: blur(4px); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: 11.5px; letter-spacing: .01em; color: var(--teal-300); display: flex; align-items: center; gap: 8px; }
-@media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 300px; border-left: 0; border-top: 1px solid var(--line); } }
+@media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); } }
 
 /* ---------- marquee strip ---------- */
 .strip { background: #fff; border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); overflow: hidden; }
