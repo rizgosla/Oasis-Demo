@@ -16,6 +16,21 @@ const nav = [
   { key: 'new-patients', label: 'New Patients', href: '/new-patients' },
   { key: 'contact', label: 'Contact', href: '/contact' },
 ];
+
+const servicesDropdown = [
+  { id: 'general-dentistry',   label: 'General Dentistry' },
+  { id: 'cosmetic-dentistry',  label: 'Cosmetic Dentistry' },
+  { id: 'dental-implants',     label: 'Dental Implants' },
+  { id: 'invisalign',          label: 'Invisalign Treatment' },
+  { id: 'crowns-bridges',      label: 'Crowns & Bridges' },
+  { id: 'emergency-dentistry', label: 'Emergency Dentistry' },
+  { id: 'teeth-whitening',     label: 'Teeth Whitening' },
+  { id: 'veneers',             label: 'Veneers' },
+  { id: 'root-canal',          label: 'Root Canal Therapy' },
+  { id: 'extractions',         label: 'Extractions' },
+  { id: 'periodontal-care',    label: 'Periodontal Care' },
+  { id: 'pediatric-dentistry', label: 'Pediatric Dentistry' },
+];
 ---
 
 <header class="site-head">
@@ -23,7 +38,31 @@ const nav = [
     <a class="brand" href="/"><img src={LOGO} alt="Oasis Dental Care" /></a>
     <nav class="nav">
       {nav.filter(n => n.key !== 'home').map(n => (
-        <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label}</a>
+        n.key === 'services' ? (
+          <div class="nav-dd">
+            <a
+              href={n.href}
+              class={`nav-dd-trigger ${n.key === page ? 'active' : ''}`}
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              {n.label}
+              <svg class="nav-dd-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </a>
+            <div class="nav-dd-menu" role="menu">
+              {servicesDropdown.map(s => (
+                <a
+                  href={`/services#svc=${s.id}`}
+                  class="nav-dd-item"
+                  data-svc={s.id}
+                  role="menuitem"
+                >{s.label}</a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label}</a>
+        )
       ))}
     </nav>
     <div class="hcta">
@@ -44,32 +83,134 @@ const nav = [
   </div>
 </header>
 
+<style>
+  .nav-dd { position: relative; }
+  .nav-dd-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .nav-dd-caret {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.18s ease;
+  }
+  .nav-dd:hover .nav-dd-caret,
+  .nav-dd.open .nav-dd-caret {
+    transform: rotate(180deg);
+  }
+
+  .nav-dd-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 240px;
+    background: var(--panel, #fff);
+    border: 1px solid var(--line-l, rgba(0,0,0,0.08));
+    border-radius: 10px;
+    padding: 6px;
+    box-shadow: 0 14px 40px rgba(8, 34, 31, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+    z-index: 200;
+  }
+  .nav-dd:hover .nav-dd-menu,
+  .nav-dd:focus-within .nav-dd-menu,
+  .nav-dd.open .nav-dd-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dd-item {
+    font-family: var(--disp);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--ink-soft);
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .nav-dd-item:hover {
+    color: var(--ink);
+    background: var(--line-l, rgba(0,0,0,0.05));
+  }
+
+  @media (max-width: 1020px) {
+    .nav-dd-menu { display: none; }
+  }
+</style>
+
 <script is:inline>
   (function () {
     var btn = document.getElementById('menuToggle');
     var menu = document.getElementById('mobileNav');
-    if (!btn || !menu) return;
-    function close() {
-      btn.classList.remove('open');
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
+    if (btn && menu) {
+      function close() {
+        btn.classList.remove('open');
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      btn.addEventListener('click', function () {
+        var open = !menu.classList.contains('open');
+        btn.classList.toggle('open', open);
+        menu.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', close);
+      });
+      document.addEventListener('click', function (e) {
+        if (!menu.classList.contains('open')) return;
+        if (menu.contains(e.target) || btn.contains(e.target)) return;
+        close();
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 1020) close();
+      });
     }
-    btn.addEventListener('click', function () {
-      var open = !menu.classList.contains('open');
-      btn.classList.toggle('open', open);
-      menu.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', String(open));
-    });
-    menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', close);
-    });
-    document.addEventListener('click', function (e) {
-      if (!menu.classList.contains('open')) return;
-      if (menu.contains(e.target) || btn.contains(e.target)) return;
-      close();
-    });
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 1020) close();
-    });
+
+    // Services dropdown: intercept click to open modal if already on /services
+    var dd = document.querySelector('.nav-dd');
+    if (dd) {
+      var trigger = dd.querySelector('.nav-dd-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', function (e) {
+          // On desktop, let hover handle. On click (touch), toggle.
+          if (window.innerWidth > 1020) return;
+          e.preventDefault();
+          dd.classList.toggle('open');
+          var expanded = dd.classList.contains('open');
+          trigger.setAttribute('aria-expanded', String(expanded));
+        });
+      }
+
+      dd.querySelectorAll('.nav-dd-item').forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          var id = item.getAttribute('data-svc');
+          if (!id) return;
+          // If already on /services, intercept and open modal directly
+          if (window.location.pathname === '/services' || window.location.pathname === '/services/') {
+            e.preventDefault();
+            if (typeof window.openServiceModal === 'function') {
+              window.openServiceModal(id);
+              history.replaceState(null, '', '/services#svc=' + id);
+            }
+          }
+          // Otherwise normal navigation; services.astro will read hash and open modal
+        });
+      });
+    }
   })();
 </script>
