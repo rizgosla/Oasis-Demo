@@ -280,7 +280,7 @@ section.pad { padding: 56px 0; }
 @media(max-width: 860px) { .doc .wrap { grid-template-columns: 1fr; gap: 34px; } .doc .pic { max-width: 400px; } }
 
 /* ---------- reviews ---------- */
-.rev { background: var(--panel); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); }
+.rev { background: var(--bg); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); }
 .rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 42px; perspective: 1200px; }
 .rgrid.reveal { opacity: 1; transform: none; }
 .rgrid.reveal .rc { opacity: 0; transform: perspective(900px) rotateY(-20deg) translateY(28px) scale(.92); transform-origin: 90% 60%; }
@@ -289,7 +289,7 @@ section.pad { padding: 56px 0; }
 .rgrid.reveal.in .rc:nth-child(2) { animation-delay: 90ms; }
 .rgrid.reveal.in .rc:nth-child(3) { animation-delay: 180ms; }
 @media(prefers-reduced-motion: reduce) { .rgrid.reveal .rc, .rgrid.reveal.in .rc { opacity: 1; transform: none; animation: none; } }
-.rc { border: 1px solid var(--line-l); border-radius: 14px; padding: 26px; background: var(--bg); position: relative; overflow: hidden; }
+.rc { border: 1px solid var(--line-l); border-radius: 14px; padding: 26px; background: var(--panel); position: relative; overflow: hidden; }
 .rc .top { display: flex; justify-content: space-between; align-items: center; }
 .rc .st { color: var(--teal); letter-spacing: 1px; font-size: 13px; }
 .rc .src { font-size: 10.5px; letter-spacing: .01em; color: var(--ink-soft); }
