@@ -56,8 +56,8 @@ import Layout from '../layouts/Layout.astro';
   <div class="wrap">
     <div class="shead reveal">
       <div><span class="tag">Our Dental Team</span><h2>Familiar faces, every visit.</h2></div>
-      <p class="team-intro">Our staff, including hygienists, assistants, and front office team members, works together to create a smooth, comfortable experience at every visit. Many patients see the same team members visit after visit, creating a sense of familiarity and continuity that helps reduce anxiety and build long-term trust.</p>
     </div>
+    <p class="team-intro reveal">Our staff, including hygienists, assistants, and front office team members, works together to create a smooth, comfortable experience at every visit. Many patients see the same team members visit after visit, creating a sense of familiarity and continuity that helps reduce anxiety and build long-term trust.</p>
 
     <div class="team reveal" style="margin-top:42px">
 
@@ -189,8 +189,6 @@ import Layout from '../layouts/Layout.astro';
   grid-template-columns: 1.15fr .85fr;
   gap: 72px;
   align-items: center;
-  max-width: 1180px;
-  margin: 0 auto;
 }
 @media(max-width: 880px) {
   .practice-split { grid-template-columns: 1fr; gap: 36px; }
@@ -210,7 +208,6 @@ import Layout from '../layouts/Layout.astro';
 }
 .practice-media {
   position: relative;
-  max-width: 460px;
   width: 100%;
   justify-self: end;
 }
@@ -285,8 +282,9 @@ import Layout from '../layouts/Layout.astro';
 /* team extras */
 .team-intro {
   color: var(--ink-soft);
-  font-size: 16px;
-  max-width: 420px;
+  font-size: 17px;
+  max-width: 720px;
+  margin-top: 20px;
   line-height: 1.65;
 }
 
