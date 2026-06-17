@@ -118,7 +118,7 @@ section.pad { padding: 56px 0; }
 /* ---------- homepage hero ---------- */
 .heromain { background: #fff; overflow: hidden; position: relative; color: var(--ink); min-height: min(80vh, 660px); display: flex; }
 .heromain .inner { position: relative; display: grid; grid-template-columns: 1.15fr .85fr; gap: 0; width: 100%; }
-.heromain .copy { padding: 72px 56px 68px var(--gutter); display: flex; flex-direction: column; justify-content: center; }
+.heromain .copy { padding: 72px 56px 0 var(--gutter); display: flex; flex-direction: column; justify-content: center; }
 .heromain .tag { color: var(--teal); }
 .heromain .tag::before { background: var(--teal); }
 .heromain h1 { font-size: clamp(42px, 5.6vw, 76px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.02; margin-top: 22px; color: var(--ink); }
@@ -127,8 +127,8 @@ section.pad { padding: 56px 0; }
 .heromain .acts { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
 .heromain .btn-ghost { background: transparent; border-color: var(--line-l); color: var(--ink); }
 .heromain .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
-.heromain .specs { display: flex; gap: 0; margin-top: 60px; border-top: 2px solid var(--line-l); }
-.heromain .sp { padding: 22px 32px 0 32px; margin-right: 0; border-right: 1px solid var(--line-l); }
+.heromain .specs { display: flex; gap: 0; margin-top: auto; border-top: 4px solid var(--line-l); }
+.heromain .sp { padding: 22px 32px 22px 32px; margin-right: 0; border-right: 1px solid var(--line-l); }
 .heromain .sp:first-child { padding-left: 0; }
 .heromain .sp:last-child { border-right: 0; }
 .heromain .sp .n { font-family: var(--disp); font-size: 24px; font-weight: 600; color: var(--ink); white-space: nowrap; }
