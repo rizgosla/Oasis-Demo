@@ -278,9 +278,16 @@ import Layout from '../layouts/Layout.astro';
     const exitIdx = cur;
     const top = cards[exitIdx];
 
-    // Swipe top card out to the right — keep it visually on top the whole time
-    top.style.transition = 'transform .42s cubic-bezier(.4,0,.6,1), opacity .38s ease-in';
-    top.style.transform = 'translateX(115%)';
+    const mobile = window.innerWidth <= 680;
+    if (mobile) {
+      // On mobile: fade + scale down so no horizontal overflow causes page zoom
+      top.style.transition = 'transform .35s cubic-bezier(.4,0,.6,1), opacity .32s ease-in';
+      top.style.transform = 'scale(0.88)';
+    } else {
+      // Desktop: slide out to the right
+      top.style.transition = 'transform .42s cubic-bezier(.4,0,.6,1), opacity .38s ease-in';
+      top.style.transform = 'translateX(115%)';
+    }
     top.style.opacity = '0';
     top.style.zIndex = '20';
     top.style.pointerEvents = 'none';
