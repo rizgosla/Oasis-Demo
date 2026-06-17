@@ -157,11 +157,10 @@ import Layout from '../layouts/Layout.astro';
 <!-- Patient Forms -->
 <section class="pad" id="forms">
   <div class="wrap">
-    <div class="shead reveal">
-      <div><span class="tag">Patient Forms</span><h2>Before your visit.</h2></div>
-    </div>
     <div class="forms-layout reveal">
       <div class="forms-info">
+        <span class="tag">Patient Forms</span>
+        <h2 class="forms-h2">Before your visit.</h2>
         <p>Please do not email completed forms, as standard email is not a secure method for transmitting personal health information. Simply bring the completed forms with you to your scheduled appointment, or arrive a few minutes early to complete them in the office.</p>
         <div class="forms-note">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
@@ -470,8 +469,14 @@ import Layout from '../layouts/Layout.astro';
   display: grid;
   grid-template-columns: 1.1fr .9fr;
   gap: 40px;
-  margin-top: 36px;
-  align-items: center;
+  align-items: start;
+}
+.forms-h2 {
+  font-size: clamp(30px, 3.8vw, 46px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  margin-top: 10px;
+  margin-bottom: 16px;
 }
 @media(max-width: 860px) {
   .forms-layout { grid-template-columns: 1fr; }
