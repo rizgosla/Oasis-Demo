@@ -428,7 +428,15 @@ section.pad { padding: 56px 0; }
 .services-copy h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; }
 .services-copy > p { color: var(--ink-soft); font-size: 16.5px; margin-top: 16px; max-width: 340px; }
 .services-copy .deck-bar { margin-top: 32px; margin-bottom: 28px; justify-content: flex-start; }
-@media(max-width: 860px) { .services-layout { grid-template-columns: 1fr; gap: 36px; } .deck-stage { order: -1; } .services-copy .deck-bar { justify-content: center; } }
+@media(max-width: 860px) {
+  .services-layout { grid-template-columns: 1fr; gap: 28px; }
+  .services-copy { display: contents; }
+  .deck-stage { order: 1; }
+  .services-copy .deck-bar { order: 2; justify-content: center; margin-top: 0; margin-bottom: 0; }
+  .services-copy h2 { order: 3; }
+  .services-copy > p { order: 4; }
+  .services-copy .btn-out { order: 5; }
+}
 
 /* ---------- service card deck ---------- */
 .deck-stage { position: relative; height: 320px; }
