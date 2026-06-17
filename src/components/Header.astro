@@ -10,6 +10,7 @@ const PHONE = '(714) 893-2106';
 const TEL = 'tel:7148932106';
 
 const nav = [
+  { key: 'home', label: 'Home', href: '/' },
   { key: 'services', label: 'Services', href: '/services' },
   { key: 'about', label: 'Our Practice', href: '/practice' },
   { key: 'new-patients', label: 'New Patients', href: '/new-patients' },
@@ -21,13 +22,54 @@ const nav = [
   <div class="wrap">
     <a class="brand" href="/"><img src={LOGO} alt="Oasis Dental Care" /></a>
     <nav class="nav">
-      {nav.map(n => (
+      {nav.filter(n => n.key !== 'home').map(n => (
         <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label}</a>
       ))}
     </nav>
     <div class="hcta">
-      <a class="btn" href={TEL}>Call now</a>
-      <a class="btn" href="/contact">Book now</a>
+      <a class="btn" href={TEL}>Call<span class="cta-more"> now</span></a>
+      <a class="btn" href="/contact">Book<span class="cta-more"> now</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg viewBox="0 0 24 24"><line class="x1" x1="4" y1="7" x2="20" y2="7"/><line class="x2" x1="4" y1="12" x2="20" y2="12"/><line class="x3" x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <div class="inner">
+      {nav.map(n => (
+        <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label} <span class="arr">→</span></a>
+      ))}
+      <a href={TEL} class="phone">{PHONE} <span class="arr">↗</span></a>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('menuToggle');
+    var menu = document.getElementById('mobileNav');
+    if (!btn || !menu) return;
+    function close() {
+      btn.classList.remove('open');
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+    btn.addEventListener('click', function () {
+      var open = !menu.classList.contains('open');
+      btn.classList.toggle('open', open);
+      menu.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    menu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+    document.addEventListener('click', function (e) {
+      if (!menu.classList.contains('open')) return;
+      if (menu.contains(e.target) || btn.contains(e.target)) return;
+      close();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 1020) close();
+    });
+  })();
+</script>
