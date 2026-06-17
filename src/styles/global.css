@@ -57,7 +57,7 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 .nav a:hover { color: var(--ink); background: var(--line-l); }
 .nav a.active { color: var(--teal); background: rgba(11,129,116,.08); }
 .hcta { display: flex; align-items: center; gap: 14px; }
-.hcta .btn { white-space: nowrap; }
+.hcta .btn { white-space: nowrap; gap: 0; }
 .menu-toggle { display: none; background: transparent; border: 1px solid var(--line-l); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); padding: 0; transition: .16s; }
 .menu-toggle:hover { border-color: var(--teal); color: var(--teal); }
 .menu-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
