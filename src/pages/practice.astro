@@ -34,12 +34,14 @@ import Layout from '../layouts/Layout.astro';
   <div class="wrap">
     <div class="practice-split reveal">
       <div class="practice-copy">
-        <span class="tag">Our Mission</span>
-        <h2>Care grounded in trust,<br>precision, and respect.</h2>
-        <p style="margin-top:22px">For many years, Oasis Dental Care has served the Huntington Beach community with a warm, personal approach supported by modern techniques and clear communication.</p>
-        <p style="margin-top:14px">Our goal is to provide dependable dental care grounded in professionalism, clarity, and respect for your comfort. We combine experience with up-to-date diagnostic tools such as digital imaging and detailed examinations, helping you make confident, informed decisions about your treatment.</p>
-        <p style="margin-top:14px">Every visit is designed to support long-term oral health through early detection, preventive education, and solutions tailored to your individual needs.</p>
-        <div style="margin-top:32px"><a class="btn" href="/contact">Schedule a visit</a></div>
+        <div class="mission-card">
+          <span class="tag">Our Mission</span>
+          <h2>Care grounded in trust,<br>precision, and respect.</h2>
+          <p style="margin-top:24px">For many years, Oasis Dental Care has served the Huntington Beach community with a warm, personal approach supported by modern techniques and clear communication.</p>
+          <p style="margin-top:16px">Our goal is to provide dependable dental care grounded in professionalism, clarity, and respect for your comfort. We combine experience with up-to-date diagnostic tools such as digital imaging and detailed examinations, helping you make confident, informed decisions about your treatment.</p>
+          <p style="margin-top:16px">Every visit is designed to support long-term oral health through early detection, preventive education, and solutions tailored to your individual needs.</p>
+          <div style="margin-top:36px"><a class="btn" href="/contact">Schedule a visit</a></div>
+        </div>
       </div>
       <div class="practice-media">
         <div class="ph-block">
@@ -199,39 +201,52 @@ import Layout from '../layouts/Layout.astro';
 .practice-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  gap: 32px;
+  align-items: stretch;
 }
 .team-band .tag { color: var(--teal-300); }
 .team-band .tag::before { background: var(--teal-300); }
 .team-band h2 { font-size: clamp(28px, 3.6vw, 44px); color: #fff; margin-top: 12px; letter-spacing: -0.025em; }
 .team-band p { color: #9cc4bd; margin-top: 16px; max-width: 680px; font-size: 17px; line-height: 1.65; }
 @media(max-width: 880px) {
-  .practice-split { grid-template-columns: 1fr; gap: 36px; }
+  .practice-split { grid-template-columns: 1fr; gap: 24px; }
 }
-.practice-copy { max-width: 620px; }
-.practice-copy h2 {
-  font-size: clamp(28px, 3.2vw, 40px);
+.practice-copy {
+  display: flex;
+  flex-direction: column;
+}
+.mission-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--dark-2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 44px 40px;
+}
+.mission-card h2 {
+  font-size: clamp(30px, 3.6vw, 46px);
   margin-top: 14px;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  letter-spacing: -0.028em;
+  line-height: 1.13;
 }
-.practice-copy p {
+.mission-card p {
   color: var(--ink-soft);
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 56ch;
+  font-size: 17px;
+  line-height: 1.72;
 }
 .practice-media {
   position: relative;
   width: 100%;
-  justify-self: end;
+  display: flex;
+  flex-direction: column;
 }
 @media(max-width: 880px) {
-  .practice-media { justify-self: start; max-width: 100%; }
+  .practice-media { min-height: 280px; }
 }
 .ph-block {
-  aspect-ratio: 4/3;
+  flex: 1;
+  min-height: 320px;
   background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2);
   border-radius: 18px;
   position: relative;
