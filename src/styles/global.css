@@ -110,15 +110,15 @@ section.pad { padding: 56px 0; }
   content: "";
   position: absolute;
   top: 50%;
-  right: -2%;
+  right: 4%;
   transform: translateY(-50%);
-  width: min(55%, 720px);
-  height: 130%;
+  width: min(50%, 640px);
+  height: 110%;
   background-image: url('https://oasisdentalcarehb.com/wp-content/uploads/2025/07/Oasis_Dental_Logo_Green_Header.png');
   background-repeat: no-repeat;
   background-position: center right;
   background-size: contain;
-  opacity: 0.08;
+  opacity: 0.1;
   pointer-events: none;
   z-index: 0;
 }
