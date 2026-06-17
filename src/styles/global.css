@@ -139,9 +139,10 @@ section.pad { padding: 56px 0; }
 @media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); } }
 
 /* ---------- page section links ---------- */
-.page-links { background: var(--panel); border-bottom: 1px solid var(--line-l); padding: 14px 0; }
-.page-links .wrap { display: flex; gap: 6px; flex-wrap: wrap; }
-.page-links a { font-family: var(--disp); font-size: 13.5px; font-weight: 600; color: var(--ink-soft); padding: 8px 16px; border-radius: 6px; transition: .16s; }
+.page-links { background: var(--panel); border-bottom: 1px solid var(--line-l); padding: 14px 0; overflow-x: auto; scrollbar-width: none; }
+.page-links::-webkit-scrollbar { display: none; }
+.page-links .wrap { display: flex; gap: 6px; flex-wrap: nowrap; }
+.page-links a { font-family: var(--disp); font-size: 13.5px; font-weight: 600; color: var(--ink-soft); padding: 8px 16px; border-radius: 6px; transition: .16s; white-space: nowrap; }
 .page-links a:hover { color: var(--teal); background: rgba(11,129,116,.07); }
 
 /* ---------- marquee strip ---------- */
