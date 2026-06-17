@@ -51,18 +51,6 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- Stat band -->
-<div class="stat-band reveal">
-  <div class="wrap">
-    <div class="stat-row">
-      <div class="stat"><div class="n">25+</div><div class="l">Years of experience</div></div>
-      <div class="stat"><div class="n">10k+</div><div class="l">Smiles cared for</div></div>
-      <div class="stat"><div class="n">4.8★</div><div class="l">Patient rated</div></div>
-      <div class="stat"><div class="n">Same-day</div><div class="l">Emergency care</div></div>
-    </div>
-  </div>
-</div>
-
 <!-- Our Dental Team -->
 <section class="pad">
   <div class="wrap">
@@ -293,43 +281,6 @@ import Layout from '../layouts/Layout.astro';
   display: flex;
   align-items: center;
   gap: 8px;
-}
-
-/* stat band */
-.stat-band {
-  background: var(--dark);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 40px 0;
-}
-.stat-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-}
-.stat {
-  padding: 0 32px;
-  border-right: 1px solid var(--line);
-  text-align: center;
-}
-.stat:last-child { border-right: 0; }
-.stat .n {
-  font-family: var(--disp);
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--teal-300);
-  letter-spacing: -0.02em;
-}
-.stat .l {
-  font-size: 12px;
-  color: #7fb3ab;
-  margin-top: 6px;
-  letter-spacing: .01em;
-}
-@media(max-width: 680px) {
-  .stat-row { grid-template-columns: repeat(2, 1fr); }
-  .stat { padding: 16px 20px; border-bottom: 1px solid var(--line); }
-  .stat:nth-child(even) { border-right: 0; }
 }
 
 /* team extras */
