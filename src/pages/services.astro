@@ -1,5 +1,281 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    id: 'general-dentistry',
+    num: '01 — General',
+    category: 'General dentistry',
+    title: 'General Dentistry',
+    pageHref: '/services/general-dentistry',
+    cardDesc: 'General dentistry is all about maintaining your oral health, preventing problems before they start, and giving your teeth the support they need to last a lifetime.',
+    desc: 'From routine cleanings to digital X-rays, general dentistry keeps your whole mouth healthy. We focus on catching problems early, guiding prevention, and making sure every visit is comfortable and clear—no jargon, no surprises.',
+    highlights: ['Checkup & professional cleaning', 'Digital X-rays & full-mouth exam', 'Cavity treatment & tooth-colored fillings', 'Personalized home care guidance'],
+    faqs: [
+      { q: 'How often should I come in for a cleaning?', a: "Every six months for most patients. If you've had gum disease or other concerns, we may recommend more frequent visits." },
+      { q: "What if I haven't been to the dentist in years?", a: "More common than you'd think—and you're always welcome without judgment. We'll start with a thorough exam and go at your pace." },
+      { q: 'Are digital X-rays safe?', a: 'Yes. Digital X-rays emit significantly less radiation than traditional film and give us clearer images to work with.' },
+      { q: 'Do you see children as well as adults?', a: "Absolutely. We provide gentle, age-appropriate care from a toddler's first visit to seniors." },
+    ],
+    bookLabel: 'Book a Cleaning or Checkup',
+    bookHref: '/contact',
+    imgDesc: 'Welcoming clinical setting or patient smiling comfortably in chair',
+    icon: '<path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/>',
+    bgIcon: '<path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/>',
+  },
+  {
+    id: 'cosmetic-dentistry',
+    num: '02 — Cosmetic',
+    category: 'Cosmetic dentistry',
+    title: 'Cosmetic Dentistry',
+    pageHref: '/services/cosmetic-dentistry',
+    cardDesc: "Ready for a more confident, radiant smile? Our cosmetic dentistry solutions—like whitening, veneers, and dental bonding—are designed to enhance your natural beauty.",
+    desc: "Whether you want a subtle refresh or a complete transformation, we tailor every cosmetic treatment to your face, smile goals, and lifestyle. Results that look naturally you—never overdone.",
+    highlights: ['Teeth whitening (in-office & take-home)', 'Dental bonding & contouring', 'Veneers & smile design', 'Complete smile makeovers'],
+    faqs: [
+      { q: "What's the difference between whitening and veneers?", a: "Whitening brightens your existing teeth's color. Veneers reshape, resize, and recolor—ideal for more significant changes." },
+      { q: 'Is cosmetic work painful?', a: "Most cosmetic treatments involve little to no discomfort. We'll always walk you through what to expect beforehand." },
+      { q: 'How long do results last?', a: "Whitening lasts months to years with touch-ups. Veneers and bonding can last a decade or more with proper care." },
+      { q: 'Will it look natural?', a: "Yes—we design around your facial proportions and natural tooth shade so results look like the best version of you." },
+    ],
+    bookLabel: 'Book a Cosmetic Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Patient with bright, natural smile; soft studio lighting',
+    icon: '<path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/><path d="M19 2l.5 1.5 1.5.5-1.5.5L19 6l-.5-1.5L17 4l1.5-.5z"/>',
+    bgIcon: '<path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/>',
+  },
+  {
+    id: 'dental-implants',
+    num: '03 — Restorative',
+    category: 'Restorative dentistry',
+    title: 'Dental Implants',
+    pageHref: '/services/dental-implants',
+    cardDesc: "If you're missing one or more teeth, dental implants offer a permanent, secure solution that looks and feels just like the real thing.",
+    desc: "A titanium post replaces the tooth root, topped with a custom crown matched to your natural teeth. Unlike bridges, implants don't affect neighboring teeth—and unlike dentures, they're fixed, permanent, and preserve your jawbone.",
+    highlights: ['3D imaging & personalized treatment plan', 'In-office implant placement', 'Healing period (osseointegration)', 'Custom crown fabrication & final placement'],
+    faqs: [
+      { q: 'Does getting an implant hurt?', a: "Placement is done with local anesthesia. Most patients are surprised by how manageable it is—any soreness is typically mild and short-lived." },
+      { q: 'How long does the whole process take?', a: "A few months from placement to final crown, allowing proper healing. We give you a personalized timeline at your consultation." },
+      { q: 'Will my insurance help cover it?', a: "Many plans cover part of implant treatment. We verify your benefits up front and provide a written estimate before anything starts." },
+      { q: 'Am I too old for dental implants?', a: "Age alone is rarely a limiting factor. Many patients in their 70s and 80s are excellent candidates. We'll evaluate your bone density and health." },
+    ],
+    bookLabel: 'Schedule an Implant Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Confident patient with full smile; implant cross-section diagram',
+    icon: '<path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/>',
+    bgIcon: '<path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/>',
+  },
+  {
+    id: 'invisalign',
+    num: '04 — Orthodontics',
+    category: 'Orthodontics',
+    title: 'Invisalign Treatment',
+    pageHref: '/services/invisalign',
+    cardDesc: 'Invisalign uses a series of clear, custom-made plastic aligners to gently move your teeth into their ideal position. Nearly invisible and removable when you eat, brush, or floss.',
+    desc: "Clear, custom-made aligners gradually move your teeth into the right position. You wear them nearly all day, but they come out for eating and brushing—and they're virtually invisible in conversation.",
+    highlights: ['Custom 3D treatment preview', 'New aligner sets every 1–2 weeks', 'Removable for meals & brushing', 'No brackets, wires, or dietary restrictions'],
+    faqs: [
+      { q: 'Am I a good candidate for Invisalign?', a: "Most adults and teens with mild to moderate alignment issues qualify. We'll confirm at your free consultation." },
+      { q: 'How long does treatment take?', a: "Treatment typically ranges from 6 to 18 months depending on your case. Simpler cases often finish faster." },
+      { q: 'Are the aligners uncomfortable?', a: "There's usually some pressure when switching to a new tray—normal and temporary. Most patients adjust within a day or two." },
+      { q: 'Can I eat normally?', a: "Yes. You remove your aligners to eat and drink anything except water, so there are no food restrictions." },
+    ],
+    bookLabel: 'Book an Invisalign Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Patient wearing clear aligners; confident smile in natural light',
+    icon: '<path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 14v2.5M12 14.5V18M17 14v2.5"/>',
+    bgIcon: '<path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  },
+  {
+    id: 'crowns-bridges',
+    num: '05 — Restorative',
+    category: 'Restorative dentistry',
+    title: 'Crowns & Bridges',
+    pageHref: '/services/crowns-bridges',
+    cardDesc: "Crowns and bridges are restorative treatments designed to repair and replace damaged or missing teeth. A crown caps a damaged tooth; a bridge fills the gap left by missing teeth.",
+    desc: "Crowns cap and protect a damaged or weakened tooth. Bridges fill the gap left by a missing tooth, anchored to neighboring teeth or implants. Both restore your bite, your appearance, and your confidence—typically in just two visits.",
+    highlights: ['Custom-fit crown or bridge', 'Tooth-colored porcelain or zirconia options', 'Anchored for lasting stability', 'Restores bite force & appearance'],
+    faqs: [
+      { q: 'How long do crowns and bridges last?', a: "With good care, crowns typically last 10–15+ years. Bridges have a similar lifespan; implant-supported bridges tend to last longer." },
+      { q: "What's the difference between a crown and a filling?", a: "Fillings repair a small cavity. A crown covers the entire visible tooth—used when damage is more extensive or the tooth is cracked." },
+      { q: 'Is the procedure painful?', a: "We numb the area completely. You may feel mild sensitivity for a few days after, but the procedure itself is comfortable." },
+      { q: 'Bridge or implant—which is better for a missing tooth?', a: "Both are solid options. Bridges are quicker with a lower upfront cost. Implants are permanent and don't involve adjacent teeth. We'll help you decide." },
+    ],
+    bookLabel: 'Book a Crown or Bridge Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Restored smile; crown fitting or bridge placement visual',
+    icon: '<path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/>',
+    bgIcon: '<path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/>',
+  },
+  {
+    id: 'emergency-dentistry',
+    num: '06 — Emergency',
+    category: 'Emergency care',
+    title: 'Emergency Dentistry',
+    pageHref: '/services/emergency-dentistry',
+    cardDesc: "Toothache, broken teeth, dental infection, or trauma—we set aside same-day and next-day slots every day so you can get seen quickly when it matters most.",
+    desc: "Dental emergencies don't wait. We keep same-day slots open for urgent situations—severe toothaches, broken teeth, lost crowns, dental infections, and trauma. Call us first and we'll get you in fast.",
+    highlights: ['Same-day & next-day availability', 'Toothaches & dental infections', 'Broken, chipped, or knocked-out teeth', 'Lost fillings, crowns & trauma care'],
+    faqs: [
+      { q: 'What counts as a dental emergency?', a: "Severe pain, swelling, a knocked-out tooth, a broken tooth, a lost crown, or any mouth trauma. When in doubt, call us." },
+      { q: 'What if my tooth gets knocked out?', a: "Handle it by the crown (not the root), rinse gently without scrubbing, and keep it moist in milk or your mouth. Get to us within 30–60 minutes for the best chance of saving it." },
+      { q: 'Do you have same-day availability?', a: "Yes. We set aside urgent slots every day. Call as early as possible—we'll do our best to get you in." },
+      { q: 'Is emergency dental care expensive?', a: "We give you a clear cost estimate before treatment starts, and we work with most insurance plans. Financing options are also available." },
+    ],
+    bookLabel: 'Call for Emergency Care',
+    bookHref: 'tel:7148932106',
+    imgDesc: 'Calm, reassuring clinical environment; prompt, compassionate care',
+    icon: '<path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/><path d="M13.5 7.5l-3 5H13l-2 4.5 5-7h-3z"/>',
+    bgIcon: '<path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/>',
+  },
+  {
+    id: 'teeth-whitening',
+    num: '07 — Cosmetic',
+    category: 'Cosmetic dentistry',
+    title: 'Teeth Whitening',
+    pageHref: '/services/teeth-whitening',
+    cardDesc: "Teeth whitening is one of the simplest ways to enhance your smile. Whether you're looking for a subtle lift or a more noticeable change, whitening removes stains and brightens your teeth.",
+    desc: "Professional whitening is faster and more effective than anything over-the-counter. We offer in-office treatment for a quick, dramatic lift—or custom take-home trays for gradual brightening on your own schedule.",
+    highlights: ['In-office treatment (approx. 1 hour)', 'Custom take-home tray kits', 'Removes coffee, tea & wine stains', 'Safe for enamel under professional supervision'],
+    faqs: [
+      { q: 'How many shades whiter can I expect?', a: "Results vary by starting shade and treatment type. Most patients see a noticeable improvement—typically several shades—after a single in-office session." },
+      { q: 'Is whitening safe for my enamel?', a: "Professional whitening is safe when done correctly. We'll assess your enamel and gum health before starting." },
+      { q: 'How long do results last?', a: "Usually 6 months to 2 years, depending on diet and habits. Touch-up trays help maintain your results." },
+      { q: 'Will my teeth be sensitive afterward?', a: "Some patients experience mild, temporary sensitivity. We can recommend desensitizing products if needed." },
+    ],
+    bookLabel: 'Book a Whitening Appointment',
+    bookHref: '/contact',
+    imgDesc: 'Patient with bright, confident smile; before/after lighting',
+    icon: '<path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/><path d="M19.5 3v2.5M18.2 4.3l1.8 1.8M20.5 4.8h-2.5"/>',
+    bgIcon: '<path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/>',
+  },
+  {
+    id: 'veneers',
+    num: '08 — Cosmetic',
+    category: 'Cosmetic dentistry',
+    title: 'Veneers',
+    pageHref: '/services/veneers',
+    cardDesc: "Veneers are thin porcelain layers bonded to the front surfaces of teeth to improve color, shape, and proportion. Tailored to fit your unique smile for a brighter, more balanced result.",
+    desc: "Ultra-thin porcelain shells bonded to the front of your teeth to change their color, shape, length, or alignment. Designed specifically for your smile—durable, stain-resistant, and remarkably natural-looking.",
+    highlights: ['Custom-designed porcelain shells', 'Addresses color, shape & proportion', 'Highly stain-resistant & long-lasting', 'Minimal tooth reduction required'],
+    faqs: [
+      { q: 'Are veneers permanent?', a: "The process involves removing a thin layer of enamel, which is permanent. The veneers themselves last 10–20 years and can be replaced when needed." },
+      { q: 'Do they look fake?', a: "Modern porcelain veneers look remarkably natural. We design them around your facial features and existing tooth shade so they blend in seamlessly." },
+      { q: 'How many teeth need veneers?', a: "It depends on your goals. Some patients need just one to match a repaired tooth; others choose a full smile set. We'll show you a preview so you know exactly what to expect." },
+      { q: 'Will they stain like natural teeth?', a: "Porcelain veneers are highly stain-resistant—more so than natural enamel. Coffee and wine won't affect them the way they affect your other teeth." },
+    ],
+    bookLabel: 'Book a Veneer Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Close-up of porcelain veneer smile; natural, polished result',
+    icon: '<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M8 6V4M16 6V4M2 10h20"/>',
+    bgIcon: '<rect x="2" y="6" width="20" height="12" rx="2"/>',
+  },
+  {
+    id: 'root-canal',
+    num: '09 — Restorative',
+    category: 'Restorative dentistry',
+    title: 'Root Canal Therapy',
+    pageHref: '/services/root-canal',
+    cardDesc: "Root canal therapy treats infection inside the tooth, relieving pain and preserving your natural tooth. Modern technique makes it far more comfortable than its reputation suggests.",
+    desc: "A root canal removes infected or inflamed tissue from inside the tooth, relieving pain and saving the natural tooth from extraction. Modern technique and anesthesia make it far more comfortable than its reputation suggests—most patients are genuinely surprised.",
+    highlights: ['Removes infection & relieves pain', 'Preserves your natural tooth', 'Full local anesthesia for comfort', 'Usually followed by a protective crown'],
+    faqs: [
+      { q: 'Does a root canal hurt?', a: "No—we fully numb the area. Most patients say it feels similar to getting a filling. Relief from the infection is often immediate." },
+      { q: 'Why not just extract the tooth?', a: "Saving your natural tooth is almost always better for long-term function, bone preservation, and cost. A root canal makes that possible." },
+      { q: 'How long is recovery?', a: "Most patients return to normal activities the next day. Some mild soreness for a day or two is typical and manageable with over-the-counter relief." },
+      { q: 'Will I need a crown after?', a: "Usually yes. A crown protects the treated tooth, which can become more brittle after the pulp is removed. We'll plan this together with you." },
+    ],
+    bookLabel: 'Book a Root Canal Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Comfortable clinical environment; patient relaxed post-treatment',
+    icon: '<circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/>',
+    bgIcon: '<circle cx="12" cy="12" r="9"/>',
+  },
+  {
+    id: 'extractions',
+    num: '10 — General',
+    category: 'General dentistry',
+    title: 'Extractions',
+    pageHref: '/services/extractions',
+    cardDesc: "When removing a tooth is the healthiest choice—due to decay, crowding, infection, or impaction—we handle it with precision and care, focusing on your comfort and recovery.",
+    desc: "When a tooth needs to come out—due to severe decay, crowding, infection, or impaction—we handle it with precision and care. We'll also walk you through your replacement options so you leave knowing exactly what comes next.",
+    highlights: ['Simple & surgical extractions', 'Wisdom tooth removal', 'Gentle technique & full anesthesia', 'Clear aftercare & next-step guidance'],
+    faqs: [
+      { q: 'Is an extraction painful?', a: "We fully numb the area before starting. You'll feel pressure but no pain. Aftercare instructions help manage any post-procedure soreness." },
+      { q: "What's the recovery like?", a: "Most people feel comfortable within 2–3 days. We'll give you detailed aftercare instructions to help you heal quickly." },
+      { q: 'What happens to the gap afterward?', a: "We'll discuss your options—implants, bridges, or partial dentures—so you understand your choices before making any decisions." },
+      { q: 'Do wisdom teeth always need to come out?', a: "Not always. We'll evaluate their position and growth pattern to determine whether removal is recommended before suggesting anything." },
+    ],
+    bookLabel: 'Book an Extraction Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Gentle, calm clinical environment; focused, caring procedure',
+    icon: '<path d="M3 6h18M3 12h18M3 18h18"/>',
+    bgIcon: '<path d="M3 6h18M3 12h18M3 18h18"/>',
+  },
+  {
+    id: 'periodontal-care',
+    num: '11 — Periodontal',
+    category: 'Periodontal care',
+    title: 'Periodontal Care',
+    pageHref: '/services/periodontal-care',
+    cardDesc: "Healthy gums are the foundation of a healthy mouth. We provide gentle, thorough periodontal care—from routine evaluations to deep cleanings—protecting you from gum disease.",
+    desc: "Your gums are the foundation of your entire smile. We provide thorough evaluations, deep cleanings, and ongoing maintenance to stop gum disease in its tracks—and keep it from coming back.",
+    highlights: ['Comprehensive gum evaluation', 'Scaling & root planing (deep cleaning)', 'Ongoing periodontal maintenance visits', 'Gum disease prevention & patient education'],
+    faqs: [
+      { q: 'What are signs of gum disease?', a: "Bleeding when brushing, swollen or receding gums, persistent bad breath, and loose teeth. Early stages are often painless—which is why regular evaluations matter." },
+      { q: 'What is a deep cleaning?', a: "Also called scaling and root planing, it removes buildup from below the gumline where regular cleaning can't reach. Done with local anesthesia for comfort." },
+      { q: 'Is gum disease reversible?', a: "Early-stage gum disease (gingivitis) is fully reversible with treatment and better home care. More advanced stages can be controlled but not completely reversed." },
+      { q: 'How often do I need periodontal maintenance?', a: "Most patients with a history of gum disease benefit from cleanings every 3–4 months rather than the standard every six." },
+    ],
+    bookLabel: 'Book a Periodontal Evaluation',
+    bookHref: '/contact',
+    imgDesc: 'Healthy gum tissue; clinical gum assessment in progress',
+    icon: '<path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/>',
+    bgIcon: '<path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/>',
+  },
+  {
+    id: 'pediatric-dentistry',
+    num: '12 — Pediatric',
+    category: 'Pediatric dentistry',
+    title: 'Pediatric Dentistry',
+    pageHref: '/services/pediatric-dentistry',
+    cardDesc: "Pediatric dentistry provides specialized care for infants, children, and teens in a positive, supportive way—from baby teeth checkups to sealants and early orthodontic guidance.",
+    desc: "We make first dental visits—and every visit after—a genuinely positive experience. Our approach is patient, unhurried, and kid-friendly, building the confidence and habits kids carry into adulthood.",
+    highlights: ["First visits for infants & toddlers", 'Cleanings, exams & sealants', 'Fluoride treatments', 'Early orthodontic monitoring'],
+    faqs: [
+      { q: 'When should my child first see a dentist?', a: "Around the time their first tooth appears—or by their first birthday, whichever comes first. Early visits set a positive foundation." },
+      { q: 'What if my child is nervous?', a: "Completely normal. We take things slowly, explain everything in age-appropriate language, and never push a child past where they're comfortable." },
+      { q: 'Do you provide sealants?', a: "Yes. Dental sealants are a safe, effective way to protect your child's back teeth from cavities, especially during cavity-prone years." },
+      { q: 'When should I think about orthodontics for my child?', a: "We start monitoring development early and can flag concerns around ages 7–9, when early intervention is most effective." },
+    ],
+    bookLabel: "Book Your Child's First Visit",
+    bookHref: '/contact',
+    imgDesc: "Child-friendly office; child patient smiling with dentist",
+    icon: '<circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>',
+    bgIcon: '<circle cx="12" cy="8" r="4"/>',
+  },
+  {
+    id: 'porcelain-bridges',
+    num: '13 — Restorative',
+    category: 'Restorative dentistry',
+    title: 'Porcelain Bridges',
+    pageHref: '/service',
+    cardDesc: 'Replace one or more missing teeth with a natural-looking fixed restoration that restores your bite, your smile, and your confidence.',
+    desc: "A porcelain bridge fills the space left by one or more missing teeth, anchored to adjacent teeth or implants. Custom-matched to your natural tooth color, it restores your bite and your smile—fixed and permanent.",
+    highlights: ['Custom color-matched porcelain', 'Anchored to neighboring teeth or implants', 'Fixed restoration—no removal needed', 'Restores full bite force & aesthetics'],
+    faqs: [
+      { q: 'How is a bridge different from an implant?', a: "A bridge is supported by neighboring teeth or implants and doesn't require surgery. Implants replace the root independently. Both are excellent options—we'll help you decide." },
+      { q: 'How long does treatment take?', a: "Typically 2–3 appointments over a few weeks. We provide a temporary bridge while your permanent one is custom-made." },
+      { q: 'How long do porcelain bridges last?', a: "With good care, 10–15+ years is typical. We'll give you specific guidance and care instructions based on your case." },
+      { q: 'Is it covered by insurance?', a: "Many plans cover part of bridge treatment. We'll verify your benefits before you start and give you a clear, written cost estimate." },
+    ],
+    bookLabel: 'Book a Bridge Consultation',
+    bookHref: '/contact',
+    imgDesc: 'Natural-looking porcelain bridge; restored, confident smile',
+    icon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
+    bgIcon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
+  },
+];
 ---
 
 <Layout
@@ -23,97 +299,16 @@ import Layout from '../layouts/Layout.astro';
 <section class="pad">
   <div class="wrap">
     <div class="cards reveal">
-      <a class="scell" href="/services/general-dentistry">
-        <div class="num">01 — General</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/></svg></div>
-        <h3>General Dentistry</h3><p>General dentistry is all about maintaining your oral health, preventing problems before they start, and giving your teeth the support they need to last a lifetime. General dentistry is for everyone—from kids coming in for their very first visit, to adults wanting to keep their smiles strong, to seniors aiming to preserve lifelong oral health.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M9 2C6.5 2 5 4.5 5 7c0 2.5.8 4.8 1.6 7.5L8 22h8l1.4-7.5C18.2 11.8 19 9.5 19 7c0-2.5-1.5-5-4-5-1 0-1.8.5-3 .5-1.2 0-2-.5-3-.5z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/cosmetic-dentistry">
-        <div class="num">02 — Cosmetic</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/><path d="M19 2l.5 1.5 1.5.5-1.5.5L19 6l-.5-1.5L17 4l1.5-.5z"/></svg></div>
-        <h3>Cosmetic Dentistry</h3><p>Ready for a more confident, radiant smile? Our cosmetic dentistry solutions—like whitening, veneers, and dental bonding—are designed to enhance your natural beauty. We tailor every treatment to your goals, creating results that look and feel like you.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M10 3C8 3 7 5 7 7c0 2 .6 3.8 1.2 6L9.5 19h5L16 13c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.4-2 .4S11 3 10 3z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/dental-implants">
-        <div class="num">03 — Restorative</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/></svg></div>
-        <h3>Dental Implants</h3><p>If you're missing one or more teeth, dental implants offer a permanent, secure solution that looks and feels just like the real thing. Oasis Dental Care combines expertise with cutting-edge technology to help you reclaim your smile—for life.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M12 2v7"/><rect x="9" y="9" width="6" height="3" rx="1"/><path d="M10.5 12l-1 8h5l-1-8"/></svg></div>
-      </a>
-      <a class="scell" href="/services/invisalign">
-        <div class="num">04 — Orthodontics</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 14v2.5M12 14.5V18M17 14v2.5"/></svg></div>
-        <h3>Invisalign Treatment</h3><p>Invisalign uses a series of clear, custom-made plastic aligners to gently move your teeth into their ideal position. Nearly invisible and removable when you eat, brush, or floss.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M3 10c0-2.8 4-5 9-5s9 2.2 9 5v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/crowns-bridges">
-        <div class="num">05 — Restorative</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/></svg></div>
-        <h3>Crowns &amp; Bridges</h3><p>Crowns and bridges are restorative treatments designed to repair and replace damaged or missing teeth. A crown caps a damaged tooth to restore its shape and strength; a bridge fills the gap left by missing teeth, anchored to surrounding healthy teeth or implants.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M3 20h18M5 20V10l3.5 4L12 3l3.5 11L19 10v10"/></svg></div>
-      </a>
-      <a class="scell" href="/services/emergency-dentistry">
-        <div class="num">06 — Emergency</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/><path d="M13.5 7.5l-3 5H13l-2 4.5 5-7h-3z"/></svg></div>
-        <h3>Emergency Dentistry</h3><p>Toothache, broken teeth, dental infection, or trauma—our emergency dentistry services provide prompt relief and help you return to comfort as quickly as possible. We set aside time each day for urgent needs so you can get seen quickly.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M9.5 2C7 2 5.5 4 5.5 6.5c0 2.3.7 4.3 1.4 7L8 20h8l1.1-6.5c.7-2.7 1.4-4.7 1.4-7C18.5 4 17 2 14.5 2z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/teeth-whitening">
-        <div class="num">07 — Cosmetic</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/><path d="M19.5 3v2.5M18.2 4.3l1.8 1.8M20.5 4.8h-2.5"/></svg></div>
-        <h3>Teeth Whitening</h3><p>Teeth whitening is one of the simplest ways to enhance your smile. Whether you're looking for a subtle lift or a more noticeable change, whitening helps remove stains and brighten the overall appearance of your teeth.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M10 3.5C8 3.5 7 5.5 7 7.5c0 2 .6 3.8 1.2 6L9.5 19h5L16 13.5c.6-2.2 1.2-4 1.2-6 0-2-1-4-3.2-4-1 0-1.5.5-2 .5S11 3.5 10 3.5z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/veneers">
-        <div class="num">08 — Cosmetic</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M8 6V4M16 6V4M2 10h20"/></svg></div>
-        <h3>Veneers</h3><p>Veneers are thin porcelain layers bonded to the front surfaces of teeth to improve color, shape, and proportion. At Oasis Dental Care, we tailor each veneer to fit your unique smile for a brighter, more balanced result.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/></svg></div>
-      </a>
-      <a class="scell" href="/services/root-canal">
-        <div class="num">09 — Restorative</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg></div>
-        <h3>Root Canal Therapy</h3><p>Root canal therapy treats infection inside the tooth, relieving pain and preventing the need for extraction. This procedure helps preserve your natural tooth structure while restoring comfort and function.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></div>
-      </a>
-      <a class="scell" href="/services/extractions">
-        <div class="num">10 — General</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
-        <h3>Extractions</h3><p>Sometimes removing a tooth is the healthiest choice. Our extractions are performed with precision and care, always focusing on your comfort, a smooth recovery, and support for your next steps—whether it's healing or replacing the tooth.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div>
-      </a>
-      <a class="scell" href="/services/periodontal-care">
-        <div class="num">11 — Periodontal</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg></div>
-        <h3>Periodontal Care</h3><p>Healthy gums are the foundation of a healthy mouth. We provide gentle, thorough periodontal care—from routine evaluations to deep cleanings and maintenance—protecting you from gum disease and supporting lifelong oral wellness.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg></div>
-      </a>
-      <a class="scell" href="/services/pediatric-dentistry">
-        <div class="num">12 — Pediatric</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></div>
-        <h3>Pediatric Dentistry</h3><p>Pediatric dentistry provides specialized dental care for infants, children, and teens in a way that's positive, supportive, and tailored to their unique needs—from baby teeth checkups to guidance on brushing, sealants, and early orthodontic care.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/></svg></div>
-      </a>
-      <a class="scell" href="/service">
-        <div class="num">13 — Restorative</div>
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-        <h3>Porcelain Bridges</h3><p>Replace one or more missing teeth with a natural-looking fixed restoration.</p>
-        <span class="arr">Learn more →</span>
-        <div class="bgico"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-      </a>
+      {services.map((s) => (
+        <button class="scell" data-svc={s.id} type="button">
+          <div class="num">{s.num}</div>
+          <div class="ic"><svg viewBox="0 0 24 24" set:html={s.icon} /></div>
+          <h3>{s.title}</h3>
+          <p>{s.cardDesc}</p>
+          <span class="arr">Learn more →</span>
+          <div class="bgico"><svg viewBox="0 0 24 24" set:html={s.bgIcon} /></div>
+        </button>
+      ))}
     </div>
   </div>
 </section>
@@ -128,4 +323,376 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
+<!-- ===== SERVICE MODAL ===== -->
+<div id="svc-modal" aria-hidden="true">
+  <div class="sm-panel" role="dialog" aria-modal="true" aria-labelledby="sm-title">
+
+    <div class="sm-header">
+      <span class="tag" id="sm-category"></span>
+      <button class="sm-close" id="sm-close" aria-label="Close service details">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="sm-body">
+      <div class="sm-left">
+        <div class="sm-intro">
+          <h2 id="sm-title"></h2>
+          <p id="sm-desc"></p>
+        </div>
+        <div class="sm-details">
+          <ul id="sm-highlights" class="sm-hl"></ul>
+          <div class="sm-faqs">
+            <span class="tag">Common questions</span>
+            <div class="faq" id="sm-faq-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sm-right">
+        <div class="img-ph sm-img">
+          <div class="img-ph-ic">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          </div>
+          <span class="img-ph-lbl">Photo coming soon</span>
+          <span class="img-ph-desc" id="sm-img-desc"></span>
+        </div>
+        <div class="sm-cta">
+          <a class="btn" id="sm-book-btn" href="/contact">Book a Consultation</a>
+          <a class="btn btn-out sm-call" href="tel:7148932106">Call (714) 893-2106</a>
+        </div>
+        <a class="sm-full-link" id="sm-full-link" href="/services">View full details →</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- ===== END MODAL ===== -->
+
 </Layout>
+
+<style>
+/* ---- button reset for service cards ---- */
+button.scell {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+/* ---- modal backdrop ---- */
+#svc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(8, 34, 31, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  pointer-events: none;
+  transition: background 0.26s ease;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#svc-modal.open {
+  background: rgba(8, 34, 31, 0.74);
+  pointer-events: all;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+/* ---- modal panel ---- */
+.sm-panel {
+  background: var(--panel);
+  border-radius: 20px;
+  max-width: 900px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  margin: auto;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+#svc-modal.open .sm-panel {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- modal header ---- */
+.sm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px 16px;
+  position: sticky;
+  top: 0;
+  background: var(--panel);
+  z-index: 10;
+  border-bottom: 1px solid var(--line-l);
+}
+
+.sm-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1.5px solid var(--line-l);
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  transition: border-color 0.16s, color 0.16s, background 0.16s;
+  flex-shrink: 0;
+}
+.sm-close:hover { border-color: var(--ink); color: var(--ink); background: var(--bg); }
+.sm-close svg {
+  width: 15px; height: 15px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2.2; stroke-linecap: round;
+}
+
+/* ---- modal body: two-column grid ---- */
+.sm-body {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  padding: 24px 28px 32px;
+  align-items: start;
+}
+
+/* ---- left column ---- */
+.sm-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.sm-intro h2 {
+  font-family: var(--disp);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-top: 2px;
+}
+
+.sm-intro p {
+  color: var(--ink-soft);
+  font-size: 15.5px;
+  margin-top: 12px;
+  line-height: 1.68;
+}
+
+.sm-details { margin-top: 22px; }
+
+.sm-hl {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.sm-hl li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--ink-soft);
+  font-size: 14.5px;
+}
+.sm-hl li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 5px;
+  width: 15px; height: 15px;
+  border-radius: 4px;
+  background: rgba(11, 129, 116, 0.11);
+}
+.sm-hl li::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 9px;
+  width: 6px; height: 3px;
+  border-left: 1.5px solid var(--teal);
+  border-bottom: 1.5px solid var(--teal);
+  transform: rotate(-45deg);
+}
+
+.sm-faqs .tag { display: inline-flex; margin-bottom: 14px; }
+.sm-faqs .faq { margin-top: 0; }
+
+/* ---- right column ---- */
+.sm-right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sm-img {
+  margin: 0 !important;
+  aspect-ratio: 4/3;
+}
+
+.sm-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sm-cta .btn { justify-content: center; }
+.sm-cta .sm-call { justify-content: center; }
+
+.sm-full-link {
+  font-size: 13px;
+  color: var(--teal);
+  font-weight: 600;
+  text-align: center;
+  display: block;
+  padding: 4px 0 2px;
+  transition: opacity 0.15s;
+}
+.sm-full-link:hover { opacity: 0.75; }
+
+/* ---- mobile ---- */
+@media (max-width: 640px) {
+  #svc-modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .sm-panel {
+    border-radius: 20px 20px 0 0;
+    max-height: 92dvh;
+    overflow-y: auto;
+    transform: translateY(48px);
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #svc-modal.open .sm-panel {
+    transform: translateY(0);
+  }
+
+  .sm-header { padding: 18px 20px 14px; }
+
+  .sm-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 18px 20px 28px;
+  }
+
+  /* on mobile: show right col (image + cta) before details (highlights + faqs) */
+  .sm-left { display: contents; }
+  .sm-intro { order: 1; }
+  .sm-right  { order: 2; }
+  .sm-details { order: 3; }
+}
+
+@media (max-width: 400px) {
+  .sm-header { padding: 16px 16px 12px; }
+  .sm-body { padding: 14px 16px 24px; }
+}
+</style>
+
+<script define:vars={{ services }}>
+  // Build lookup map
+  const SVC_MAP = {};
+  services.forEach(s => { SVC_MAP[s.id] = s; });
+
+  const backdrop = document.getElementById('svc-modal');
+  const panel    = backdrop.querySelector('.sm-panel');
+  const closeBtn = document.getElementById('sm-close');
+
+  let lastFocused = null;
+
+  function openModal(id) {
+    const s = SVC_MAP[id];
+    if (!s) return;
+
+    // Populate header
+    document.getElementById('sm-category').textContent = s.category;
+
+    // Populate intro
+    document.getElementById('sm-title').textContent = s.title;
+    document.getElementById('sm-desc').textContent  = s.desc;
+
+    // Populate highlights
+    const hlEl = document.getElementById('sm-highlights');
+    hlEl.innerHTML = s.highlights.map(h => `<li>${h}</li>`).join('');
+
+    // Populate FAQs
+    const faqEl = document.getElementById('sm-faq-list');
+    faqEl.innerHTML = s.faqs.map((f, i) =>
+      `<details${i === 0 ? ' open' : ''}><summary>${f.q}</summary><p>${f.a}</p></details>`
+    ).join('');
+
+    // Populate image desc
+    document.getElementById('sm-img-desc').textContent = s.imgDesc;
+
+    // Populate CTA
+    const bookBtn = document.getElementById('sm-book-btn');
+    bookBtn.textContent = s.bookLabel;
+    bookBtn.href = s.bookHref || '/contact';
+
+    // Full details link
+    const fullLink = document.getElementById('sm-full-link');
+    fullLink.href = s.pageHref || '/services';
+
+    // Store trigger element & open
+    lastFocused = document.activeElement;
+    backdrop.setAttribute('aria-hidden', 'false');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    // Move focus into modal
+    requestAnimationFrame(() => closeBtn.focus());
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('open');
+    backdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // Card clicks
+  document.querySelectorAll('.scell[data-svc]').forEach(btn => {
+    btn.addEventListener('click', () => openModal(btn.dataset.svc));
+  });
+
+  // Close button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Backdrop click (outside panel)
+  backdrop.addEventListener('click', e => {
+    if (e.target === backdrop) closeModal();
+  });
+
+  // ESC key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && backdrop.classList.contains('open')) closeModal();
+  });
+
+  // Basic focus trap
+  panel.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const focusable = panel.querySelectorAll(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
+  });
+</script>
