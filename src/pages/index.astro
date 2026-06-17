@@ -304,9 +304,9 @@ import Layout from '../layouts/Layout.astro';
   document.getElementById('deckNext').addEventListener('click', () => go((cur + 1) % N));
   document.getElementById('deckPrev').addEventListener('click', () => go((cur - 1 + N) % N));
 
-  let timer = setInterval(() => go((cur + 1) % N), 5500);
+  let timer = setInterval(() => go((cur + 1) % N), 10000);
   stage.addEventListener('mouseenter', () => clearInterval(timer));
-  stage.addEventListener('mouseleave', () => { timer = setInterval(() => go((cur + 1) % N), 5500); });
+  stage.addEventListener('mouseleave', () => { timer = setInterval(() => go((cur + 1) % N), 10000); });
 
   // init
   cards.forEach((c, i) => { c.dataset.pos = String(Math.min(i, 3)); });
