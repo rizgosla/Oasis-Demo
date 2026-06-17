@@ -139,7 +139,7 @@ section.pad { padding: 56px 0; }
 @media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 300px; border-left: 0; border-top: 1px solid var(--line); } }
 
 /* ---------- marquee strip ---------- */
-.strip { background: var(--bg); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); overflow: hidden; }
+.strip { background: #fff; border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); overflow: hidden; }
 .strip .track { display: flex; gap: 48px; padding: 16px 0; font-size: 12.5px; letter-spacing: .01em; color: var(--ink-soft); white-space: nowrap; animation: scroll 32s linear infinite; }
 .strip .track span { display: flex; align-items: center; gap: 48px; }
 .strip .track b { color: var(--teal); font-weight: 500; }
@@ -147,7 +147,7 @@ section.pad { padding: 56px 0; }
 @media(prefers-reduced-motion: reduce) { .strip .track { animation: none; } }
 
 /* ---------- stat band ---------- */
-.stat-band { background: var(--dark); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 0; }
+.stat-band { background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 40px 0; }
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
 .stat { padding: 0 32px; border-right: 1px solid var(--line); text-align: center; }
 .stat:last-child { border-right: 0; }
