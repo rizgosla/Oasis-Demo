@@ -99,7 +99,7 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 
 /* ---------- sections ---------- */
 section.pad { padding: 56px 0; }
-#services { padding: 96px 0; }
+#services { padding: 120px 0; }
 .shead { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
 .shead h2 { font-size: clamp(30px, 3.8vw, 46px); font-weight: 600; margin-top: 14px; letter-spacing: -0.025em; }
 .shead p { color: var(--ink-soft); max-width: 420px; font-size: 16.5px; }
@@ -153,10 +153,10 @@ section.pad { padding: 56px 0; }
 @media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 300px; border-left: 0; border-top: 1px solid var(--line); } }
 
 /* ---------- marquee strip ---------- */
-.strip { background: var(--dark); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; }
-.strip .track { display: flex; gap: 48px; padding: 14px 0; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: #6fa89f; white-space: nowrap; animation: scroll 32s linear infinite; }
+.strip { border-bottom: 1px solid var(--line-l); overflow: hidden; }
+.strip .track { display: flex; gap: 48px; padding: 16px 0; font-size: 12.5px; letter-spacing: .01em; color: var(--ink-soft); white-space: nowrap; animation: scroll 32s linear infinite; }
 .strip .track span { display: flex; align-items: center; gap: 48px; }
-.strip .track b { color: var(--teal-300); font-weight: 600; }
+.strip .track b { color: var(--teal); font-weight: 500; }
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media(prefers-reduced-motion: reduce) { .strip .track { animation: none; } }
 
