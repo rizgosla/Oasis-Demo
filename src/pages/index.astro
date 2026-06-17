@@ -161,7 +161,7 @@ import Layout from '../layouts/Layout.astro';
       <div><span class="tag">The Oasis difference</span><h2>Built around precision &amp; comfort.</h2></div>
       <p>It's not just the technology — it's how we listen, explain, and treat every patient like a neighbor.</p>
     </div>
-    <div class="tgrid reveal">
+    <div class="tgrid reveal" id="tgridScroll">
       <div class="tcard"><div class="num">01 — Scheduling</div><h3>Respecting Your Time</h3><p>Your time matters. We operate on a schedule with the patient in mind—no waiting around or delays.</p></div>
       <div class="tcard"><div class="num">02 — Safety</div><h3>Putting Safety First</h3><p>We follow sterilization protocols recommended by the ADA, CDC, and OSHA to ensure a safe, clean environment.</p></div>
       <div class="tcard"><div class="num">03 — Orthodontics</div><h3>Straighten Your Way</h3><p>We give patients the option to choose from traditional braces or nearly invisible Invisalign.</p></div>
@@ -169,6 +169,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="tcard"><div class="num">05 — Community</div><h3>Rooted in Community</h3><p>From Surf City families to local business owners and weekend beachgoers, we're proud to serve the community we call home.</p></div>
       <div class="tcard"><div class="num">06 — Services</div><h3>Full-Service Dentistry</h3><p>Whether you need a routine checkup, a smile makeover, or a helping hand in an emergency, you won't need to travel far.</p></div>
     </div>
+    <div class="tdots" id="tgridDots" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -319,6 +320,30 @@ import Layout from '../layouts/Layout.astro';
   // init
   cards.forEach((c, i) => { c.dataset.pos = String(Math.min(i, 3)); });
   setDots();
+})();
+
+(function () {
+  const scroller = document.getElementById('tgridScroll');
+  const dotsEl = document.getElementById('tgridDots');
+  if (!scroller || !dotsEl) return;
+  const pages = 3;
+  for (let i = 0; i < pages; i++) {
+    const d = document.createElement('button');
+    d.className = 'deck-dot';
+    d.setAttribute('aria-label', 'Page ' + (i + 1));
+    d.addEventListener('click', () => {
+      scroller.scrollTo({ left: scroller.clientWidth * i, behavior: 'smooth' });
+    });
+    dotsEl.appendChild(d);
+  }
+  function update() {
+    const w = scroller.clientWidth || 1;
+    const idx = Math.round(scroller.scrollLeft / w);
+    [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === idx));
+  }
+  scroller.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 })();
 </script>
 

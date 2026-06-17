@@ -241,6 +241,7 @@ section.pad { padding: 56px 0; }
 .tcard h3 { font-size: 19px; margin-top: 12px; color: #fff; }
 .tcard p { color: #a9ccc5; font-size: 14px; margin-top: 8px; line-height: 1.55; }
 @media(min-width: 861px) and (max-width: 1100px) { .tgrid { grid-template-columns: repeat(2, 1fr); } }
+.tdots { display: none; }
 @media(max-width: 860px) {
   .tgrid {
     grid-template-columns: unset;
@@ -259,6 +260,7 @@ section.pad { padding: 56px 0; }
   .tcard { padding: 18px 20px; scroll-snap-align: start; }
   .tcard h3 { font-size: 17px; margin-top: 10px; }
   .tcard p { font-size: 13.5px; }
+  .tdots { display: flex; justify-content: center; gap: 7px; margin-top: 18px; }
 }
 @media(prefers-reduced-motion: reduce) { .tgrid.reveal .tcard, .tgrid.reveal.in .tcard { opacity: 1; transform: none; animation: none; } }
 
