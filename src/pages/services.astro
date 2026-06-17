@@ -7,7 +7,6 @@ const services = [
     num: '01 — General',
     category: 'General dentistry',
     title: 'General Dentistry',
-    pageHref: '/services/general-dentistry',
     cardDesc: 'General dentistry is all about maintaining your oral health, preventing problems before they start, and giving your teeth the support they need to last a lifetime.',
     desc: 'From routine cleanings to digital X-rays, general dentistry keeps your whole mouth healthy. We focus on catching problems early, guiding prevention, and making sure every visit is comfortable and clear—no jargon, no surprises.',
     highlights: ['Checkup & professional cleaning', 'Digital X-rays & full-mouth exam', 'Cavity treatment & tooth-colored fillings', 'Personalized home care guidance'],
@@ -28,7 +27,6 @@ const services = [
     num: '02 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Cosmetic Dentistry',
-    pageHref: '/services/cosmetic-dentistry',
     cardDesc: "Ready for a more confident, radiant smile? Our cosmetic dentistry solutions—like whitening, veneers, and dental bonding—are designed to enhance your natural beauty.",
     desc: "Whether you want a subtle refresh or a complete transformation, we tailor every cosmetic treatment to your face, smile goals, and lifestyle. Results that look naturally you—never overdone.",
     highlights: ['Teeth whitening (in-office & take-home)', 'Dental bonding & contouring', 'Veneers & smile design', 'Complete smile makeovers'],
@@ -49,15 +47,15 @@ const services = [
     num: '03 — Restorative',
     category: 'Restorative dentistry',
     title: 'Dental Implants',
-    pageHref: '/services/dental-implants',
     cardDesc: "If you're missing one or more teeth, dental implants offer a permanent, secure solution that looks and feels just like the real thing.",
     desc: "A titanium post replaces the tooth root, topped with a custom crown matched to your natural teeth. Unlike bridges, implants don't affect neighboring teeth—and unlike dentures, they're fixed, permanent, and preserve your jawbone.",
     highlights: ['3D imaging & personalized treatment plan', 'In-office implant placement', 'Healing period (osseointegration)', 'Custom crown fabrication & final placement'],
     faqs: [
-      { q: 'Does getting an implant hurt?', a: "Placement is done with local anesthesia. Most patients are surprised by how manageable it is—any soreness is typically mild and short-lived." },
-      { q: 'How long does the whole process take?', a: "A few months from placement to final crown, allowing proper healing. We give you a personalized timeline at your consultation." },
-      { q: 'Will my insurance help cover it?', a: "Many plans cover part of implant treatment. We verify your benefits up front and provide a written estimate before anything starts." },
-      { q: 'Am I too old for dental implants?', a: "Age alone is rarely a limiting factor. Many patients in their 70s and 80s are excellent candidates. We'll evaluate your bone density and health." },
+      { q: 'Will the procedure hurt?', a: "Most patients say the process is easier than expected. We use modern anesthesia and gentle techniques to keep you comfortable during each step, and most people manage post-procedure soreness with simple over-the-counter pain relief." },
+      { q: 'How long do dental implants last?', a: "With good care, dental implants can last decades—often a lifetime. They're designed to be a long-term solution, not just a quick fix." },
+      { q: 'Am I too old (or too young) for implants?', a: "Implants are a great option for healthy adults of almost any age. If you're considering them, we'll check your health and bone structure to make sure it's the right choice for you." },
+      { q: "What's recovery like?", a: "Most patients return to their routine the next day, with only minor adjustments. We'll guide you through the healing process and support you at every visit." },
+      { q: 'How much do dental implants cost?', a: "We're happy to discuss costs and insurance options in advance—no surprises, no pressure. Flexible payment plans are available, and we'll help you understand all your choices." },
     ],
     bookLabel: 'Schedule an Implant Consultation',
     bookHref: '/contact',
@@ -70,15 +68,16 @@ const services = [
     num: '04 — Orthodontics',
     category: 'Orthodontics',
     title: 'Invisalign Treatment',
-    pageHref: '/services/invisalign',
     cardDesc: 'Invisalign uses a series of clear, custom-made plastic aligners to gently move your teeth into their ideal position. Nearly invisible and removable when you eat, brush, or floss.',
     desc: "Clear, custom-made aligners gradually move your teeth into the right position. You wear them nearly all day, but they come out for eating and brushing—and they're virtually invisible in conversation.",
     highlights: ['Custom 3D treatment preview', 'New aligner sets every 1–2 weeks', 'Removable for meals & brushing', 'No brackets, wires, or dietary restrictions'],
     faqs: [
-      { q: 'Am I a good candidate for Invisalign?', a: "Most adults and teens with mild to moderate alignment issues qualify. We'll confirm at your free consultation." },
-      { q: 'How long does treatment take?', a: "Treatment typically ranges from 6 to 18 months depending on your case. Simpler cases often finish faster." },
-      { q: 'Are the aligners uncomfortable?', a: "There's usually some pressure when switching to a new tray—normal and temporary. Most patients adjust within a day or two." },
-      { q: 'Can I eat normally?', a: "Yes. You remove your aligners to eat and drink anything except water, so there are no food restrictions." },
+      { q: 'How long does Invisalign treatment take?', a: "Treatment length varies but typically ranges from 6 to 18 months depending on your specific needs. Invisalign Express offers faster treatment for minor adjustments." },
+      { q: 'Are Invisalign aligners comfortable?', a: "Yes! They are made from smooth, BPA-free plastic designed to fit snugly and gently move your teeth, causing minimal discomfort compared to traditional braces." },
+      { q: 'Can I eat and drink with Invisalign?', a: "It's best to remove your aligners when eating or drinking anything other than water to avoid staining and damage." },
+      { q: 'How often do I need to wear the aligners?', a: "For best results, wear your aligners 20 to 22 hours per day, removing them only to eat, brush, and floss." },
+      { q: 'Will Invisalign affect my speech?', a: "Most patients adapt quickly, and any temporary lisp typically disappears within a few days." },
+      { q: 'How often will I need check-ins during treatment?', a: "You'll have periodic visits—usually every 6 to 8 weeks—so we can monitor your progress and provide your next set of aligners. These appointments are quick and comfortable, and they help ensure your treatment stays on track." },
     ],
     bookLabel: 'Book an Invisalign Consultation',
     bookHref: '/contact',
@@ -91,15 +90,15 @@ const services = [
     num: '05 — Restorative',
     category: 'Restorative dentistry',
     title: 'Crowns & Bridges',
-    pageHref: '/services/crowns-bridges',
     cardDesc: "Crowns and bridges are restorative treatments designed to repair and replace damaged or missing teeth. A crown caps a damaged tooth; a bridge fills the gap left by missing teeth.",
     desc: "Crowns cap and protect a damaged or weakened tooth. Bridges fill the gap left by a missing tooth, anchored to neighboring teeth or implants. Both restore your bite, your appearance, and your confidence—typically in just two visits.",
     highlights: ['Custom-fit crown or bridge', 'Tooth-colored porcelain or zirconia options', 'Anchored for lasting stability', 'Restores bite force & appearance'],
     faqs: [
-      { q: 'How long do crowns and bridges last?', a: "With good care, crowns typically last 10–15+ years. Bridges have a similar lifespan; implant-supported bridges tend to last longer." },
-      { q: "What's the difference between a crown and a filling?", a: "Fillings repair a small cavity. A crown covers the entire visible tooth—used when damage is more extensive or the tooth is cracked." },
-      { q: 'Is the procedure painful?', a: "We numb the area completely. You may feel mild sensitivity for a few days after, but the procedure itself is comfortable." },
-      { q: 'Bridge or implant—which is better for a missing tooth?', a: "Both are solid options. Bridges are quicker with a lower upfront cost. Implants are permanent and don't involve adjacent teeth. We'll help you decide." },
+      { q: 'How long do crowns and bridges last?', a: "With proper care, crowns and bridges can last 10-15 years or longer. Regular dental visits and good oral hygiene are key to their longevity." },
+      { q: 'Are crowns and bridges noticeable?', a: "We use tooth-colored materials that match your natural teeth closely, making crowns and bridges virtually indistinguishable from your own smile." },
+      { q: 'Is the procedure painful?', a: "We numb the area thoroughly to ensure your comfort during preparation and placement. Most patients report minimal discomfort." },
+      { q: 'Can I eat normally with crowns or bridges?', a: "Yes. Once placed, crowns and bridges function like natural teeth, allowing you to eat, speak, and smile confidently." },
+      { q: 'Will my insurance cover crowns and bridges?', a: "Many dental plans cover crowns and bridges partially. We'll help you understand your benefits and provide clear cost estimates upfront." },
     ],
     bookLabel: 'Book a Crown or Bridge Consultation',
     bookHref: '/contact',
@@ -112,15 +111,15 @@ const services = [
     num: '06 — Emergency',
     category: 'Emergency care',
     title: 'Emergency Dentistry',
-    pageHref: '/services/emergency-dentistry',
     cardDesc: "Toothache, broken teeth, dental infection, or trauma—we set aside same-day and next-day slots every day so you can get seen quickly when it matters most.",
     desc: "Dental emergencies don't wait. We keep same-day slots open for urgent situations—severe toothaches, broken teeth, lost crowns, dental infections, and trauma. Call us first and we'll get you in fast.",
     highlights: ['Same-day & next-day availability', 'Toothaches & dental infections', 'Broken, chipped, or knocked-out teeth', 'Lost fillings, crowns & trauma care'],
     faqs: [
-      { q: 'What counts as a dental emergency?', a: "Severe pain, swelling, a knocked-out tooth, a broken tooth, a lost crown, or any mouth trauma. When in doubt, call us." },
-      { q: 'What if my tooth gets knocked out?', a: "Handle it by the crown (not the root), rinse gently without scrubbing, and keep it moist in milk or your mouth. Get to us within 30–60 minutes for the best chance of saving it." },
-      { q: 'Do you have same-day availability?', a: "Yes. We set aside urgent slots every day. Call as early as possible—we'll do our best to get you in." },
-      { q: 'Is emergency dental care expensive?', a: "We give you a clear cost estimate before treatment starts, and we work with most insurance plans. Financing options are also available." },
+      { q: 'What counts as a dental emergency?', a: "Severe pain, swelling, broken or knocked-out teeth, persistent bleeding, or any sudden change in your mouth that worries you should be treated as an emergency. If you're unsure, call us—we'll help you decide what to do next." },
+      { q: 'Can a knocked-out tooth be saved?', a: "Often, yes—if you act quickly. Keep the tooth moist (in milk or your cheek), avoid touching the root, and call us right away. Fast action increases the chance of saving the tooth." },
+      { q: 'What if my dental emergency happens after hours?', a: "Call our office—our voicemail will give you instructions, and we do our best to respond to true emergencies as soon as possible, even after hours." },
+      { q: 'Will insurance cover emergency dental care?', a: "Most plans cover some emergency services. We'll check your benefits, explain costs up front, and help you find solutions if you don't have insurance." },
+      { q: 'Do I need an appointment for emergency care?', a: "We prioritize emergency calls and can usually see you the same day. It's best to call ahead so we can prepare for your arrival." },
     ],
     bookLabel: 'Call for Emergency Care',
     bookHref: 'tel:7148932106',
@@ -133,15 +132,15 @@ const services = [
     num: '07 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Teeth Whitening',
-    pageHref: '/services/teeth-whitening',
     cardDesc: "Teeth whitening is one of the simplest ways to enhance your smile. Whether you're looking for a subtle lift or a more noticeable change, whitening removes stains and brightens your teeth.",
     desc: "Professional whitening is faster and more effective than anything over-the-counter. We offer in-office treatment for a quick, dramatic lift—or custom take-home trays for gradual brightening on your own schedule.",
     highlights: ['In-office treatment (approx. 1 hour)', 'Custom take-home tray kits', 'Removes coffee, tea & wine stains', 'Safe for enamel under professional supervision'],
     faqs: [
-      { q: 'How many shades whiter can I expect?', a: "Results vary by starting shade and treatment type. Most patients see a noticeable improvement—typically several shades—after a single in-office session." },
-      { q: 'Is whitening safe for my enamel?', a: "Professional whitening is safe when done correctly. We'll assess your enamel and gum health before starting." },
-      { q: 'How long do results last?', a: "Usually 6 months to 2 years, depending on diet and habits. Touch-up trays help maintain your results." },
-      { q: 'Will my teeth be sensitive afterward?', a: "Some patients experience mild, temporary sensitivity. We can recommend desensitizing products if needed." },
+      { q: 'Is teeth whitening safe?', a: "Yes. Professional whitening uses controlled, dentist-supervised treatments designed to protect your teeth and gums while lightening stains." },
+      { q: 'Will whitening make my teeth sensitive?', a: "Some patients experience mild sensitivity during or after treatment, but it's usually temporary. We offer solutions to minimize discomfort." },
+      { q: 'How long do whitening results last?', a: "Results vary, but with good care, whitening effects can last from several months up to a few years. Touch-ups may be recommended." },
+      { q: 'Can anyone get their teeth whitened?', a: "Most adults and teens are good candidates, but whitening isn't recommended for pregnant women or those with certain dental conditions. We evaluate your suitability during consultation." },
+      { q: 'How quickly will I see results?', a: "In-office treatments can brighten teeth several shades in a single visit, while take-home kits show gradual improvement over days or weeks." },
     ],
     bookLabel: 'Book a Whitening Appointment',
     bookHref: '/contact',
@@ -154,15 +153,16 @@ const services = [
     num: '08 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Veneers',
-    pageHref: '/services/veneers',
     cardDesc: "Veneers are thin porcelain layers bonded to the front surfaces of teeth to improve color, shape, and proportion. Tailored to fit your unique smile for a brighter, more balanced result.",
     desc: "Ultra-thin porcelain shells bonded to the front of your teeth to change their color, shape, length, or alignment. Designed specifically for your smile—durable, stain-resistant, and remarkably natural-looking.",
     highlights: ['Custom-designed porcelain shells', 'Addresses color, shape & proportion', 'Highly stain-resistant & long-lasting', 'Minimal tooth reduction required'],
     faqs: [
-      { q: 'Are veneers permanent?', a: "The process involves removing a thin layer of enamel, which is permanent. The veneers themselves last 10–20 years and can be replaced when needed." },
-      { q: 'Do they look fake?', a: "Modern porcelain veneers look remarkably natural. We design them around your facial features and existing tooth shade so they blend in seamlessly." },
-      { q: 'How many teeth need veneers?', a: "It depends on your goals. Some patients need just one to match a repaired tooth; others choose a full smile set. We'll show you a preview so you know exactly what to expect." },
-      { q: 'Will they stain like natural teeth?', a: "Porcelain veneers are highly stain-resistant—more so than natural enamel. Coffee and wine won't affect them the way they affect your other teeth." },
+      { q: 'Are veneers permanent?', a: "While veneers are very durable, they do require some removal of enamel and are considered a permanent cosmetic treatment. With proper care, they can last 10-15 years or longer." },
+      { q: 'Do veneers look natural?', a: "Yes! Veneers are custom-made to match the color, shape, and translucency of your natural teeth for a seamless appearance." },
+      { q: 'Is the veneer application painful?', a: "Most patients experience little to no discomfort during the procedure. Local anesthesia is used when enamel is removed." },
+      { q: 'Can veneers fix crooked teeth?', a: "Veneers can mask minor misalignments and gaps, but severe cases may require orthodontic treatment." },
+      { q: 'How do I care for my veneers?', a: "Good oral hygiene, regular dental visits, and avoiding excessive biting on hard objects will help keep veneers looking their best." },
+      { q: 'How long do veneers last?', a: "Veneers can last many years with proper care. Good oral hygiene and regular dental visits will help them stay in excellent condition." },
     ],
     bookLabel: 'Book a Veneer Consultation',
     bookHref: '/contact',
@@ -175,15 +175,15 @@ const services = [
     num: '09 — Restorative',
     category: 'Restorative dentistry',
     title: 'Root Canal Therapy',
-    pageHref: '/services/root-canal',
     cardDesc: "Root canal therapy treats infection inside the tooth, relieving pain and preserving your natural tooth. Modern technique makes it far more comfortable than its reputation suggests.",
     desc: "A root canal removes infected or inflamed tissue from inside the tooth, relieving pain and saving the natural tooth from extraction. Modern technique and anesthesia make it far more comfortable than its reputation suggests—most patients are genuinely surprised.",
     highlights: ['Removes infection & relieves pain', 'Preserves your natural tooth', 'Full local anesthesia for comfort', 'Usually followed by a protective crown'],
     faqs: [
-      { q: 'Does a root canal hurt?', a: "No—we fully numb the area. Most patients say it feels similar to getting a filling. Relief from the infection is often immediate." },
-      { q: 'Why not just extract the tooth?', a: "Saving your natural tooth is almost always better for long-term function, bone preservation, and cost. A root canal makes that possible." },
-      { q: 'How long is recovery?', a: "Most patients return to normal activities the next day. Some mild soreness for a day or two is typical and manageable with over-the-counter relief." },
-      { q: 'Will I need a crown after?', a: "Usually yes. A crown protects the treated tooth, which can become more brittle after the pulp is removed. We'll plan this together with you." },
+      { q: 'Is a root canal painful?', a: "Most patients are surprised by how comfortable the procedure is. With modern anesthesia and gentle care, a root canal often feels no different than getting a filling." },
+      { q: 'How do I know if I need a root canal?', a: "Symptoms can include ongoing tooth pain, sensitivity to hot or cold, swelling, or a pimple on the gums. The best way to know for sure is a dental exam and x-rays." },
+      { q: 'Will my tooth look or feel different afterward?', a: "Once restored with a filling or crown, your tooth will look and function like any other. You'll be able to eat, speak, and smile with confidence." },
+      { q: 'How long does a root canal take?', a: "Most root canals are completed in one to two appointments, depending on the tooth and the severity of the infection." },
+      { q: 'Will my insurance cover a root canal?', a: "Most dental insurance plans cover some or all of the cost of root canal therapy. Our team will help you understand your benefits and out-of-pocket costs before starting." },
     ],
     bookLabel: 'Book a Root Canal Consultation',
     bookHref: '/contact',
@@ -196,15 +196,16 @@ const services = [
     num: '10 — General',
     category: 'General dentistry',
     title: 'Extractions',
-    pageHref: '/services/extractions',
     cardDesc: "When removing a tooth is the healthiest choice—due to decay, crowding, infection, or impaction—we handle it with precision and care, focusing on your comfort and recovery.",
     desc: "When a tooth needs to come out—due to severe decay, crowding, infection, or impaction—we handle it with precision and care. We'll also walk you through your replacement options so you leave knowing exactly what comes next.",
     highlights: ['Simple & surgical extractions', 'Wisdom tooth removal', 'Gentle technique & full anesthesia', 'Clear aftercare & next-step guidance'],
     faqs: [
-      { q: 'Is an extraction painful?', a: "We fully numb the area before starting. You'll feel pressure but no pain. Aftercare instructions help manage any post-procedure soreness." },
-      { q: "What's the recovery like?", a: "Most people feel comfortable within 2–3 days. We'll give you detailed aftercare instructions to help you heal quickly." },
-      { q: 'What happens to the gap afterward?', a: "We'll discuss your options—implants, bridges, or partial dentures—so you understand your choices before making any decisions." },
-      { q: 'Do wisdom teeth always need to come out?', a: "Not always. We'll evaluate their position and growth pattern to determine whether removal is recommended before suggesting anything." },
+      { q: 'Will the extraction hurt?', a: "We use strong local anesthesia to keep you comfortable, and we check in with you throughout the procedure. If you're nervous, let us know—we can discuss sedation or additional comfort options." },
+      { q: 'How long is recovery?', a: "Most people feel much better within a couple of days. We'll give you clear aftercare instructions, and you can always call if you have questions while you heal." },
+      { q: 'What can I eat after an extraction?', a: "Stick to soft, cool foods (like yogurt or applesauce) for the first day or two. We'll give you a full list and tips for an easy recovery." },
+      { q: 'Will I need to replace the tooth?', a: "Depending on the location, you might benefit from a replacement (like an implant, bridge, or partial denture) to maintain your bite and appearance. We'll help you explore all your options." },
+      { q: "What if I'm anxious about the procedure?", a: "You're not alone—many people feel this way. Our team is skilled at easing nerves, and we'll work with you to make your visit as stress-free as possible." },
+      { q: 'How do I know if an extraction is really necessary?', a: "We only recommend removing a tooth when it's the healthiest option for your long-term well-being. Before deciding, Dr. Fu will review digital images with you, explain what's going on in clear terms, and discuss any alternatives. You'll always understand the “why” behind the recommendation before moving forward." },
     ],
     bookLabel: 'Book an Extraction Consultation',
     bookHref: '/contact',
@@ -217,15 +218,15 @@ const services = [
     num: '11 — Periodontal',
     category: 'Periodontal care',
     title: 'Periodontal Care',
-    pageHref: '/services/periodontal-care',
     cardDesc: "Healthy gums are the foundation of a healthy mouth. We provide gentle, thorough periodontal care—from routine evaluations to deep cleanings—protecting you from gum disease.",
     desc: "Your gums are the foundation of your entire smile. We provide thorough evaluations, deep cleanings, and ongoing maintenance to stop gum disease in its tracks—and keep it from coming back.",
     highlights: ['Comprehensive gum evaluation', 'Scaling & root planing (deep cleaning)', 'Ongoing periodontal maintenance visits', 'Gum disease prevention & patient education'],
     faqs: [
-      { q: 'What are signs of gum disease?', a: "Bleeding when brushing, swollen or receding gums, persistent bad breath, and loose teeth. Early stages are often painless—which is why regular evaluations matter." },
-      { q: 'What is a deep cleaning?', a: "Also called scaling and root planing, it removes buildup from below the gumline where regular cleaning can't reach. Done with local anesthesia for comfort." },
-      { q: 'Is gum disease reversible?', a: "Early-stage gum disease (gingivitis) is fully reversible with treatment and better home care. More advanced stages can be controlled but not completely reversed." },
-      { q: 'How often do I need periodontal maintenance?', a: "Most patients with a history of gum disease benefit from cleanings every 3–4 months rather than the standard every six." },
+      { q: 'What causes gum disease?', a: "Gum disease is caused by plaque buildup along and below the gum line. Factors like poor oral hygiene, smoking, genetics, and certain health conditions can increase risk." },
+      { q: 'What are the signs of gum disease?', a: "Look for redness, swelling, bleeding gums, persistent bad breath, or loose teeth. Early detection is key to effective treatment." },
+      { q: 'How is gum disease treated?', a: "Treatment can range from professional cleanings to deep cleanings (scaling and root planing) and, in advanced cases, surgical procedures." },
+      { q: 'Can gum disease affect my overall health?', a: "Yes. Research links gum disease to heart disease, diabetes, and other systemic conditions, making periodontal care vital." },
+      { q: 'How often should I have periodontal checkups?', a: "Depending on your gum health, your dentist may recommend visits every 3 to 6 months for monitoring and maintenance." },
     ],
     bookLabel: 'Book a Periodontal Evaluation',
     bookHref: '/contact',
@@ -238,15 +239,15 @@ const services = [
     num: '12 — Pediatric',
     category: 'Pediatric dentistry',
     title: 'Pediatric Dentistry',
-    pageHref: '/services/pediatric-dentistry',
     cardDesc: "Pediatric dentistry provides specialized care for infants, children, and teens in a positive, supportive way—from baby teeth checkups to sealants and early orthodontic guidance.",
     desc: "We make first dental visits—and every visit after—a genuinely positive experience. Our approach is patient, unhurried, and kid-friendly, building the confidence and habits kids carry into adulthood.",
     highlights: ["First visits for infants & toddlers", 'Cleanings, exams & sealants', 'Fluoride treatments', 'Early orthodontic monitoring'],
     faqs: [
-      { q: 'When should my child first see a dentist?', a: "Around the time their first tooth appears—or by their first birthday, whichever comes first. Early visits set a positive foundation." },
-      { q: 'What if my child is nervous?', a: "Completely normal. We take things slowly, explain everything in age-appropriate language, and never push a child past where they're comfortable." },
-      { q: 'Do you provide sealants?', a: "Yes. Dental sealants are a safe, effective way to protect your child's back teeth from cavities, especially during cavity-prone years." },
-      { q: 'When should I think about orthodontics for my child?', a: "We start monitoring development early and can flag concerns around ages 7–9, when early intervention is most effective." },
+      { q: 'When should my child have their first dental visit?', a: "We recommend bringing your child in by their first birthday, or within six months of the first tooth erupting. Early visits help your child get comfortable and allow us to spot any concerns right away." },
+      { q: 'How often should children see the dentist?', a: "Just like adults, kids benefit from regular checkups every six months. Some children may need more frequent visits if they're prone to cavities or have special concerns." },
+      { q: 'What if my child is nervous or afraid?', a: "That's completely normal! Our team is experienced in working with anxious kids. We take things slow, explain each step, and use plenty of positive reinforcement to help build trust and confidence." },
+      { q: 'Are baby teeth really that important?', a: "Yes! Healthy baby teeth help children chew, speak, and smile. They also hold space for adult teeth and contribute to overall health." },
+      { q: 'Do you offer sealants or fluoride treatments?', a: "Absolutely. We recommend sealants and fluoride for most children to protect against cavities and strengthen enamel." },
     ],
     bookLabel: "Book Your Child's First Visit",
     bookHref: '/contact',
@@ -259,7 +260,6 @@ const services = [
     num: '13 — Restorative',
     category: 'Restorative dentistry',
     title: 'Porcelain Bridges',
-    pageHref: '/service',
     cardDesc: 'Replace one or more missing teeth with a natural-looking fixed restoration that restores your bite, your smile, and your confidence.',
     desc: "A porcelain bridge fills the space left by one or more missing teeth, anchored to adjacent teeth or implants. Custom-matched to your natural tooth color, it restores your bite and your smile—fixed and permanent.",
     highlights: ['Custom color-matched porcelain', 'Anchored to neighboring teeth or implants', 'Fixed restoration—no removal needed', 'Restores full bite force & aesthetics'],
@@ -361,7 +361,6 @@ const services = [
           <a class="btn" id="sm-book-btn" href="/contact">Book a Consultation</a>
           <a class="btn btn-out sm-call" href="tel:7148932106">Call (714) 893-2106</a>
         </div>
-        <a class="sm-full-link" id="sm-full-link" href="/services">View full details →</a>
       </div>
     </div>
 
@@ -549,17 +548,6 @@ button.scell {
 .sm-cta .btn { justify-content: center; }
 .sm-cta .sm-call { justify-content: center; }
 
-.sm-full-link {
-  font-size: 13px;
-  color: var(--teal);
-  font-weight: 600;
-  text-align: center;
-  display: block;
-  padding: 4px 0 2px;
-  transition: opacity 0.15s;
-}
-.sm-full-link:hover { opacity: 0.75; }
-
 /* ---- mobile ---- */
 @media (max-width: 640px) {
   #svc-modal {
@@ -642,10 +630,6 @@ button.scell {
     bookBtn.textContent = s.bookLabel;
     bookBtn.href = s.bookHref || '/contact';
 
-    // Full details link
-    const fullLink = document.getElementById('sm-full-link');
-    fullLink.href = s.pageHref || '/services';
-
     // Store trigger element & open
     lastFocused = document.activeElement;
     backdrop.setAttribute('aria-hidden', 'false');
@@ -663,10 +647,21 @@ button.scell {
     if (lastFocused) lastFocused.focus();
   }
 
+  // Expose openModal so other components (e.g., header dropdown) can trigger it
+  window.openServiceModal = openModal;
+
   // Card clicks
   document.querySelectorAll('.scell[data-svc]').forEach(btn => {
     btn.addEventListener('click', () => openModal(btn.dataset.svc));
   });
+
+  // Open from URL hash (e.g. #svc=dental-implants), supports header dropdown links
+  function openFromHash() {
+    const m = /^#svc=([a-z0-9-]+)$/i.exec(window.location.hash);
+    if (m && SVC_MAP[m[1]]) openModal(m[1]);
+  }
+  openFromHash();
+  window.addEventListener('hashchange', openFromHash);
 
   // Close button
   closeBtn.addEventListener('click', closeModal);
