@@ -35,7 +35,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="practice-split reveal">
       <div class="practice-copy">
         <span class="tag">Our Mission</span>
-        <h2>Care grounded in trust, precision, and respect.</h2>
+        <h2>Care grounded in trust,<br>precision, and respect.</h2>
         <p style="margin-top:22px">For many years, Oasis Dental Care has served the Huntington Beach community with a warm, personal approach supported by modern techniques and clear communication.</p>
         <p style="margin-top:14px">Our goal is to provide dependable dental care grounded in professionalism, clarity, and respect for your comfort. We combine experience with up-to-date diagnostic tools such as digital imaging and detailed examinations, helping you make confident, informed decisions about your treatment.</p>
         <p style="margin-top:14px">Every visit is designed to support long-term oral health through early detection, preventive education, and solutions tailored to your individual needs.</p>
@@ -61,14 +61,17 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 <!-- Our Dental Team -->
-<section class="pad" id="team">
+<div class="team-band" id="team">
+  <div class="grid-ov"></div>
+  <div class="wrap" style="position:relative">
+    <span class="tag">Our Dental Team</span>
+    <h2>Familiar faces, every visit.</h2>
+    <p>Our staff, including hygienists, assistants, and front office team members, works together to create a smooth, comfortable experience at every visit. Many patients see the same team members visit after visit, creating a sense of familiarity and continuity that helps reduce anxiety and build long-term trust.</p>
+  </div>
+</div>
+<section class="pad">
   <div class="wrap">
-    <div class="shead reveal">
-      <div><span class="tag">Our Dental Team</span><h2>Familiar faces, every visit.</h2></div>
-    </div>
-    <p class="team-intro reveal">Our staff, including hygienists, assistants, and front office team members, works together to create a smooth, comfortable experience at every visit. Many patients see the same team members visit after visit, creating a sense of familiarity and continuity that helps reduce anxiety and build long-term trust.</p>
-
-    <div class="team reveal" style="margin-top:42px">
+    <div class="team reveal">
 
       <!-- Dr. Fu -->
       <div class="member">
@@ -195,10 +198,18 @@ import Layout from '../layouts/Layout.astro';
 /* practice page layout */
 .practice-split {
   display: grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap: 72px;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
   align-items: center;
 }
+.team-band {
+  background: var(--dark);
+  padding: 56px 0;
+}
+.team-band .tag { color: var(--teal-300); }
+.team-band .tag::before { background: var(--teal-300); }
+.team-band h2 { font-size: clamp(28px, 3.6vw, 44px); color: #fff; margin-top: 12px; letter-spacing: -0.025em; }
+.team-band p { color: #9cc4bd; margin-top: 16px; max-width: 680px; font-size: 17px; line-height: 1.65; }
 @media(max-width: 880px) {
   .practice-split { grid-template-columns: 1fr; gap: 36px; }
 }
@@ -289,13 +300,7 @@ import Layout from '../layouts/Layout.astro';
 }
 
 /* team extras */
-.team-intro {
-  color: var(--ink-soft);
-  font-size: 17px;
-  max-width: 720px;
-  margin-top: 20px;
-  line-height: 1.65;
-}
+
 
 /* values grid */
 .values-grid {
