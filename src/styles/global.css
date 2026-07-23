@@ -297,6 +297,12 @@ section.pad { padding: 56px 0; }
 .doc .meta .n { font-family: var(--disp); font-weight: 600; font-size: 22px; color: var(--teal); }
 .doc .meta .l { font-size: 10.5px; letter-spacing: .01em; color: var(--ink-soft); margin-top: 4px; }
 @media(max-width: 860px) { .doc .wrap { grid-template-columns: 1fr; gap: 34px; } .doc .pic { max-width: 400px; } }
+/* personal note + signature */
+.doc .note-q { margin-top: 22px; font-family: var(--disp); font-weight: 500; font-size: clamp(18px, 1.9vw, 21px); line-height: 1.5; letter-spacing: -0.01em; color: var(--ink); border-left: 3px solid var(--teal); padding-left: 20px; }
+.sig { margin-top: 22px; display: flex; align-items: center; gap: 16px; }
+.sig .mark { font-family: "Caveat", cursive; font-size: 40px; line-height: 1; color: var(--teal); }
+.sig .who { font-size: 13px; color: var(--ink-soft); }
+.sig .who b { display: block; font-family: var(--disp); font-weight: 600; font-size: 15px; color: var(--ink); }
 
 /* ---------- reviews ---------- */
 .rev { background: var(--bg); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); }
@@ -535,12 +541,21 @@ section.pad { padding: 56px 0; }
 .img-ph-lbl { font-family:var(--disp);font-weight:600;font-size:15px;color:#eaf6f3; }
 .img-ph-desc { font-size:12.5px;color:#86b3ab;max-width:360px;line-height:1.55; }
 
+/* ---------- Invisalign logo lockup ---------- */
+.invis-logo { display:inline-flex; align-items:center; gap:.42em; line-height:1; }
+.invis-emblem { height:var(--ih,30px); width:var(--ih,30px); flex:0 0 auto; }
+.invis-type { font-family:var(--body); font-weight:700; font-size:calc(var(--ih,30px) * .88); letter-spacing:-.045em; color:#12333a; line-height:1; white-space:nowrap; }
+.invis-type sup { font-size:.4em; font-weight:600; top:-.95em; left:.05em; letter-spacing:0; }
+
+/* ---------- Invisalign provider strip ---------- */
+.provider-strip { background: var(--panel); border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); }
+.provider-strip .wrap { display: flex; align-items: center; justify-content: center; gap: 26px; padding: 26px var(--gutter); flex-wrap: wrap; text-align: center; }
+.provider-strip p { color: var(--ink-soft); font-size: 15px; max-width: 540px; }
+.provider-strip p strong { color: var(--ink); font-weight: 600; }
+@media(max-width: 640px) { .provider-strip .wrap { flex-direction: column; gap: 14px; padding: 24px var(--gutter); } }
+
 /* ---------- Invisalign provider badge ---------- */
 .invis-badge { display:inline-flex; align-items:center; gap:12px; padding:9px 16px; border:1px solid var(--line-l); border-radius:999px; background:var(--panel); box-shadow:0 2px 12px rgba(8,34,31,.05); transition:.16s; }
 .invis-badge:hover { border-color:var(--teal-300); transform:translateY(-2px); box-shadow:0 6px 20px rgba(8,34,31,.08); }
-.invis-mark { display:flex; align-items:center; gap:9px; color:var(--teal); }
-.invis-mark svg { width:22px; height:22px; flex-shrink:0; }
-.invis-word { font-family:var(--body); font-weight:600; font-size:19px; letter-spacing:-.03em; color:var(--teal); line-height:1; }
-.invis-word sup { font-size:.46em; font-weight:600; top:-.75em; letter-spacing:0; }
 .invis-sub { font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); border-left:1px solid var(--line-l); padding-left:12px; white-space:nowrap; }
 @media(max-width:420px){ .invis-sub{ display:none; } }

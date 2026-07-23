@@ -1,0 +1,26 @@
+---
+// Invisalign brand lockup — the 8-petal radial "bloom" emblem + lowercase wordmark.
+// Faithful vector recreation for use as an authorized-provider mark. To use the
+// official trademarked artwork instead, drop it in at /public and swap the markup.
+interface Props {
+  height?: number;   // emblem height in px; wordmark scales from it
+  wordmark?: boolean;
+  class?: string;
+}
+const { height = 30, wordmark = true, class: cls = '' } = Astro.props;
+const petals = [0, 45, 90, 135, 180, 225, 270, 315];
+---
+<span class={`invis-logo ${cls}`.trim()} style={`--ih:${height}px`} role="img" aria-label="Invisalign">
+  <svg class="invis-emblem" viewBox="0 0 60 60" aria-hidden="true" focusable="false">
+    <g transform="translate(30 30)">
+      {petals.map((a) => (
+        <g transform={`rotate(${a})`}>
+          <path d="M0 -3 C5.6 -10 5.6 -19.5 0 -26 L0 -3 Z" fill="#19b8b1" />
+          <path d="M0 -3 C-5.6 -10 -5.6 -19.5 0 -26 L0 -3 Z" fill="#0b8a86" />
+        </g>
+      ))}
+      <circle r="3.3" fill="#0b8a86" />
+    </g>
+  </svg>
+  {wordmark && <span class="invis-type">invisalign<sup>&reg;</sup></span>}
+</span>
