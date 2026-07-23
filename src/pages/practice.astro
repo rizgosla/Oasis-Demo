@@ -126,11 +126,13 @@ import Layout from '../layouts/Layout.astro';
 <section class="pad tech" id="values">
   <div class="bg-glow"></div>
   <div class="wrap">
-    <div class="shead reveal">
-      <div><span class="tag">Our Core Values</span><h2>What guides everything we do.</h2></div>
-      <p>Five principles that shape every patient interaction from the moment you walk in.</p>
-    </div>
     <div class="values-grid reveal">
+
+      <div class="v-intro">
+        <span class="tag">Our Core Values</span>
+        <h2>What guides everything we do.</h2>
+        <p>Five principles that shape every patient interaction — from the moment you walk in.</p>
+      </div>
 
       <div class="vcard">
         <div class="v-ic">
@@ -319,20 +321,43 @@ import Layout from '../layouts/Layout.astro';
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
-  margin-top: 42px;
+  margin-top: 0;
   perspective: 1200px;
 }
 .values-grid.reveal { opacity: 1; transform: none; }
 .values-grid.reveal .vcard { opacity: 0; transform: perspective(900px) rotateY(-20deg) translateY(28px) scale(.92); transform-origin: 90% 60%; }
 .values-grid.reveal.in .vcard { animation: dealIn .65s cubic-bezier(.34, 1.4, .5, 1) forwards; }
-.values-grid.reveal.in .vcard:nth-child(1) { animation-delay: 0ms; }
-.values-grid.reveal.in .vcard:nth-child(2) { animation-delay: 90ms; }
-.values-grid.reveal.in .vcard:nth-child(3) { animation-delay: 180ms; }
-.values-grid.reveal.in .vcard:nth-child(4) { animation-delay: 270ms; }
-.values-grid.reveal.in .vcard:nth-child(5) { animation-delay: 360ms; }
+.values-grid.reveal.in .vcard:nth-child(2) { animation-delay: 0ms; }
+.values-grid.reveal.in .vcard:nth-child(3) { animation-delay: 90ms; }
+.values-grid.reveal.in .vcard:nth-child(4) { animation-delay: 180ms; }
+.values-grid.reveal.in .vcard:nth-child(5) { animation-delay: 270ms; }
+.values-grid.reveal.in .vcard:nth-child(6) { animation-delay: 360ms; }
 @media(prefers-reduced-motion: reduce) { .values-grid.reveal .vcard, .values-grid.reveal.in .vcard { opacity: 1; transform: none; animation: none; } }
 @media(max-width: 900px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width: 560px) { .values-grid { grid-template-columns: 1fr; } }
+
+/* values intro tile (fills the grid so 5 cards read as a balanced 3×2) */
+.v-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 10px;
+}
+.v-intro h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  color: #fff;
+  margin-top: 14px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+.v-intro p {
+  color: #9cc4bd;
+  margin-top: 16px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  max-width: 36ch;
+}
+@media(max-width: 560px) { .v-intro { padding: 4px 2px 8px; } }
 .vcard {
   border: 1px solid var(--line);
   border-radius: 14px;
