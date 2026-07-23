@@ -1,6 +1,6 @@
 # Oasis Dental Care — Website
 
-Marketing website for **Oasis Dental Care**, a precision, technology-forward dental practice in Huntington Beach, California. Led by Dr. Jason Fu.
+Marketing website for **Oasis Dental Care**, a warm, family-run dental practice in Huntington Beach, California. Led by Dr. Jason Fu, who has cared for Orange County families for over 25 years.
 
 Built with [Astro](https://astro.build) and deployed as a static site to [Cloudflare Pages](https://pages.cloudflare.com).
 
@@ -11,7 +11,7 @@ Built with [Astro](https://astro.build) and deployed as a static site to [Cloudf
 | Route | File | Description |
 |---|---|---|
 | `/` | `src/pages/index.astro` | Homepage — hero, bento services, tech section, Dr. Fu, reviews, location, book CTA |
-| `/services` | `src/pages/services.astro` | Full 13-service catalog grid |
+| `/services` | `src/pages/services.astro` | Full 12-service catalog grid |
 | `/service` | `src/pages/service.astro` | Service detail template (Dental Implants example) |
 | `/team` | `src/pages/team.astro` | Dr. Fu feature + staff grid |
 | `/contact` | `src/pages/contact.astro` | Appointment request form + office info |
@@ -89,7 +89,7 @@ All design tokens and component styles live in `src/styles/global.css`.
 **Colors**
 - `--teal` `#0b8174` — primary brand
 - `--dark` `#08221f` — dark sections, header sections
-- `--bg` `#f3f6f5` — page background
+- `--bg` `#f8fbfa` — page background
 - `--panel` `#ffffff` — card surfaces
 
 **Fonts** (loaded from Google Fonts)

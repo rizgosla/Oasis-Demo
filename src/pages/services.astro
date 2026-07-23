@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InvisalignBadge from '../components/InvisalignBadge.astro';
 
 const services = [
   {
@@ -7,7 +8,7 @@ const services = [
     num: '01 — General',
     category: 'General dentistry',
     title: 'General Dentistry',
-    cardDesc: 'General dentistry is all about maintaining your oral health, preventing problems before they start, and giving your teeth the support they need to last a lifetime.',
+    cardDesc: 'Cleanings, exams, and checkups that keep your smile healthy for life.',
     desc: 'From routine cleanings to digital X-rays, general dentistry keeps your whole mouth healthy. We focus on catching problems early, guiding prevention, and making sure every visit is comfortable and clear—no jargon, no surprises.',
     highlights: ['Checkup & professional cleaning', 'Digital X-rays & full-mouth exam', 'Cavity treatment & tooth-colored fillings', 'Personalized home care guidance'],
     faqs: [
@@ -27,7 +28,7 @@ const services = [
     num: '02 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Cosmetic Dentistry',
-    cardDesc: "Ready for a more confident, radiant smile? Our cosmetic dentistry solutions—like whitening, veneers, and dental bonding—are designed to enhance your natural beauty.",
+    cardDesc: 'Whitening, veneers, and bonding to brighten and refine your natural smile.',
     desc: "Whether you want a subtle refresh or a complete transformation, we tailor every cosmetic treatment to your face, smile goals, and lifestyle. Results that look naturally you—never overdone.",
     highlights: ['Teeth whitening (in-office & take-home)', 'Dental bonding & contouring', 'Veneers & smile design', 'Complete smile makeovers'],
     faqs: [
@@ -47,7 +48,7 @@ const services = [
     num: '03 — Restorative',
     category: 'Restorative dentistry',
     title: 'Dental Implants',
-    cardDesc: "If you're missing one or more teeth, dental implants offer a permanent, secure solution that looks and feels just like the real thing.",
+    cardDesc: 'A permanent, natural-looking replacement for one or more missing teeth.',
     desc: "A titanium post replaces the tooth root, topped with a custom crown matched to your natural teeth. Unlike bridges, implants don't affect neighboring teeth—and unlike dentures, they're fixed, permanent, and preserve your jawbone.",
     highlights: ['3D imaging & personalized treatment plan', 'In-office implant placement', 'Healing period (osseointegration)', 'Custom crown fabrication & final placement'],
     faqs: [
@@ -68,7 +69,7 @@ const services = [
     num: '04 — Orthodontics',
     category: 'Orthodontics',
     title: 'Invisalign Treatment',
-    cardDesc: 'Invisalign uses a series of clear, custom-made plastic aligners to gently move your teeth into their ideal position. Nearly invisible and removable when you eat, brush, or floss.',
+    cardDesc: 'Clear, removable aligners that straighten teeth — no brackets or wires.',
     desc: "Clear, custom-made aligners gradually move your teeth into the right position. You wear them nearly all day, but they come out for eating and brushing—and they're virtually invisible in conversation.",
     highlights: ['Custom 3D treatment preview', 'New aligner sets every 1–2 weeks', 'Removable for meals & brushing', 'No brackets, wires, or dietary restrictions'],
     faqs: [
@@ -90,7 +91,7 @@ const services = [
     num: '05 — Restorative',
     category: 'Restorative dentistry',
     title: 'Crowns & Bridges',
-    cardDesc: "Crowns and bridges are restorative treatments designed to repair and replace damaged or missing teeth. A crown caps a damaged tooth; a bridge fills the gap left by missing teeth.",
+    cardDesc: 'Custom restorations that repair damaged teeth and fill the gaps left by missing ones.',
     desc: "Crowns cap and protect a damaged or weakened tooth. Bridges fill the gap left by a missing tooth, anchored to neighboring teeth or implants. Both restore your bite, your appearance, and your confidence—typically in just two visits.",
     highlights: ['Custom-fit crown or bridge', 'Tooth-colored porcelain or zirconia options', 'Anchored for lasting stability', 'Restores bite force & appearance'],
     faqs: [
@@ -111,7 +112,7 @@ const services = [
     num: '06 — Emergency',
     category: 'Emergency care',
     title: 'Emergency Dentistry',
-    cardDesc: "Toothache, broken teeth, dental infection, or trauma—we set aside same-day and next-day slots every day so you can get seen quickly when it matters most.",
+    cardDesc: 'Same-day relief for toothaches, broken teeth, and dental pain.',
     desc: "Dental emergencies don't wait. We keep same-day slots open for urgent situations—severe toothaches, broken teeth, lost crowns, dental infections, and trauma. Call us first and we'll get you in fast.",
     highlights: ['Same-day & next-day availability', 'Toothaches & dental infections', 'Broken, chipped, or knocked-out teeth', 'Lost fillings, crowns & trauma care'],
     faqs: [
@@ -132,7 +133,7 @@ const services = [
     num: '07 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Teeth Whitening',
-    cardDesc: "Teeth whitening is one of the simplest ways to enhance your smile. Whether you're looking for a subtle lift or a more noticeable change, whitening removes stains and brightens your teeth.",
+    cardDesc: 'Professional whitening that lifts stains and brightens your smile.',
     desc: "Professional whitening is faster and more effective than anything over-the-counter. We offer in-office treatment for a quick, dramatic lift—or custom take-home trays for gradual brightening on your own schedule.",
     highlights: ['In-office treatment (approx. 1 hour)', 'Custom take-home tray kits', 'Removes coffee, tea & wine stains', 'Safe for enamel under professional supervision'],
     faqs: [
@@ -153,7 +154,7 @@ const services = [
     num: '08 — Cosmetic',
     category: 'Cosmetic dentistry',
     title: 'Veneers',
-    cardDesc: "Veneers are thin porcelain layers bonded to the front surfaces of teeth to improve color, shape, and proportion. Tailored to fit your unique smile for a brighter, more balanced result.",
+    cardDesc: 'Thin porcelain shells that reshape and perfect the look of your smile.',
     desc: "Ultra-thin porcelain shells bonded to the front of your teeth to change their color, shape, length, or alignment. Designed specifically for your smile—durable, stain-resistant, and remarkably natural-looking.",
     highlights: ['Custom-designed porcelain shells', 'Addresses color, shape & proportion', 'Highly stain-resistant & long-lasting', 'Minimal tooth reduction required'],
     faqs: [
@@ -175,7 +176,7 @@ const services = [
     num: '09 — Restorative',
     category: 'Restorative dentistry',
     title: 'Root Canal Therapy',
-    cardDesc: "Root canal therapy treats infection inside the tooth, relieving pain and preserving your natural tooth. Modern technique makes it far more comfortable than its reputation suggests.",
+    cardDesc: 'Gentle treatment that relieves pain and saves your natural tooth.',
     desc: "A root canal removes infected or inflamed tissue from inside the tooth, relieving pain and saving the natural tooth from extraction. Modern technique and anesthesia make it far more comfortable than its reputation suggests—most patients are genuinely surprised.",
     highlights: ['Removes infection & relieves pain', 'Preserves your natural tooth', 'Full local anesthesia for comfort', 'Usually followed by a protective crown'],
     faqs: [
@@ -196,7 +197,7 @@ const services = [
     num: '10 — General',
     category: 'General dentistry',
     title: 'Extractions',
-    cardDesc: "When removing a tooth is the healthiest choice—due to decay, crowding, infection, or impaction—we handle it with precision and care, focusing on your comfort and recovery.",
+    cardDesc: 'Comfortable, gentle tooth removal with clear, caring aftercare.',
     desc: "When a tooth needs to come out—due to severe decay, crowding, infection, or impaction—we handle it with precision and care. We'll also walk you through your replacement options so you leave knowing exactly what comes next.",
     highlights: ['Simple & surgical extractions', 'Wisdom tooth removal', 'Gentle technique & full anesthesia', 'Clear aftercare & next-step guidance'],
     faqs: [
@@ -218,7 +219,7 @@ const services = [
     num: '11 — Periodontal',
     category: 'Periodontal care',
     title: 'Periodontal Care',
-    cardDesc: "Healthy gums are the foundation of a healthy mouth. We provide gentle, thorough periodontal care—from routine evaluations to deep cleanings—protecting you from gum disease.",
+    cardDesc: "Gentle gum care that protects your smile's foundation from disease.",
     desc: "Your gums are the foundation of your entire smile. We provide thorough evaluations, deep cleanings, and ongoing maintenance to stop gum disease in its tracks—and keep it from coming back.",
     highlights: ['Comprehensive gum evaluation', 'Scaling & root planing (deep cleaning)', 'Ongoing periodontal maintenance visits', 'Gum disease prevention & patient education'],
     faqs: [
@@ -239,7 +240,7 @@ const services = [
     num: '12 — Pediatric',
     category: 'Pediatric dentistry',
     title: 'Pediatric Dentistry',
-    cardDesc: "Pediatric dentistry provides specialized care for infants, children, and teens in a positive, supportive way—from baby teeth checkups to sealants and early orthodontic guidance.",
+    cardDesc: 'Kind, patient dental care for kids of every age.',
     desc: "We make first dental visits—and every visit after—a genuinely positive experience. Our approach is patient, unhurried, and kid-friendly, building the confidence and habits kids carry into adulthood.",
     highlights: ["First visits for infants & toddlers", 'Cleanings, exams & sealants', 'Fluoride treatments', 'Early orthodontic monitoring'],
     faqs: [
@@ -255,44 +256,25 @@ const services = [
     icon: '<circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>',
     bgIcon: '<circle cx="12" cy="8" r="4"/>',
   },
-  {
-    id: 'porcelain-bridges',
-    num: '13 — Restorative',
-    category: 'Restorative dentistry',
-    title: 'Porcelain Bridges',
-    cardDesc: 'Replace one or more missing teeth with a natural-looking fixed restoration that restores your bite, your smile, and your confidence.',
-    desc: "A porcelain bridge fills the space left by one or more missing teeth, anchored to adjacent teeth or implants. Custom-matched to your natural tooth color, it restores your bite and your smile—fixed and permanent.",
-    highlights: ['Custom color-matched porcelain', 'Anchored to neighboring teeth or implants', 'Fixed restoration—no removal needed', 'Restores full bite force & aesthetics'],
-    faqs: [
-      { q: 'How is a bridge different from an implant?', a: "A bridge is supported by neighboring teeth or implants and doesn't require surgery. Implants replace the root independently. Both are excellent options—we'll help you decide." },
-      { q: 'How long does treatment take?', a: "Typically 2–3 appointments over a few weeks. We provide a temporary bridge while your permanent one is custom-made." },
-      { q: 'How long do porcelain bridges last?', a: "With good care, 10–15+ years is typical. We'll give you specific guidance and care instructions based on your case." },
-      { q: 'Is it covered by insurance?', a: "Many plans cover part of bridge treatment. We'll verify your benefits before you start and give you a clear, written cost estimate." },
-    ],
-    bookLabel: 'Book a Bridge Consultation',
-    bookHref: '/contact',
-    imgDesc: 'Natural-looking porcelain bridge; restored, confident smile',
-    icon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
-    bgIcon: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>',
-  },
 ];
 ---
 
 <Layout
   title="Services — Oasis Dental Care, Huntington Beach"
-  description="All 13 dental services under one roof in Huntington Beach. General, cosmetic, implants, Invisalign and more with Dr. Jason Fu."
+  description="Every dental service your family needs, all in one place in Huntington Beach. General, cosmetic, implants, Invisalign and more — with Dr. Jason Fu."
   page="services"
 >
 
 <section class="phero">
   <div class="wrap">
     <span class="tag">/ Services</span>
-    <h1>Every treatment,<br />one practice.</h1>
-    <p>From routine checkups to dental implants and Invisalign® — all 13 services under one roof in Huntington Beach, led by Dr. Jason Fu.</p>
+    <h1>Everything your<br />family needs.</h1>
+    <p>From routine checkups to dental implants and Invisalign® — every service under one roof in Huntington Beach, with the same trusted dentist, Dr. Jason Fu.</p>
     <div class="acts">
       <a class="btn" href="/contact">Book a consultation <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
     </div>
+    <div style="margin-top:26px"><InvisalignBadge /></div>
   </div>
 </section>
 

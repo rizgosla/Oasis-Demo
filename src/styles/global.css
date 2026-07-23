@@ -2,7 +2,7 @@
    Oasis Dental Care — global design system
    ============================================================ */
 :root {
-  --bg: #f3f6f5;
+  --bg: #f8fbfa;
   --panel: #ffffff;
   --ink: #0a1a18;
   --ink-soft: #56655f;
@@ -534,3 +534,13 @@ section.pad { padding: 56px 0; }
 .img-ph-ic svg { width:24px;height:24px;stroke:var(--teal-300);fill:none;stroke-width:1.5; }
 .img-ph-lbl { font-family:var(--disp);font-weight:600;font-size:15px;color:#eaf6f3; }
 .img-ph-desc { font-size:12.5px;color:#86b3ab;max-width:360px;line-height:1.55; }
+
+/* ---------- Invisalign provider badge ---------- */
+.invis-badge { display:inline-flex; align-items:center; gap:12px; padding:9px 16px; border:1px solid var(--line-l); border-radius:999px; background:var(--panel); box-shadow:0 2px 12px rgba(8,34,31,.05); transition:.16s; }
+.invis-badge:hover { border-color:var(--teal-300); transform:translateY(-2px); box-shadow:0 6px 20px rgba(8,34,31,.08); }
+.invis-mark { display:flex; align-items:center; gap:9px; color:var(--teal); }
+.invis-mark svg { width:22px; height:22px; flex-shrink:0; }
+.invis-word { font-family:var(--body); font-weight:600; font-size:19px; letter-spacing:-.03em; color:var(--teal); line-height:1; }
+.invis-word sup { font-size:.46em; font-weight:600; top:-.75em; letter-spacing:0; }
+.invis-sub { font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); border-left:1px solid var(--line-l); padding-left:12px; white-space:nowrap; }
+@media(max-width:420px){ .invis-sub{ display:none; } }
