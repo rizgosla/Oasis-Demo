@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InvisalignBadge from '../components/InvisalignBadge.astro';
 ---
 
 <Layout
-  title="Oasis Dental Care — Precision dentistry in Huntington Beach"
-  description="Precision, technology-forward dentistry in Huntington Beach. Same-day crowns, 3D imaging, implants & Invisalign with Dr. Jason Fu. Call (714) 893-2106."
+  title="Oasis Dental Care — Your neighborhood dentist in Huntington Beach"
+  description="Warm, personal dental care in Huntington Beach. See the same trusted dentist, Dr. Jason Fu, who has cared for Orange County families for over 25 years. Call (714) 893-2106."
 >
 
 <!-- hero -->
@@ -12,13 +13,14 @@ import Layout from '../layouts/Layout.astro';
   <div class="heromain">
     <div class="inner">
       <div class="copy">
-        <span class="tag" style="font-size:15px">Precision dentistry · Huntington Beach</span>
+        <span class="tag" style="font-size:15px">Your neighborhood dentist · Huntington Beach</span>
         <h1>Oasis Dental Care.<br /><span>Achieve a smile you'll love!</span></h1>
-        <p>Whether you're visiting us for the first time or coming back to see our team, you can expect personalized attention and a warm, relaxed atmosphere.</p>
+        <p>A small, family-run practice where you'll see the same familiar faces every visit. Whether it's your first time or your fifteenth year with us, expect unhurried, personal attention in a calm, welcoming space.</p>
         <div class="acts">
           <a class="btn" href="/contact">Request appointment <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
         </div>
+        <div style="margin-top:28px"><InvisalignBadge /></div>
       </div>
       <div class="media">
         <div class="ph">
@@ -36,8 +38,8 @@ import Layout from '../layouts/Layout.astro';
 <div class="stat-band reveal">
   <div class="wrap">
     <div class="stat-row">
-      <div class="stat"><div class="n">25+</div><div class="l">Years of experience</div></div>
-      <div class="stat"><div class="n">10k+</div><div class="l">Smiles cared for</div></div>
+      <div class="stat"><div class="n">25+</div><div class="l">Years in Orange County</div></div>
+      <div class="stat"><div class="n">1</div><div class="l">Dentist — the one you'll always see</div></div>
       <div class="stat"><div class="n">4.8★</div><div class="l">Patient rated</div></div>
       <div class="stat"><div class="n">Same-day</div><div class="l">Emergency care</div></div>
     </div>
@@ -59,8 +61,8 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- left: copy + controls + CTA -->
       <div class="services-copy">
-        <h2>Every treatment, one system.</h2>
-        <p>A full-service practice — from preventive visits to advanced restorative and cosmetic work, all under one roof in Huntington Beach.</p>
+        <h2>All your family's care, one familiar place.</h2>
+        <p>From routine cleanings to cosmetic and restorative work — everything your family needs, right here in Huntington Beach, with a team that knows you by name.</p>
         <div class="deck-bar">
           <button class="deck-arrow" id="deckPrev" aria-label="Previous service">
             <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
@@ -158,14 +160,14 @@ import Layout from '../layouts/Layout.astro';
   <div class="bg-glow"></div>
   <div class="wrap">
     <div class="shead reveal">
-      <div><span class="tag">The Oasis difference</span><h2>Built around precision &amp; comfort.</h2></div>
-      <p>It's not just the technology — it's how we listen, explain, and treat every patient like a neighbor.</p>
+      <div><span class="tag">The Oasis difference</span><h2>Care that feels personal.</h2></div>
+      <p>We're not a big chain — we're a neighborhood practice. It's in how we listen, take our time, and treat every patient like someone we'll see for years to come.</p>
     </div>
     <div class="tgrid reveal" id="tgridScroll">
       <div class="tcard"><div class="num">01 — Scheduling</div><h3>Respecting Your Time</h3><p>Your time matters. We operate on a schedule with the patient in mind—no waiting around or delays.</p></div>
       <div class="tcard"><div class="num">02 — Safety</div><h3>Putting Safety First</h3><p>We follow sterilization protocols recommended by the ADA, CDC, and OSHA to ensure a safe, clean environment.</p></div>
       <div class="tcard"><div class="num">03 — Orthodontics</div><h3>Straighten Your Way</h3><p>We give patients the option to choose from traditional braces or nearly invisible Invisalign.</p></div>
-      <div class="tcard"><div class="num">04 — Technology</div><h3>Leading-Edge Care</h3><p>From 3D imaging to same-day crowns, we choose technology that makes your visit safer and more precise.</p></div>
+      <div class="tcard"><div class="num">04 — Familiar Faces</div><h3>The Same Team, Every Visit</h3><p>You'll see Dr. Fu and the same friendly staff each time — never a rotating roster of strangers. That's how trust is built.</p></div>
       <div class="tcard"><div class="num">05 — Community</div><h3>Rooted in Community</h3><p>From Surf City families to local business owners and weekend beachgoers, we're proud to serve the community we call home.</p></div>
       <div class="tcard"><div class="num">06 — Services</div><h3>Full-Service Dentistry</h3><p>Whether you need a routine checkup, a smile makeover, or a helping hand in an emergency, you won't need to travel far.</p></div>
     </div>
@@ -181,12 +183,12 @@ import Layout from '../layouts/Layout.astro';
       <div class="ovl"><span class="nm">Dr. Jason Fu</span><span class="rl" style="font-size:15px">Lead Dentist</span></div>
     </div>
     <div class="reveal">
-      <h2>Decades of clinical excellence and patient care</h2>
-      <p>Dr. Jason Fu brings over 25 years of clinical experience to Oasis Dental Care, combining advanced dental expertise with a calm, patient-focused approach. He is committed to delivering thoughtful, individualized care—whether you're visiting for preventive treatment, restorative work, or cosmetic enhancements.</p>
-      <p>Together, Dr. Fu and the Oasis Dental team are focused on creating a welcoming environment where clinical excellence and patient comfort go hand in hand.</p>
+      <h2>The same trusted dentist, for over 25 years</h2>
+      <p>Dr. Jason Fu has cared for Orange County families for more than 25 years — and at Oasis, he's the dentist you'll see at every visit. No rotating providers, no big-chain feel. Just a familiar face who takes the time to know you, listen to your concerns, and explain things in plain language.</p>
+      <p>Whether you're in for a preventive cleaning, restorative work, or a cosmetic touch-up, Dr. Fu and his small, steady team focus on one thing: making your visit feel personal and unhurried.</p>
       <div class="meta">
-        <div><div class="n">25+</div><div class="l">Years exp.</div></div>
-        <div><div class="n">10k+</div><div class="l">Smiles cared for</div></div>
+        <div><div class="n">25+</div><div class="l">Years in O.C.</div></div>
+        <div><div class="n">Same</div><div class="l">Dentist, every visit</div></div>
         <div><div class="n">4.8★</div><div class="l">Patient rated</div></div>
       </div>
     </div>
