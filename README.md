@@ -1,6 +1,6 @@
 # Oasis Dental Care — Website
 
-Marketing website for **Oasis Dental Care**, a warm, family-run dental practice in Huntington Beach, California. Led by Dr. Jason Fu, who has cared for Orange County families for over 25 years.
+Marketing website for **Oasis Dental Care**, a warm, family-run dental practice in Huntington Beach, California. Led by Dr. Jason Fu, who has cared for Orange County families for over 20 years.
 
 Built with [Astro](https://astro.build) and deployed as a static site to [Cloudflare Pages](https://pages.cloudflare.com).
 

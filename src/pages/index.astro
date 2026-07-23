@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import InvisalignBadge from '../components/InvisalignBadge.astro';
+import InvisalignLogo from '../components/InvisalignLogo.astro';
 ---
 
 <Layout
-  title="Oasis Dental Care — Your neighborhood dentist in Huntington Beach"
-  description="Warm, personal dental care in Huntington Beach. See the same trusted dentist, Dr. Jason Fu, who has cared for Orange County families for over 25 years. Call (714) 893-2106."
+  title="Oasis Dental Care — Your Orange County dentist for 20+ years"
+  description="Warm, personal dental care in Huntington Beach. See the same trusted dentist, Dr. Jason Fu, who has cared for Orange County families for over 20 years. Call (714) 893-2106."
 >
 
 <!-- hero -->
@@ -13,7 +14,7 @@ import InvisalignBadge from '../components/InvisalignBadge.astro';
   <div class="heromain">
     <div class="inner">
       <div class="copy">
-        <span class="tag" style="font-size:15px">Your neighborhood dentist · Huntington Beach</span>
+        <span class="tag" style="font-size:15px">Your Orange County dentist · 20+ years</span>
         <h1>Oasis Dental Care.<br /><span>Achieve a smile you'll love!</span></h1>
         <p>A small, family-run practice where you'll see the same familiar faces every visit. Whether it's your first time or your fifteenth year with us, expect unhurried, personal attention in a calm, welcoming space.</p>
         <div class="acts">
@@ -38,7 +39,7 @@ import InvisalignBadge from '../components/InvisalignBadge.astro';
 <div class="stat-band reveal">
   <div class="wrap">
     <div class="stat-row">
-      <div class="stat"><div class="n">25+</div><div class="l">Years in Orange County</div></div>
+      <div class="stat"><div class="n">20+</div><div class="l">Years in Orange County</div></div>
       <div class="stat"><div class="n">1</div><div class="l">Dentist — the one you'll always see</div></div>
       <div class="stat"><div class="n">4.8★</div><div class="l">Patient rated</div></div>
       <div class="stat"><div class="n">Same-day</div><div class="l">Emergency care</div></div>
@@ -183,17 +184,30 @@ import InvisalignBadge from '../components/InvisalignBadge.astro';
       <div class="ovl"><span class="nm">Dr. Jason Fu</span><span class="rl" style="font-size:15px">Lead Dentist</span></div>
     </div>
     <div class="reveal">
-      <h2>The same trusted dentist, for over 25 years</h2>
-      <p>Dr. Jason Fu has cared for Orange County families for more than 25 years — and at Oasis, he's the dentist you'll see at every visit. No rotating providers, no big-chain feel. Just a familiar face who takes the time to know you, listen to your concerns, and explain things in plain language.</p>
-      <p>Whether you're in for a preventive cleaning, restorative work, or a cosmetic touch-up, Dr. Fu and his small, steady team focus on one thing: making your visit feel personal and unhurried.</p>
+      <span class="tag">Meet Dr. Fu</span>
+      <h2>The same trusted dentist, for over 20 years</h2>
+      <p>For more than 20 years, Dr. Jason Fu has cared for families right here in Orange County. At Oasis, he isn't one of a rotating cast — he's the dentist you'll see at every visit, the one who remembers your name, your history, and what makes you uneasy in the chair.</p>
+      <p class="note-q">“I've practiced in this community for two decades because I love knowing my patients as neighbors, not chart numbers. When you come to Oasis, you're seeing me — every single visit.”</p>
+      <div class="sig">
+        <span class="mark">Jason Fu</span>
+        <span class="who"><b>Dr. Jason Fu</b>Lead Dentist &amp; Founder · Orange County</span>
+      </div>
       <div class="meta">
-        <div><div class="n">25+</div><div class="l">Years in O.C.</div></div>
+        <div><div class="n">20+</div><div class="l">Years serving O.C.</div></div>
         <div><div class="n">Same</div><div class="l">Dentist, every visit</div></div>
         <div><div class="n">4.8★</div><div class="l">Patient rated</div></div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- invisalign provider strip -->
+<div class="provider-strip reveal">
+  <div class="wrap">
+    <InvisalignLogo height={36} />
+    <p>A proud, <strong>certified Invisalign® provider</strong> — straightening Orange County smiles with clear, custom-made aligners, right here at home.</p>
+  </div>
+</div>
 
 <!-- reviews -->
 <section class="pad rev" id="reviews">
