@@ -1,0 +1,81 @@
+---
+// Dentist schema — a subtype of both LocalBusiness and MedicalBusiness, so it
+// carries NAP, hours and medical-practice signals in one node. Rendered site-wide
+// from Layout.astro. The @id lets other schema on the site point back at it.
+//
+// Deliberately omitted:
+//   aggregateRating / review — the 4.8 shown on the homepage comes from Google
+//     and Yelp. Google requires self-serving aggregate ratings to be from reviews
+//     collected on your own site; marking up third-party ratings as your own risks
+//     a manual action. Google surfaces the Business Profile rating natively anyway.
+//   geo — no verified coordinates available; hasMap points at the Business Profile
+//     rather than guessing lat/long.
+//   Saturday hours — "by appointment" is not a fixed window, and inventing one
+//     would be worse than leaving it out.
+//   priceRange — no source of truth for it in the site content.
+
+const SITE = Astro.site?.origin ?? 'https://oasisdentalcarehb.com';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Dentist',
+  '@id': `${SITE}/#dentist`,
+  name: 'Oasis Dental Care',
+  description:
+    'A warm, family-run dental practice in Huntington Beach, California, led by Dr. Jason Fu — serving Orange County families for over 20 years.',
+  url: SITE,
+  logo: `${SITE}/logo.png`,
+  image: `${SITE}/og-default.png`,
+  telephone: '+1-714-893-2106',
+  email: 'oasisdentalcarehb@yahoo.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '6552 Bolsa Ave, Suite J',
+    addressLocality: 'Huntington Beach',
+    addressRegion: 'CA',
+    postalCode: '92647',
+    addressCountry: 'US',
+  },
+  hasMap: 'https://www.google.com/maps?cid=8858444920419398576',
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Friday',
+      opens: '09:00',
+      closes: '16:00',
+    },
+  ],
+  founder: {
+    '@type': 'Person',
+    name: 'Dr. Jason Fu',
+    jobTitle: 'Lead Dentist & Founder',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Huntington Beach' },
+    { '@type': 'AdministrativeArea', name: 'Orange County' },
+  ],
+  medicalSpecialty: 'Dentistry',
+  availableService: [
+    'General Dentistry',
+    'Cosmetic Dentistry',
+    'Dental Implants',
+    'Invisalign',
+    'Crowns & Bridges',
+    'Emergency Dentistry',
+    'Teeth Whitening',
+    'Veneers',
+    'Root Canal Therapy',
+    'Extractions',
+    'Periodontal Care',
+    'Pediatric Dentistry',
+  ].map((name) => ({ '@type': 'MedicalProcedure', name })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

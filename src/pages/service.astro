@@ -1,5 +1,23 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
+
+// Mirrors the visual breadcrumb rendered in the hero below.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+    { name: 'Dental Implants', path: '/service' },
+  ].map(({ name, path }, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name,
+    item: new URL(path, Astro.site).href,
+  })),
+};
 ---
 
 <Layout
@@ -7,6 +25,7 @@ import Layout from '../layouts/Layout.astro';
   description="Permanent, natural-looking dental implants in Huntington Beach. Restore missing teeth with Dr. Jason Fu at Oasis Dental Care. Call (714) 893-2106."
   page="services"
 >
+<script type="application/ld+json" slot="schema" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <section class="phero">
   <div class="wrap">

@@ -1,5 +1,47 @@
 ---
+export const prerender = true;
+
 import Layout from '../layouts/Layout.astro';
+
+// Single source of truth for the new-patient FAQs: the <details> list below and
+// the FAQPage structured data are both rendered from this array, so the visible
+// copy and the markup Google reads can never drift apart.
+const faqs = [
+  {
+    q: 'What happens during my first appointment?',
+    a: "You'll meet with Dr. Fu for a conversation about your dental history, followed by an exam and any needed digital x-rays or scans. We'll review what we see together and talk about your options in clear, simple terms.",
+  },
+  {
+    q: 'Will I get a cleaning at my first visit?',
+    a: "In most cases, yes. If a different type of cleaning or treatment is needed first, we'll explain why and help you plan the next steps.",
+  },
+  {
+    q: "What if I'm nervous about dental visits?",
+    a: "You're not alone. We take your comfort seriously and go at your pace. Dr. Fu checks in often, explains each step, and adjusts treatment based on your needs.",
+  },
+  {
+    q: 'What should I bring with me?',
+    a: "Please bring a photo ID, your dental insurance card (if you have one), and any recent dental records if available. If not, no problem—we'll take care of everything here.",
+  },
+  {
+    q: 'Does Dr. Fu explain treatment options?',
+    a: 'Absolutely. Clear communication is one of our core values. We walk you through each recommendation and help you understand what is necessary, optional, or can wait.',
+  },
+  {
+    q: 'Can I talk to Dr. Fu about past dental experiences or concerns?',
+    a: 'Yes—please do. Understanding your past experiences helps us tailor your care and create a visit that feels comfortable and reassuring.',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 ---
 
 <Layout
@@ -7,6 +49,7 @@ import Layout from '../layouts/Layout.astro';
   description="Start your smile journey at Oasis Dental Care in Huntington Beach. Learn what to expect as a new patient, read FAQs, and access patient forms."
   page="new-patients"
 >
+<script type="application/ld+json" slot="schema" set:html={JSON.stringify(faqSchema)} />
 
 <section class="phero">
   <div class="wrap">
@@ -98,30 +141,12 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="np-faq-layout reveal">
       <div class="faq">
-        <details open>
-          <summary>What happens during my first appointment?</summary>
-          <p>You'll meet with Dr. Fu for a conversation about your dental history, followed by an exam and any needed digital x-rays or scans. We'll review what we see together and talk about your options in clear, simple terms.</p>
-        </details>
-        <details>
-          <summary>Will I get a cleaning at my first visit?</summary>
-          <p>In most cases, yes. If a different type of cleaning or treatment is needed first, we'll explain why and help you plan the next steps.</p>
-        </details>
-        <details>
-          <summary>What if I'm nervous about dental visits?</summary>
-          <p>You're not alone. We take your comfort seriously and go at your pace. Dr. Fu checks in often, explains each step, and adjusts treatment based on your needs.</p>
-        </details>
-        <details>
-          <summary>What should I bring with me?</summary>
-          <p>Please bring a photo ID, your dental insurance card (if you have one), and any recent dental records if available. If not, no problem—we'll take care of everything here.</p>
-        </details>
-        <details>
-          <summary>Does Dr. Fu explain treatment options?</summary>
-          <p>Absolutely. Clear communication is one of our core values. We walk you through each recommendation and help you understand what is necessary, optional, or can wait.</p>
-        </details>
-        <details>
-          <summary>Can I talk to Dr. Fu about past dental experiences or concerns?</summary>
-          <p>Yes—please do. Understanding your past experiences helps us tailor your care and create a visit that feels comfortable and reassuring.</p>
-        </details>
+        {faqs.map(({ q, a }, i) => (
+          <details open={i === 0}>
+            <summary>{q}</summary>
+            <p>{a}</p>
+          </details>
+        ))}
       </div>
 
       <div class="np-faq-aside">
