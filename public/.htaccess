@@ -1,0 +1,86 @@
+# Apache / LiteSpeed config for SiteGround. This is the single source of truth
+# for redirects and URL handling.
+#
+# Deploy: run `npm run build` and upload the contents of dist/ to public_html.
+# The build is fully static, so nothing else is required.
+
+RewriteEngine On
+Options -MultiViews
+
+# Astro is configured with trailingSlash: 'never' and every canonical tag is
+# emitted without one. Apache's mod_dir would otherwise 301 /contact to
+# /contact/, leaving every canonical URL pointing at a redirect.
+DirectorySlash Off
+
+# ---------------------------------------------------------------------------
+# 1. WordPress 301s. These run first because every old URL is published WITH a
+#    trailing slash, and the normalisation rule further down would otherwise
+#    rewrite them before they were matched.
+# ---------------------------------------------------------------------------
+
+# top-level pages
+RewriteRule ^our-practice-dentristy-oasis-dental-care/?$      /practice      [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/?$          /services      [R=301,L]
+RewriteRule ^contact-us-dentristy-oasis-dental-care/?$        /contact       [R=301,L]
+RewriteRule ^new_patients-dentristy-oasis-dental-care/?$      /new-patients  [R=301,L]
+RewriteRule ^comfort-care-dentristy-oasis-dental-care/?$      /new-patients  [R=301,L]
+
+# retired patient portal
+RewriteRule ^patient-login-form-dentristy-oasis-dental-care/?$  /contact  [R=301,L]
+RewriteRule ^patient-profile-oasis-dental-care/?$               /contact  [R=301,L]
+
+# the 12 old service pages map 1:1 onto the new routes
+RewriteRule ^services-dentristy-oasis-dental-care/services-general-dentristy-oasis-dental-care/?$               /services/general-dentistry    [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-cosmetic-dentristy-oasis-dental-care/?$              /services/cosmetic-dentistry   [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-dental-implants-dentristy-oasis-dental-care/?$       /services/dental-implants      [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-invisalign_dentistry-oasis_dental_care/?$            /services/invisalign           [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-crowns-and-bridges-dentristy-oasis-dental-care/?$    /services/crowns-bridges       [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-emergency-dentistry-oasis-dental-care/?$             /services/emergency-dentistry  [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-teeth-whitening-dentristy-oasis-dental-care/?$       /services/teeth-whitening      [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-veneers-dentristy-oasis-dental-care/?$               /services/veneers              [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-root-canal-therapy-dentristy-oasis-dental-care/?$    /services/root-canal           [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-extractions-dentristy-oasis-dental-care/?$           /services/extractions          [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-periodontal-care-dentristy-oasis-dental-care/?$      /services/periodontal-care     [R=301,L]
+RewriteRule ^services-dentristy-oasis-dental-care/services-pediatric-dentristy-oasis-dental-care_oasis_dental_care/?$  /services/pediatric-dentistry  [R=301,L]
+
+# blog — not rebuilt. Pointed at the closest topical page rather than all at
+# /services; a redirect to an unrelated page reads as a soft 404 anyway.
+RewriteRule ^blog-smile-tips-blog-dentristy-oasis-dental-care/?$  /services  [R=301,L]
+RewriteRule ^2015/09/26/5-tips-for-a-healthy-mouth-to-last-a-lifetime-without-breaking-the-bank/?$     /services/general-dentistry    [R=301,L]
+RewriteRule ^2025/07/16/all-about-tooth-decay/?$                                                      /services/general-dentistry    [R=301,L]
+RewriteRule ^2015/09/26/if-you-need-a-crown-or-an-implant-you-will-pay-a-gap/?$                        /services/dental-implants      [R=301,L]
+RewriteRule ^2015/09/26/we-are-amongst-the-most-qualified-dental-implant-providers/?$                  /services/dental-implants      [R=301,L]
+RewriteRule ^2015/09/26/to-find-out-if-your-child-is-eligible-call-the-department-of-human-services/?$ /services/pediatric-dentistry  [R=301,L]
+RewriteRule ^2015/09/26/carefully-consider-the-benefits-of-health-insurance-for-dental-treatment/?$    /services                      [R=301,L]
+
+# Two WordPress demo posts with no dental content. Swap to [R=410,L] if you'd
+# rather send the cleaner "gone" signal than a topical mismatch.
+RewriteRule ^2015/09/08/8-times-people-should-have-sued-james-woods-for-defamation/?$    /services  [R=301,L]
+RewriteRule ^2015/09/26/8-times-people-should-have-sued-james-woods-for-defamation-2/?$  /services  [R=301,L]
+
+# internal WordPress artifact + the retired demo route from this build
+RewriteRule ^oasis-dental-style-sheet/?$  /                          [R=301,L]
+RewriteRule ^service/?$                   /services/dental-implants  [R=301,L]
+
+# ---------------------------------------------------------------------------
+# 2. Form endpoint. Keeps the form's action="/api/appointment" working here
+#    exactly as it does on the Cloudflare Worker, so the markup needs no
+#    per-host variation. Internal rewrite, not a redirect.
+# ---------------------------------------------------------------------------
+RewriteRule ^api/appointment/?$  /appointment.php  [L]
+
+# ---------------------------------------------------------------------------
+# 3. Drop the trailing slash so the served URL matches the canonical tag.
+# ---------------------------------------------------------------------------
+RewriteCond %{REQUEST_URI} !^/$
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# ---------------------------------------------------------------------------
+# 4. Serve Astro's prerendered directory indexes for extensionless paths.
+#    The condition means this only fires when the index.html actually exists,
+#    so real files (/logo.png, /robots.txt) fall through untouched.
+# ---------------------------------------------------------------------------
+RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+RewriteRule ^(.+)$ /$1/index.html [L]
+
+ErrorDocument 404 /404.html
