@@ -12,9 +12,10 @@ interface Props {
   page?: string;
   ogImage?: string;
   ogType?: string;
+  noindex?: boolean;
 }
 
-const { title, description, page = '', ogImage = '/og-default.png', ogType = 'website' } = Astro.props;
+const { title, description, page = '', ogImage = '/og-default.png', ogType = 'website', noindex = false } = Astro.props;
 
 // Internal links are written without a trailing slash (href="/services"), so the
 // canonical is normalised to match — otherwise Astro's directory build format
@@ -31,8 +32,8 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="canonical" href={canonical} />
-    <meta name="robots" content={SITE_INDEXABLE ? 'index, follow' : 'noindex, nofollow'} />
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <meta name="robots" content={SITE_INDEXABLE && !noindex ? 'index, follow' : 'noindex, nofollow'} />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="Oasis Dental Care" />

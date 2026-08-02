@@ -1,0 +1,5 @@
+# These two are uploaded to the Apache host as-is. Git's autocrlf on Windows
+# would otherwise give them CRLF endings, which Apache's config parser can
+# carry into directive values. Pin them to LF.
+.htaccess   text eol=lf
+*.php       text eol=lf

@@ -14,6 +14,8 @@
 //     would be worse than leaving it out.
 //   priceRange — no source of truth for it in the site content.
 
+import { services } from '../data/services.js';
+
 const SITE = Astro.site?.origin ?? 'https://oasisdentalcarehb.com';
 
 const schema = {
@@ -22,7 +24,7 @@ const schema = {
   '@id': `${SITE}/#dentist`,
   name: 'Oasis Dental Care',
   description:
-    'A warm, family-run dental practice in Huntington Beach, California, led by Dr. Jason Fu — serving Orange County families for over 20 years.',
+    'A warm, family-run dental practice in Huntington Beach, California, led by Dr. Jason Fu — serving Orange County families for over 25 years.',
   url: SITE,
   logo: `${SITE}/logo.png`,
   image: `${SITE}/og-default.png`,
@@ -37,6 +39,10 @@ const schema = {
     addressCountry: 'US',
   },
   hasMap: 'https://www.google.com/maps?cid=8858444920419398576',
+  // Entity reconciliation for local search. Only verified profiles belong here —
+  // a wrong URL merges this practice with someone else's entity.
+  // TODO before launch: add Yelp, Facebook and the Invisalign provider listing.
+  sameAs: ['https://www.google.com/maps?cid=8858444920419398576'],
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
@@ -61,20 +67,13 @@ const schema = {
     { '@type': 'AdministrativeArea', name: 'Orange County' },
   ],
   medicalSpecialty: 'Dentistry',
-  availableService: [
-    'General Dentistry',
-    'Cosmetic Dentistry',
-    'Dental Implants',
-    'Invisalign',
-    'Crowns & Bridges',
-    'Emergency Dentistry',
-    'Teeth Whitening',
-    'Veneers',
-    'Root Canal Therapy',
-    'Extractions',
-    'Periodontal Care',
-    'Pediatric Dentistry',
-  ].map((name) => ({ '@type': 'MedicalProcedure', name })),
+  // Driven from the same data as the service pages, so each procedure now
+  // carries the URL of a real page rather than a bare name.
+  availableService: services.map(({ title, id }) => ({
+    '@type': 'MedicalProcedure',
+    name: title,
+    url: `${SITE}/services/${id}`,
+  })),
 };
 ---
 

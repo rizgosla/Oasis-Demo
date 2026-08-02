@@ -1,0 +1,55 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+
+// Served by Apache via `ErrorDocument 404` with a real 404 status. It is also
+// reachable directly at /404.html, which would return 200 — hence noindex, so
+// that path can never be indexed as though it were a real page.
+---
+
+<Layout
+  title="Page not found — Oasis Dental Care"
+  description="That page isn't here. Find our services, practice information and appointment booking at Oasis Dental Care in Huntington Beach."
+  noindex
+>
+
+<section class="phero">
+  <div class="wrap">
+    <span class="tag">/ 404</span>
+    <h1>We couldn't find that page.</h1>
+    <p>The link may be out of date, or the page may have moved. Everything you're looking for is still here — try one of these.</p>
+    <div class="acts">
+      <a class="btn" href="/">Back to home <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
+    </div>
+  </div>
+</section>
+
+<div class="page-links">
+  <div class="wrap">
+    <a href="/services">Services</a>
+    <a href="/practice">Our Practice</a>
+    <a href="/new-patients">New Patients</a>
+    <a href="/contact">Contact</a>
+  </div>
+</div>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="ctacard reveal in">
+      <div class="grid-ov"></div>
+      <div class="c">
+        <span class="tag">New patients welcome</span>
+        <h2>Ready when you are.</h2>
+        <p>Tell us a good time and someone warm will get back to you — usually the same day.</p>
+      </div>
+      <div class="acts">
+        <a class="btn" href="tel:7148932106">Call (714) 893-2106</a>
+        <a class="btn btn-o" href="/contact">Request online</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>
