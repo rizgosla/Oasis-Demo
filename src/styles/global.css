@@ -51,7 +51,7 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 .site-head { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line-l); }
 .site-head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
 .brand { font-family: var(--disp); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
-.brand img { height: 38px; }
+.brand img { height: 38px; width: auto; }
 .nav { display: flex; gap: 8px; align-items: center; }
 .nav a { font-family: var(--disp); font-weight: 500; font-size: 14.5px; color: var(--ink-soft); padding: 8px 14px; border-radius: 6px; }
 .nav a:hover { color: var(--ink); background: var(--line-l); }
