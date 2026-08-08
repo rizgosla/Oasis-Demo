@@ -4,7 +4,7 @@
 // robots.txt, so this one constant is the only edit needed either way.
 //
 // Now true: this build is the live site at oasisdentalcarehb.com and the
-// WordPress install it replaced is gone. The 301 map in public/.htaccess
+// WordPress install it replaced is gone. The 301 map in public/_redirects
 // carries the old URLs across.
 //
 // Set back to false only if this build is ever served from a staging domain
