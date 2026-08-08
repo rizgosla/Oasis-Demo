@@ -1,5 +1,4 @@
-# These two are uploaded to the Apache host as-is. Git's autocrlf on Windows
-# would otherwise give them CRLF endings, which Apache's config parser can
-# carry into directive values. Pin them to LF.
-.htaccess   text eol=lf
-*.php       text eol=lf
+# Cloudflare Pages parses _redirects line by line. Git's autocrlf on Windows
+# would otherwise give it CRLF endings, leaving a trailing \r on the status code
+# ("301\r") and silently breaking every rule. Pin it to LF.
+_redirects  text eol=lf
