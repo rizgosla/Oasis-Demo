@@ -74,12 +74,12 @@ const procedureSchema = {
 
 <section class="phero">
   <div class="wrap">
-    <div class="crumbs"><a href="/">Home</a><span class="sep">/</span><a href="/services">Services</a><span class="sep">/</span><span style="color:#cfe6e2">{service.title}</span></div>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/services">Services</a><span class="sep" aria-hidden="true">/</span><span style="color:#cfe6e2" aria-current="page">{service.title}</span></nav>
     <span class="tag">{service.category}</span>
     <h1>{service.title}</h1>
     <p>{service.heroIntro ?? service.desc}</p>
     <div class="acts">
-      <a class="btn" href="/contact">Book a consultation <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" href="/contact">Book a consultation <svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
     </div>
   </div>
@@ -126,9 +126,9 @@ const procedureSchema = {
         <div class="scard reveal">
           <div class="hd"><div class="grid-ov"></div><h3>{asideTitle}</h3><p>Same-week appointments often available.</p></div>
           <div class="bd">
-            <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>{asideRows[0]}</span></div>
-            <div class="row"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>{asideRows[1]}</span></div>
-            <div class="row"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg><span>{asideRows[2]}</span></div>
+            <div class="row"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>{asideRows[0]}</span></div>
+            <div class="row"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span>{asideRows[1]}</span></div>
+            <div class="row"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg><span>{asideRows[2]}</span></div>
             <div class="divider"></div>
             <a class="btn" href={service.bookHref}>{service.bookLabel}</a>
             <a class="btn btn-out" href="tel:7148932106" style="justify-content:center">Call (714) 893-2106</a>
@@ -146,11 +146,11 @@ const procedureSchema = {
       {related.map((r) => (
         <a class="scell" href={`/services/${r.id}`}>
           <div class="num">{r.category}</div>
-          <div class="ic"><svg viewBox="0 0 24 24" set:html={r.icon} /></div>
+          <div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" set:html={r.icon} /></div>
           <h3>{r.title}</h3>
           <p>{r.cardDesc}</p>
           <span class="arr">Learn more →</span>
-          <div class="bgico"><svg viewBox="0 0 24 24" set:html={r.bgIcon} /></div>
+          <div class="bgico"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" set:html={r.bgIcon} /></div>
         </a>
       ))}
     </div>

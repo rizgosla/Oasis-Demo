@@ -16,20 +16,20 @@ import Layout from '../layouts/Layout.astro';
     <h1>The Oasis Dental Story</h1>
     <p>A warm, personal approach supported by modern techniques, clear communication, and a team that genuinely cares about the community we serve.</p>
     <div class="acts">
-      <a class="btn" href="/contact">Book an appointment <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" href="/contact">Book an appointment <svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
     </div>
   </div>
 </section>
 
-<div class="page-links">
+<nav class="page-links" aria-label="Page sections">
   <div class="wrap">
     <a href="#mission">Our Mission</a>
     <a href="#team">Our Team</a>
     <a href="#values">Core Values</a>
     <a href="/contact">Book Now</a>
   </div>
-</div>
+</nav>
 
 <!-- Mission -->
 <section class="pad" id="mission">
@@ -49,7 +49,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="ph-block">
           <div class="ph-inner">
             <div class="ph-ic">
-              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
             </div>
             <div class="ph-title">Office photo</div>
             <div class="ph-sub">Our practice on Bolsa Ave, Huntington Beach.</div>
@@ -83,7 +83,7 @@ import Layout from '../layouts/Layout.astro';
           <img src="/dr-jason-fu.jpg" alt="Dr. Jason Fu, lead dentist and founder of Oasis Dental Care" width="600" height="800" loading="lazy" />
         </div>
         <div class="info">
-          <div class="nm">Dr. Jason Fu</div>
+          <h3 class="nm">Dr. Jason Fu</h3>
           <div class="rl">Lead Dentist &amp; Founder</div>
           <p>Dr. Fu brings over 25 years of clinical experience, combining advanced dental expertise with a calm, patient-focused approach. Whether you're in for preventive, restorative or cosmetic care, he takes the time to answer your questions and address every concern. Together with Leandre and Edith, he has built a practice where clinical precision and genuine warmth go hand in hand.</p>
         </div>
@@ -93,12 +93,12 @@ import Layout from '../layouts/Layout.astro';
       <div class="member">
         <div class="photo">
           <div class="ph">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span>Leandre</span>
           </div>
         </div>
         <div class="info">
-          <div class="nm">Leandre</div>
+          <h3 class="nm">Leandre</h3>
           <div class="rl">Lead Back Office Manager</div>
           <p>Leandre plays an essential role in the clinical flow of each day. From sterilisation protocols and preparing treatment rooms to coordinating chairside support alongside Dr. Fu, she helps ensure that appointments run smoothly and comfortably. Patients consistently note how calm and reassuring she is.</p>
         </div>
@@ -108,12 +108,12 @@ import Layout from '../layouts/Layout.astro';
       <div class="member">
         <div class="photo">
           <div class="ph">
-            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span>Edith</span>
           </div>
         </div>
         <div class="info">
-          <div class="nm">Edith</div>
+          <h3 class="nm">Edith</h3>
           <div class="rl">Office Manager</div>
           <p>Edith is the welcoming face of Oasis and frequently the first point of contact for many patients. She welcomes you at the front desk, handles scheduling and insurance verification, and provides thoughtful guidance on financial arrangements and preparing for your visit — making sure every patient feels at home from the moment they walk in.</p>
         </div>
@@ -138,7 +138,7 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="vcard">
         <div class="v-ic">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
         <h3>Clear Communication</h3>
         <p>We explain findings from exams, digital x-rays, and treatment recommendations in straightforward language, ensuring you understand your options.</p>
@@ -146,7 +146,7 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="vcard">
         <div class="v-ic">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
         </div>
         <h3>Consistency</h3>
         <p>You'll see the same doctor and a stable staff, rather than rotating providers. Familiarity breeds trust and helps us better understand your needs over time.</p>
@@ -154,7 +154,7 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="vcard">
         <div class="v-ic">
-          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <h3>Comfort and Care</h3>
         <p>Our approach prioritizes gentle techniques, patient pacing, and a welcoming environment so every visit feels as stress-free as possible.</p>
@@ -162,7 +162,7 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="vcard">
         <div class="v-ic">
-          <svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5l-8-3z"/></svg>
         </div>
         <h3>Prevention Focus</h3>
         <p>Routine cleanings, hygiene guidance, exams, and digital imaging help catch small issues early and prevent more extensive treatment later.</p>
@@ -170,7 +170,7 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="vcard">
         <div class="v-ic">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3>Community-Oriented</h3>
         <p>We are proud to care for families, individuals, and local residents throughout Huntington Beach—a community we're honored to call home.</p>

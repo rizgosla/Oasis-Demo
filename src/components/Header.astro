@@ -32,25 +32,29 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
             <a
               href={n.href}
               class={`nav-dd-trigger ${n.key === page ? 'active' : ''}`}
+              aria-current={n.key === page ? 'page' : undefined}
               aria-haspopup="true"
               aria-expanded="false"
+              aria-controls="services-menu"
             >
               {n.label}
-              <svg class="nav-dd-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              <svg class="nav-dd-caret" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
             </a>
-            <div class="nav-dd-menu" role="menu">
+            {/* Deliberately no role="menu"/"menuitem": those roles promise
+                arrow-key navigation and a roving tabindex that this disclosure
+                does not implement. A list of links needs no role. */}
+            <div class="nav-dd-menu" id="services-menu">
               {servicesDropdown.map(s => (
                 <a
                   href={`/services/${s.id}`}
                   class="nav-dd-item"
                   data-svc={s.id}
-                  role="menuitem"
                 >{s.label}</a>
               ))}
             </div>
           </div>
         ) : (
-          <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label}</a>
+          <a href={n.href} class={n.key === page ? 'active' : ''} aria-current={n.key === page ? 'page' : undefined}>{n.label}</a>
         )
       ))}
     </nav>
@@ -58,18 +62,18 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
       <a class="btn" href={TEL}>Call<span class="cta-more">&nbsp;Now</span></a>
       <a class="btn" href="/contact">Book<span class="cta-more">&nbsp;Now</span></a>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
-        <svg viewBox="0 0 24 24"><line class="x1" x1="4" y1="7" x2="20" y2="7"/><line class="x2" x1="4" y1="12" x2="20" y2="12"/><line class="x3" x1="4" y1="17" x2="20" y2="17"/></svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><line class="x1" x1="4" y1="7" x2="20" y2="7"/><line class="x2" x1="4" y1="12" x2="20" y2="12"/><line class="x3" x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
     </div>
   </div>
-  <div class="mobile-nav" id="mobileNav">
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
     <div class="inner">
       {nav.map(n => (
-        <a href={n.href} class={n.key === page ? 'active' : ''}>{n.label} <span class="arr">→</span></a>
+        <a href={n.href} class={n.key === page ? 'active' : ''} aria-current={n.key === page ? 'page' : undefined}>{n.label} <span class="arr" aria-hidden="true">→</span></a>
       ))}
-      <a href={TEL} class="phone">{PHONE} <span class="arr">↗</span></a>
+      <a href={TEL} class="phone">{PHONE} <span class="arr" aria-hidden="true">↗</span></a>
     </div>
-  </div>
+  </nav>
 </header>
 
 <style>
@@ -146,16 +150,16 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
     var btn = document.getElementById('menuToggle');
     var menu = document.getElementById('mobileNav');
     if (btn && menu) {
-      function close() {
-        btn.classList.remove('open');
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-      btn.addEventListener('click', function () {
-        var open = !menu.classList.contains('open');
+      function setState(open) {
         btn.classList.toggle('open', open);
         menu.classList.toggle('open', open);
         btn.setAttribute('aria-expanded', String(open));
+        // The icon animates into an X, so its accessible name has to follow.
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+      function close() { setState(false); }
+      btn.addEventListener('click', function () {
+        setState(!menu.classList.contains('open'));
       });
       menu.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', close);
@@ -182,6 +186,17 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
           dd.classList.toggle('open');
           var expanded = dd.classList.contains('open');
           trigger.setAttribute('aria-expanded', String(expanded));
+        });
+
+        // Above 1020px the flyout is opened purely by CSS :hover/:focus-within,
+        // so aria-expanded has to be driven from the same events — otherwise it
+        // reports "collapsed" the entire time the menu is visible.
+        var setExpanded = function (v) { trigger.setAttribute('aria-expanded', String(v)); };
+        dd.addEventListener('mouseenter', function () { if (window.innerWidth > 1020) setExpanded(true); });
+        dd.addEventListener('mouseleave', function () { if (window.innerWidth > 1020) setExpanded(false); });
+        dd.addEventListener('focusin', function () { if (window.innerWidth > 1020) setExpanded(true); });
+        dd.addEventListener('focusout', function (e) {
+          if (window.innerWidth > 1020 && !dd.contains(e.relatedTarget)) setExpanded(false);
         });
       }
 

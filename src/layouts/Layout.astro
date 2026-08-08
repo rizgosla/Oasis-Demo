@@ -30,6 +30,11 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {/* Marks that scripting is available, before anything paints. The
+        scroll-reveal system hides content with opacity:0 until its observer
+        runs; gating that on .js means a script failure degrades to "no
+        animation" instead of a permanently blank page. See global.css. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {!noindex && <link rel="canonical" href={canonical} />}
@@ -61,9 +66,13 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <StatusBar />
     <Header page={page} />
-    <slot />
+    {/* tabindex="-1" so the skip link reliably moves focus here in Safari. */}
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
     <Footer />
     <script>
       const io = new IntersectionObserver((es) => {
