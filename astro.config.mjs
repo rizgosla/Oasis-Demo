@@ -10,9 +10,14 @@ export default defineConfig({
   // src/pages/api/appointment.ts, the form handler.
   output: 'static',
   adapter: cloudflare({
-    // The form POST is the only server-rendered route, so there is nothing to
-    // serve images from at runtime. Keep Astro's image handling in the build.
-    imageService: 'compile',
+    // No page uses the astro:assets Image pipeline -- every image is a plain
+    // static <img>, so there is nothing for Astro to optimize either at build
+    // or at runtime. 'compile' still wires up a runtime /_image fallback
+    // endpoint that bundles `sharp` (a native Node addon) into the Worker;
+    // Cloudflare's Worker bundler cannot load that native binary, and the
+    // Pages build fails even though `astro build` succeeds locally.
+    // 'passthrough' drops both the sharp build step and the runtime endpoint.
+    imageService: 'passthrough',
   }),
   // Every internal link is written without a trailing slash (href="/services"),
   // so canonical tags and the sitemap are pinned to that same form. Leave
