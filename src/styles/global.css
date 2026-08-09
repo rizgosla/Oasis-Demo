@@ -13,6 +13,11 @@
   --dark-2: #0d2c28;
   --line: #1a3a35;
   --line-l: #dde6e3;
+  /* --line-l is a decorative hairline at ~1.2:1 — fine for card edges and
+     dividers, but WCAG 1.4.11 needs 3:1 for the boundary of a control the user
+     has to find and operate. --line-ctrl is 3.19:1 on --bg and 3.32:1 on white,
+     and is used only for form fields and outlined buttons. */
+  --line-ctrl: #7f918c;
   --disp: "Space Grotesk", system-ui, sans-serif;
   --body: "Hanken Grotesk", system-ui, sans-serif;
   --gutter: clamp(22px, 2.4vw, 72px);
@@ -23,13 +28,46 @@ body { font-family: var(--body); color: var(--ink); background: var(--bg); -webk
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; letter-spacing: -0.02em; }
+
+/* ---------- accessibility utilities ---------- */
+/* Hidden visually, still announced by assistive tech. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+/* Parked off-screen until a keyboard user tabs to it. Pointer users never see it. */
+.skip-link {
+  position: absolute; top: 0; left: 0; z-index: 200;
+  background: var(--teal); color: #fff;
+  font-family: var(--disp); font-weight: 600; font-size: 14.5px;
+  padding: 12px 20px; border-radius: 0 0 6px 0;
+  transform: translateY(-105%);
+  transition: transform .16s;
+}
+.skip-link:focus { transform: translateY(0); }
+/* :focus-visible never matches a mouse click, so the resting design is
+   untouched for pointer users and only keyboard focus draws a ring. */
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+/* The teal ring has too little contrast against teal and dark surfaces. */
+.cell.dark :focus-visible, .cell.teal :focus-visible, .site-foot :focus-visible,
+.sbar :focus-visible, .team-band :focus-visible, .tech :focus-visible,
+.ctacard :focus-visible, .bookcard :focus-visible { outline-color: var(--teal-300); }
+/* Focused only as the skip-link target, never by Tab — no ring needed. */
+main:focus { outline: none; }
+
 .wrap { max-width: none; margin: 0 auto; padding: 0 var(--gutter); }
 .wrap-narrow { max-width: 920px; margin: 0 auto; padding: 0 var(--gutter); }
 .tag { font-family: var(--body); font-size: 11.5px; letter-spacing: .01em; color: var(--teal); display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
 .tag::before { content: ""; width: 7px; height: 7px; background: var(--teal); border-radius: 1px; }
 .btn { display: inline-flex; align-items: center; gap: 9px; font-family: var(--disp); font-weight: 600; font-size: 14.5px; padding: 13px 20px; border-radius: 6px; border: 1.5px solid var(--teal); background: var(--teal); color: #fff; cursor: pointer; transition: .16s; }
 .btn:hover { background: var(--teal-700); border-color: var(--teal-700); }
-.btn-out { background: transparent; color: var(--ink); border-color: var(--line-l); }
+.btn-out { background: transparent; color: var(--ink); border-color: var(--line-ctrl); }
 .btn-out:hover { border-color: var(--teal); background: var(--teal); color: #fff; }
 .btn-ghost { background: transparent; border-color: rgba(255,255,255,.22); color: #fff; }
 .btn-ghost:hover { border-color: var(--teal-300); color: var(--teal-300); }
@@ -51,14 +89,23 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 .site-head { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--line-l); }
 .site-head .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
 .brand { font-family: var(--disp); font-weight: 600; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); }
+/* width:auto is required, not redundant. The img carries width="1032"
+   height="261" attributes for CLS, and those act as presentational hints — so
+   without an author width the used width stays 1032px, gets clamped by
+   max-width:100% to whatever the flex row leaves, and the fixed height then
+   stretches the logo. width:auto lets the height drive it via the aspect ratio.
+   Inherited by the footer and small-screen rules, which only override height. */
 .brand img { height: 38px; width: auto; }
 .nav { display: flex; gap: 8px; align-items: center; }
 .nav a { font-family: var(--disp); font-weight: 500; font-size: 14.5px; color: var(--ink-soft); padding: 8px 14px; border-radius: 6px; }
 .nav a:hover { color: var(--ink); background: var(--line-l); }
-.nav a.active { color: var(--teal); background: rgba(11,129,116,.08); }
+/* --teal on this tile computes to 4.28:1 — the 8% teal wash lifts the effective
+   background to #ebf5f4, which is just enough to drop it under 4.5:1.
+   --teal-700 on the same tile is 6.62:1. */
+.nav a.active { color: var(--teal-700); background: rgba(11,129,116,.08); }
 .hcta { display: flex; align-items: center; gap: 14px; }
 .hcta .btn { white-space: nowrap; gap: 0; }
-.menu-toggle { display: none; background: transparent; border: 1px solid var(--line-l); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); padding: 0; transition: .16s; }
+.menu-toggle { display: none; background: transparent; border: 1px solid var(--line-ctrl); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); padding: 0; transition: .16s; }
 .menu-toggle:hover { border-color: var(--teal); color: var(--teal); }
 .menu-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
 .menu-toggle .x1, .menu-toggle .x2, .menu-toggle .x3 { transform-origin: center; transition: transform .25s ease, opacity .2s ease; }
@@ -91,7 +138,9 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 .site-foot .brand img { height: 36px; filter: brightness(0) invert(1); opacity: .95; }
 .site-foot .brand { color: #fff; }
 .site-foot p { margin-top: 14px; color: #7fb3ab; max-width: 260px; font-size: 14px; }
-.site-foot h4 { font-family: var(--body); color: var(--teal-300); font-size: 12px; letter-spacing: .04em; margin-bottom: 14px; font-weight: 600; }
+/* Retagged h4 -> h2 so the document outline does not skip a level; every
+   property that governs appearance is set here, so the change is invisible. */
+.site-foot h2 { font-family: var(--body); color: var(--teal-300); font-size: 12px; letter-spacing: .04em; margin-bottom: 14px; font-weight: 600; }
 .site-foot ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
 .site-foot a:hover { color: #fff; }
 .site-foot .fbot { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 12px; color: #5f938b; }
@@ -145,8 +194,11 @@ section.pad { padding: 56px 0; }
 .heromain h1 span { color: var(--teal); }
 .heromain p { color: var(--ink-soft); font-size: 18.5px; max-width: 720px; margin-top: 22px; }
 .heromain .acts { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
-.heromain .btn-ghost { background: transparent; border-color: var(--line-l); color: var(--ink); }
-.heromain .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+/* .btn-ghost defaults to white text on a transparent background for the dark
+   sections. Both hero variants sit on white, so they need the light-background
+   treatment — kept in one rule so the two cannot drift apart again. */
+.heromain .btn-ghost, .phero .btn-ghost { background: transparent; border-color: var(--line-ctrl); color: var(--ink); }
+.heromain .btn-ghost:hover, .phero .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
 .heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); }
 .heromain .media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .heromain .media .ph { position: absolute; inset: 24px; border: 1.5px dashed rgba(95,208,192,.32); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 20px; }
@@ -171,6 +223,10 @@ section.pad { padding: 56px 0; }
 .strip .track b { color: var(--teal); font-weight: 500; }
 @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media(prefers-reduced-motion: reduce) { .strip .track { animation: none; } }
+/* 2.2.2 Pause, Stop, Hide — the ticker auto-starts and runs indefinitely, so it
+   needs a way to stop it. Hovering pauses it; :focus-within covers keyboard
+   users, who reach it via the tabindex on the strip in index.astro. */
+.strip:hover .track, .strip:focus-within .track { animation-play-state: paused; }
 
 /* ---------- stat band ---------- */
 .stat-band { background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; }
@@ -205,8 +261,8 @@ section.pad { padding: 56px 0; }
 .cell.dark.feat .grid-ov { background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 32px 32px; }
 .cell.teal { background: var(--teal); color: #fff; border-color: var(--teal); }
 .cell.teal .ic { background: rgba(255,255,255,.15); color: #fff; }
-.cell.teal p { color: #d4f3ee; }
-.cell.teal .num { color: #d4f3ee; }
+.cell.teal p { color: #fff; }
+.cell.teal .num { color: #fff; }
 .cell .arr { font-size: 11px; color: var(--teal); display: flex; align-items: center; gap: 6px; }
 .cell.dark .arr, .cell.teal .arr { color: #fff; }
 .cell > div:not(.grid-ov):not(.bgico) { position: relative; z-index: 1; }
@@ -329,7 +385,7 @@ section.pad { padding: 56px 0; }
 .loc h2 { font-size: clamp(26px, 3.2vw, 40px); letter-spacing: -0.02em; margin-top: 12px; }
 .hours { margin-top: 24px; font-size: 15px; }
 .hours .hr { display: flex; justify-content: space-between; padding: 11px 0; border-bottom: 1px solid var(--line-l); }
-.hours .hr.c span:last-child { color: var(--teal); }
+.hours .hr.c dd { color: var(--teal); }
 .loc .addr { margin-top: 22px; font-size: 15px; color: var(--ink-soft); line-height: 1.7; }
 .loc .map { border: 1px solid var(--line-l); border-radius: 16px; overflow: hidden; min-height: 400px; background: var(--panel); }
 .loc .map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; filter: grayscale(.3); }
@@ -340,10 +396,10 @@ section.pad { padding: 56px 0; }
 .bookcard { background: var(--teal); border-radius: 20px; padding: 60px 50px; color: #fff; position: relative; overflow: hidden; display: grid; grid-template-columns: 1.3fr auto; gap: 40px; align-items: center; }
 .bookcard .grid-ov { background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 40px 40px; }
 .bookcard .c { position: relative; }
-.bookcard .tag { color: #d4f3ee; }
-.bookcard .tag::before { background: #d4f3ee; }
+.bookcard .tag { color: #fff; }
+.bookcard .tag::before { background: #fff; }
 .bookcard h2 { font-size: clamp(30px, 4vw, 52px); color: #fff; margin-top: 16px; letter-spacing: -0.03em; }
-.bookcard p { color: #d4f3ee; font-size: 17px; margin-top: 14px; max-width: 440px; }
+.bookcard p { color: #fff; font-size: 17px; margin-top: 14px; max-width: 440px; }
 .bookcard .acts { position: relative; display: flex; flex-direction: column; gap: 12px; }
 .bookcard .btn { background: #fff; color: var(--teal-700); border-color: #fff; justify-content: center; }
 .bookcard .btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
@@ -400,7 +456,9 @@ section.pad { padding: 56px 0; }
 .scell .num { font-size: 11px; color: var(--ink-soft); }
 .scell .ic { width: 44px; height: 44px; border-radius: 11px; background: var(--bg); display: grid; place-items: center; color: var(--teal); margin: 12px 0 16px; }
 .scell .ic svg { width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.7; }
-.scell h3 { font-size: 20px; }
+/* Retagged h3 -> h2: the page's only h1 was followed straight by h3s, skipping
+   a level. Font size is set here, so the change is invisible. */
+.scell h2 { font-size: 20px; }
 .scell p { color: var(--ink-soft); font-size: 14.5px; margin-top: 8px; }
 .scell .arr { margin-top: 14px; font-size: 13px; color: var(--teal); display: inline-flex; gap: 6px; font-weight: 600; }
 .scell:hover .arr { gap: 10px; }
@@ -418,7 +476,11 @@ section.pad { padding: 56px 0; }
 .member .photo .ph svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 1.4; }
 .member .photo .ph span { font-size: 12.5px; color: var(--ink-soft); max-width: 170px; }
 .member .info { padding: 20px 22px; }
-.member .info .nm { font-family: var(--disp); font-weight: 600; font-size: 19px; }
+/* Retagged div -> h3 so team members appear in the heading outline. As a div it
+   inherited the body line-height and normal tracking; the base h1-h4 rule would
+   otherwise impose 1.04/-0.02em and visibly tighten the block, so both are
+   pinned back to what they were. */
+.member .info .nm { font-family: var(--disp); font-weight: 600; font-size: 19px; line-height: 1.55; letter-spacing: normal; }
 .member .info .rl { font-size: 13px; color: var(--teal); margin-top: 2px; font-weight: 600; }
 .member .info p { font-size: 14px; color: var(--ink-soft); margin-top: 10px; }
 .team-feature { display: grid; grid-template-columns: .8fr 1.2fr; gap: 48px; align-items: center; margin-top: 42px; }
@@ -434,9 +496,24 @@ section.pad { padding: 56px 0; }
 .formcard .note { font-size: 13px; color: var(--ink-soft); margin-top: 8px; background: rgba(11,129,116,.06); border-radius: 8px; padding: 12px 14px; border: 1px solid var(--line-l); }
 .field { display: flex; flex-direction: column; gap: 7px; margin-top: 18px; }
 .field label { font-size: 13px; font-weight: 600; color: var(--ink); }
-.field input, .field textarea, .field select { font-family: var(--body); font-size: 15px; padding: 12px 14px; border: 1.5px solid var(--line-l); border-radius: 9px; background: var(--bg); color: var(--ink); transition: .15s; }
+.field input, .field textarea, .field select { font-family: var(--body); font-size: 15px; padding: 12px 14px; border: 1.5px solid var(--line-ctrl); border-radius: 9px; background: var(--bg); color: var(--ink); transition: .15s; }
+/* Browsers default placeholders to roughly half the text colour, landing near
+   3.8:1. Setting it explicitly (5.9:1 on --bg) takes it out of their hands.
+   opacity:1 is needed because Firefox dims placeholders by default. */
+.field input::placeholder, .field textarea::placeholder { color: var(--ink-soft); opacity: 1; }
 .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--teal); background: #fff; }
 .field textarea { resize: vertical; min-height: 110px; }
+/* The rule above kills the native outline, which would also suppress the global
+   :focus-visible ring on form controls — same specificity, so this restores it
+   for keyboard users while a mouse click still gets only the border tint. */
+.field input:focus-visible, .field textarea:focus-visible, .field select:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+/* Per-field validation messages. 7.33:1 on the white form card, well past the
+   4.5:1 minimum, and the message is text so the state never rests on colour
+   alone. :empty keeps the flex gap from reserving space when there is no error. */
+.field-error { font-size: 13px; font-weight: 600; color: #b00020; }
+.field-error:empty { display: none; }
+.field.is-invalid input, .field.is-invalid textarea, .field.is-invalid select { border-color: #b00020; }
+.form-legend { font-size: 12.5px; color: var(--ink-soft); margin-top: 14px; }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 @media(max-width: 520px) { .frow { grid-template-columns: 1fr; } }
 .infocard { border: 1px solid var(--line-l); border-radius: 18px; background: var(--panel); overflow: hidden; }
@@ -444,23 +521,25 @@ section.pad { padding: 56px 0; }
 .infocard h3 { font-size: 20px; }
 .infocard .row { display: flex; gap: 13px; align-items: flex-start; margin-top: 18px; font-size: 15px; color: var(--ink-soft); }
 .infocard .row svg { width: 19px; height: 19px; stroke: var(--teal); fill: none; stroke-width: 1.7; flex-shrink: 0; margin-top: 2px; }
-.infocard .row b { color: var(--ink); font-weight: 600; display: block; }
+/* Was `b`, which is presentational — a dt/dd pair states programmatically that
+   "Address" labels the text under it. dt is already display:block. */
+.infocard .row dt { color: var(--ink); font-weight: 600; }
 .infocard .map { border-top: 1px solid var(--line-l); min-height: 260px; }
 .infocard .map iframe { width: 100%; height: 100%; min-height: 260px; border: 0; filter: grayscale(.3); }
 .hours-list { margin-top: 8px; }
 .hours-list .hr { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--line-l); font-size: 14.5px; }
 .hours-list .hr:last-child { border-bottom: 0; }
-.hours-list .hr.c span:last-child { color: var(--teal); }
+.hours-list .hr.c dd { color: var(--teal); }
 
 /* ---------- CTA band ---------- */
 .cta { padding: 60px 0 100px; }
 .ctacard { background: var(--teal); border-radius: 20px; padding: 80px 60px; color: #fff; position: relative; overflow: hidden; display: grid; grid-template-columns: 1.3fr auto; gap: 40px; align-items: center; }
 .ctacard .grid-ov { background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px); background-size: 40px 40px; }
 .ctacard .c { position: relative; }
-.ctacard .tag { color: #d4f3ee; }
-.ctacard .tag::before { background: #d4f3ee; }
+.ctacard .tag { color: #fff; }
+.ctacard .tag::before { background: #fff; }
 .ctacard h2 { font-size: clamp(28px, 3.6vw, 46px); color: #fff; margin-top: 14px; letter-spacing: -0.02em; }
-.ctacard p { color: #d4f3ee; font-size: 17px; margin-top: 12px; max-width: 440px; }
+.ctacard p { color: #fff; font-size: 17px; margin-top: 12px; max-width: 440px; }
 .ctacard .acts { position: relative; display: flex; flex-direction: column; gap: 12px; }
 .ctacard .btn { background: #fff; color: var(--teal-700); border-color: #fff; justify-content: center; }
 .ctacard .btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
@@ -489,14 +568,20 @@ section.pad { padding: 56px 0; }
 .services-copy h2 { font-size: clamp(30px, 3.8vw, 48px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; }
 .services-copy > p { color: var(--ink-soft); font-size: 16.5px; margin-top: 16px; max-width: 340px; }
 .services-copy .deck-bar { margin-top: 32px; margin-bottom: 28px; justify-content: flex-start; }
+/* The markup is ordered for mobile — cards, heading, intro, controls, link —
+   so that on a single-column phone layout the reading order and the visual
+   order are the same (1.3.2). Desktop therefore has to place the two columns
+   explicitly, since the deck now comes first in source. */
+@media(min-width: 861px) {
+  .services-copy { grid-column: 1; grid-row: 1; }
+  .deck-stage { grid-column: 2; grid-row: 1; }
+}
 @media(max-width: 860px) {
   .services-layout { grid-template-columns: 1fr; gap: 28px; }
+  /* Flattening the copy wrapper lets its children sit directly in the grid, so
+     the visual order is simply the source order — no `order` overrides needed. */
   .services-copy { display: contents; }
-  .deck-stage { order: 1; }
-  .services-copy .deck-bar { order: 2; justify-content: center; margin-top: 0; margin-bottom: 0; }
-  .services-copy h2 { order: 3; }
-  .services-copy > p { order: 4; }
-  .services-copy .btn-out { order: 5; }
+  .services-copy .deck-bar { justify-content: center; margin-top: 0; margin-bottom: 0; }
 }
 
 /* ---------- service card deck ---------- */
@@ -526,11 +611,16 @@ section.pad { padding: 56px 0; }
 .svc-cta svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
 .svc-cta:hover svg { transform: translateX(4px); }
 .deck-bar { display: flex; align-items: center; gap: 18px; }
-.deck-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line-l); background: var(--panel); color: var(--ink); cursor: pointer; display: grid; place-items: center; transition: border-color .18s, color .18s; flex-shrink: 0; }
+.deck-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line-ctrl); background: var(--panel); color: var(--ink); cursor: pointer; display: grid; place-items: center; transition: border-color .18s, color .18s; flex-shrink: 0; }
 .deck-arrow:hover { border-color: var(--teal); color: var(--teal); }
 .deck-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .deck-dots { display: flex; gap: 7px; align-items: center; }
-.deck-dot { width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-l); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
+.deck-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-l); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
+/* The visible dot is 7px, which is a very small thing to hit. This enlarges the
+   clickable area to the full 14px pitch without changing what is drawn. It
+   stops at 14px on purpose: the dots sit 14px apart, so a wider target would
+   overlap its neighbour and activate the wrong slide. */
+.deck-dot::before { content: ""; position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; transform: translate(-50%, -50%); }
 .deck-dot.on { background: var(--teal); transform: scale(1.35); }
 @media(max-width: 680px) { .deck-stage { height: 310px; } .svc-card { padding: 28px 26px 24px; } .svc-body h3 { font-size: 21px; } }
 
@@ -559,3 +649,29 @@ section.pad { padding: 56px 0; }
 .invis-badge:hover { border-color:var(--teal-300); transform:translateY(-2px); box-shadow:0 6px 20px rgba(8,34,31,.08); }
 .invis-sub { font-family:var(--disp); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); border-left:1px solid var(--line-l); padding-left:12px; white-space:nowrap; }
 @media(max-width:420px){ .invis-sub{ display:none; } }
+
+/* ============================================================
+   No-JS safety net
+   ------------------------------------------------------------
+   Two systems hide content by default and rely on script to reveal it: the
+   scroll-reveal classes (.reveal / .tgrid / .rgrid) and the service-card deck,
+   whose `:not([data-pos="0"])` selector also matches every card before the deck
+   script assigns positions. If that script never runs, most of the site — and
+   the whole services section — stays permanently invisible.
+
+   Layout.astro sets `.js` on <html> from an inline script in <head>, so these
+   rules apply only when scripting is unavailable. They are additive overrides
+   rather than `.js` prefixes on the originals, because prefixing would raise
+   specificity above the prefers-reduced-motion rules and silently break them.
+   ============================================================ */
+html:not(.js) .reveal,
+html:not(.js) .tgrid.reveal .tcard,
+html:not(.js) .rgrid.reveal .rc {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+/* The deck stacks all six cards with position:absolute, so without the script
+   to position them, show the first and drop the rest rather than overlap. */
+html:not(.js) .svc-card:not(:first-child) { display: none; }
+html:not(.js) .svc-card > * { opacity: 1; }

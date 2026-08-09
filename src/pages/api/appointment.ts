@@ -82,8 +82,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   // Deliberately permissive, matching FILTER_VALIDATE_EMAIL's practical effect:
   // reject the obviously malformed, never a real address.
-  if (first === '' || last === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return back('error=invalid');
+  //
+  // The failing fields are named in the redirect so the page can point at the
+  // specific controls rather than showing one generic "check your details"
+  // message — WCAG 3.3.1 requires the item in error to be identified.
+  const invalid: string[] = [];
+  if (first === '') invalid.push('first_name');
+  if (last === '') invalid.push('last_name');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) invalid.push('email');
+  if (invalid.length) {
+    return back(`error=invalid&fields=${invalid.join(',')}`);
   }
 
   const fields: Record<string, string> = {
