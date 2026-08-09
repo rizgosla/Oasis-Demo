@@ -16,11 +16,12 @@
   // prerendered page, so deploys without this binding would serve the API
   // route fine but 404 the rest of the site.
   //
-  // NOTE: "name" must match this project's actual Worker/Pages name in the
-  // Cloudflare dashboard, or `wrangler deploy` will create a new project
-  // instead of updating the existing one. Update it if it doesn't match.
+  // "name" must match this project's actual Worker name in the Cloudflare
+  // dashboard -- confirmed as "oasisdemo" from a build log warning:
+  // "Failed to match Worker name. Your config file is using the Worker name
+  // "oasis-dental-care", but the CI system expected "oasisdemo"."
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "oasis-dental-care",
+  "name": "oasisdemo",
   "compatibility_date": "2026-08-09",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./dist/_worker.js/index.js",
