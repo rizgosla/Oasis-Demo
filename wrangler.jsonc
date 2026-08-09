@@ -1,0 +1,31 @@
+{
+  // Cloudflare deploy config. The build log showed:
+  //
+  //   Executing user deploy command: npx wrangler deploy
+  //   ✘ [ERROR] Missing entry-point to Worker script or to assets directory
+  //
+  // The Cloudflare project's "Deploy command" is set to `npx wrangler deploy`
+  // (the Workers deploy path), which needs this file to know what to deploy --
+  // it has no default to fall back on the way plain `wrangler pages deploy`
+  // does. `astro build` itself was completing fine; only this deploy step
+  // failed.
+  //
+  // `main` is the on-demand worker Astro's Cloudflare adapter builds for
+  // src/pages/api/appointment.ts. `assets.binding` must be exactly "ASSETS" --
+  // the adapter's request handler calls `env.ASSETS.fetch(...)` to serve every
+  // prerendered page, so deploys without this binding would serve the API
+  // route fine but 404 the rest of the site.
+  //
+  // NOTE: "name" must match this project's actual Worker/Pages name in the
+  // Cloudflare dashboard, or `wrangler deploy` will create a new project
+  // instead of updating the existing one. Update it if it doesn't match.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "oasis-dental-care",
+  "compatibility_date": "2026-08-09",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./dist/_worker.js/index.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  }
+}
