@@ -1,7 +1,21 @@
 ---
+import { services } from '../data/services.js';
+
 const LOGO = '/logo.png';
 const PHONE = '(714) 893-2106';
 const TEL = 'tel:7148932106';
+
+// Curated subset with short footer-specific labels, resolved against
+// services.js by id so a rename or removal there drops the link instead of
+// silently pointing at a dead route.
+const FOOTER_SERVICES = [
+  { id: 'general-dentistry', label: 'General' },
+  { id: 'cosmetic-dentistry', label: 'Cosmetic' },
+  { id: 'dental-implants', label: 'Implants' },
+  { id: 'invisalign', label: 'Invisalign®' },
+  { id: 'emergency-dentistry', label: 'Emergency' },
+];
+const footerServices = FOOTER_SERVICES.filter(({ id }) => services.some((s) => s.id === id));
 ---
 
 <footer class="site-foot">
@@ -14,11 +28,9 @@ const TEL = 'tel:7148932106';
       <div>
         <h2>Services</h2>
         <ul>
-          <li><a href="/services/general-dentistry">General</a></li>
-          <li><a href="/services/cosmetic-dentistry">Cosmetic</a></li>
-          <li><a href="/services/dental-implants">Implants</a></li>
-          <li><a href="/services/invisalign">Invisalign®</a></li>
-          <li><a href="/services/emergency-dentistry">Emergency</a></li>
+          {footerServices.map((s) => (
+            <li><a href={`/services/${s.id}`}>{s.label}</a></li>
+          ))}
         </ul>
       </div>
       <div>

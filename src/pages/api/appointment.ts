@@ -134,20 +134,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return back('error=server');
   }
 
-  const response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      from: `Oasis Dental Care <${from}>`,
-      to: [to],
-      reply_to: headerSafe(email),
-      subject: headerSafe(`Appointment request: ${first} ${last}`),
-      html,
-    }),
-  });
+  let response: Response;
+  try {
+    response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: `Oasis Dental Care <${from}>`,
+        to: [to],
+        reply_to: headerSafe(email),
+        subject: headerSafe(`Appointment request: ${first} ${last}`),
+        html,
+      }),
+    });
+  } catch (err) {
+    console.error(`appointment: fetch to Resend failed for ${email} — ${err}`);
+    return back('error=server');
+  }
 
   if (!response.ok) {
     console.error(
