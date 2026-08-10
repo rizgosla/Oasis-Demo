@@ -29,4 +29,13 @@
     "directory": "./dist",
     "binding": "ASSETS"
   }
+  // The build logs "Enabling sessions with Cloudflare KV with the SESSION KV
+  // binding" — the @astrojs/cloudflare adapter wires this up by default and
+  // this version has no config flag to turn it off, only to rename it via
+  // `sessionKVBindingName`. No page calls Astro.session, so it's inert today.
+  // It only becomes a real error ("Invalid binding `SESSION`") the moment
+  // something does call Astro.session while this file has no matching
+  // kv_namespaces entry. If that happens, run
+  // `npx wrangler kv namespace create SESSION` and add the id it prints here:
+  //   "kv_namespaces": [{ "binding": "SESSION", "id": "<id from that command>" }]
 }

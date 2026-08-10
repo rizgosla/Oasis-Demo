@@ -26,10 +26,15 @@ import type { APIRoute } from 'astro';
  *   APPOINTMENT_TO    defaults to the address published on the site
  *   APPOINTMENT_FROM  must be on the domain verified with Resend
  *
- * CSRF: the origin check below is done by hand, as the PHP version did.
- * Astro's security.checkOrigin only engages when buildOutput resolves to
- * 'server', which is not the case under output: 'static' — a cross-origin POST
- * was verified to pass straight through it.
+ * CSRF: the origin check below is done by hand, as the PHP version did — but
+ * note Astro's own security.checkOrigin is ALSO active in production here.
+ * Adding this one on-demand route flips the whole build's buildOutput to
+ * 'server', which turns Astro's built-in check on by default (confirmed via
+ * the built manifest: "checkOrigin":true). Astro's check runs first and
+ * rejects a bad Origin with its own bare 403 before this handler ever sees
+ * the request. The explicit check below is what makes a bad Origin land on
+ * the friendly /contact?error= redirect instead — it is not, as previously
+ * assumed, the only thing standing between this route and a forged POST.
  */
 
 export const prerender = false;
@@ -72,7 +77,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const data = await request.formData();
 
   // Bots fill every field they find; real users never see this one.
-  if (String(data.get('company') ?? '').trim() !== '') {
+  if (String(data.get('hp_verify') ?? '').trim() !== '') {
     return back('sent=1');
   }
 
@@ -121,9 +126,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
     `${escapeHtml(host)}. Reply directly to reach the patient.</p>` +
     '</body></html>';
 
-  // The From address must be on the domain verified with Resend. The patient's
-  // address goes in reply_to instead, so hitting Reply still reaches them.
-  const from = headerSafe(env.APPOINTMENT_FROM || `website@${host}`);
+  // The From address must be on the domain verified with Resend — the *only*
+  // domain that's ever verified is the production one, so the fallback must
+  // be that fixed domain rather than the request's own host. Falling back to
+  // `website@${host}` would silently point at an unverified pages.dev/preview
+  // host on any deploy other than production, and Resend would reject every
+  // send with no visible cause besides the generic error=server redirect.
+  const from = headerSafe(env.APPOINTMENT_FROM || 'website@oasisdentalcarehb.com');
   const to = headerSafe(env.APPOINTMENT_TO || 'oasisdentalcarehb@yahoo.com');
 
   // Checked last so a misconfigured deploy still reports validation errors

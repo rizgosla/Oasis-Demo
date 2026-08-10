@@ -25,9 +25,14 @@ export default defineConfig({
   // Astro.url.pathname resolve to '/services.html' during prerender, which
   // ends up in the canonical tag.
   trailingSlash: 'never',
-  // NOTE: security.checkOrigin is deliberately not relied on here. Astro only
-  // activates it when settings.buildOutput resolves to 'server', which does not
-  // hold with output: 'static' — a cross-origin POST to /api/appointment was
-  // verified to pass straight through. The route does the origin check itself.
+  // NOTE: security.checkOrigin is NOT relied on here, even though it is in
+  // fact active. Adding one on-demand route (src/pages/api/appointment.ts,
+  // prerender = false) flips settings.buildOutput to 'server' for the whole
+  // build, which turns Astro's built-in check on by default — confirmed via
+  // the built manifest ("checkOrigin":true). It runs ahead of our handler and
+  // rejects a bad Origin with a bare, unstyled 403 of its own. The route below
+  // still does its own explicit origin check so that path produces the same
+  // friendly /contact?error= redirect instead of depending on Astro's default
+  // response, which cannot be customized from user code.
   integrations: [sitemap()],
 });
