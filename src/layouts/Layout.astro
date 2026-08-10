@@ -6,6 +6,7 @@ import Footer from '../components/Footer.astro';
 import MobileCta from '../components/MobileCta.astro';
 import SchemaLocalBusiness from '../components/SchemaLocalBusiness.astro';
 import { SITE_INDEXABLE } from '../config/seo.js';
+import { GA_MEASUREMENT_ID } from '../config/analytics.js';
 
 interface Props {
   title: string;
@@ -31,6 +32,24 @@ const ogImageUrl = new URL(ogImage, Astro.site).href;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {/* Google recommends this as high in <head> as possible. Skipped in
+        `astro dev` (import.meta.env.PROD is false there) so local testing
+        never reports as real traffic — it still runs on Cloudflare preview
+        deploys, since those are ordinary production builds from Astro's
+        point of view. Disabled entirely if GA_MEASUREMENT_ID is empty. */}
+    {GA_MEASUREMENT_ID && import.meta.env.PROD && (
+      <Fragment>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+        <script define:vars={{ GA_MEASUREMENT_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', GA_MEASUREMENT_ID);
+        </script>
+      </Fragment>
+    )}
+
     {/* Marks that scripting is available, before anything paints. The
         scroll-reveal system hides content with opacity:0 until its observer
         runs; gating that on .js means a script failure degrades to "no
