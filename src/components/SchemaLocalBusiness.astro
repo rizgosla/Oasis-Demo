@@ -41,8 +41,14 @@ const schema = {
   hasMap: 'https://www.google.com/maps?cid=8858444920419398576',
   // Entity reconciliation for local search. Only verified profiles belong here —
   // a wrong URL merges this practice with someone else's entity.
-  // TODO before launch: add Yelp, Facebook and the Invisalign provider listing.
-  sameAs: ['https://www.google.com/maps?cid=8858444920419398576'],
+  // No Facebook page exists for the practice, so none is listed here.
+  // TODO: add the Invisalign provider listing URL once available — see
+  // https://www.invisalign.com/find-my-doctor and search "Oasis Dental Care,
+  // Huntington Beach" to find the practice's provider profile page.
+  sameAs: [
+    'https://www.google.com/maps?cid=8858444920419398576',
+    'https://www.yelp.com/biz/oasis-dental-care-huntington-beach-2',
+  ],
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
