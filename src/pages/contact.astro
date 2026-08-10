@@ -182,13 +182,12 @@ import Layout from '../layouts/Layout.astro';
 
     // --- Reporting the server's answer ------------------------------------
     // Validation also runs server-side, and without JS that is the only pass.
-    // The API redirects back here with ?sent=1, or ?error=invalid&fields=…
+    // A successful submission redirects to /thank-you instead of back here, so
+    // the only outcome this page ever reports is an error: ?error=invalid&fields=…
     var params = new URLSearchParams(window.location.search);
     var message = null;
 
-    if (params.has('sent')) {
-      message = 'Thanks — your request is in. Someone from our team will get back to you, usually the same day.';
-    } else if (params.get('error') === 'invalid') {
+    if (params.get('error') === 'invalid') {
       var bad = (params.get('fields') || '').split(',').filter(Boolean);
       bad.forEach(function (f) {
         var input = document.getElementById(f);

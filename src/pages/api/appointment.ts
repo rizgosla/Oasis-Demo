@@ -43,6 +43,9 @@ export const prerender = false;
 const back = (status: string) =>
   new Response(null, { status: 303, headers: { Location: `/contact?${status}` } });
 
+/** Redirect to the standalone confirmation page on a successful send. */
+const success = () => new Response(null, { status: 303, headers: { Location: '/thank-you' } });
+
 /** Mirrors the form's intent: a blank field counts as absent. */
 const field = (data: FormData, key: string) => {
   const value = String(data.get(key) ?? '').trim();
@@ -78,7 +81,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
   // Bots fill every field they find; real users never see this one.
   if (String(data.get('hp_verify') ?? '').trim() !== '') {
-    return back('sent=1');
+    return success();
   }
 
   const first = String(data.get('first_name') ?? '').trim();
@@ -171,5 +174,5 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return back('error=server');
   }
 
-  return back('sent=1');
+  return success();
 };

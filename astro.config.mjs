@@ -34,5 +34,11 @@ export default defineConfig({
   // still does its own explicit origin check so that path produces the same
   // friendly /contact?error= redirect instead of depending on Astro's default
   // response, which cannot be customized from user code.
-  integrations: [sitemap()],
+  integrations: [
+    // /thank-you is noindex (it's a transactional confirmation, not content
+    // anyone should land on from search), but the sitemap integration knows
+    // nothing about that prop — it lists every prerendered route unless told
+    // otherwise, so it has to be filtered out here explicitly.
+    sitemap({ filter: (page) => !page.endsWith('/thank-you') }),
+  ],
 });

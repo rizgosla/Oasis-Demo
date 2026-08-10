@@ -1,0 +1,39 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+
+// Landed on after a successful /api/appointment POST — see the `success()`
+// redirect in src/pages/api/appointment.ts. noindex: this is a transactional
+// confirmation, not a page anyone should land on from search, and nothing
+// here is true unless an actual submission just happened.
+---
+
+<Layout
+  title="Request received — Oasis Dental Care"
+  description="Your appointment request has been sent to Oasis Dental Care in Huntington Beach."
+  noindex
+>
+
+<section class="phero">
+  <div class="wrap">
+    <span class="tag">/ Thank you</span>
+    <h1>Thanks — you're all set.</h1>
+    <p>Your request is in. Someone from our team will reach out, usually the same day, to confirm a time that works for you.</p>
+    <p>If this is urgent, please call us directly at <a href="tel:7148932106" style="color:var(--teal)">(714) 893-2106</a> rather than waiting for a reply.</p>
+    <div class="acts">
+      <a class="btn" href="/">Back to home <svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
+    </div>
+  </div>
+</section>
+
+<div class="page-links">
+  <div class="wrap">
+    <a href="/services">Services</a>
+    <a href="/practice">Our Practice</a>
+    <a href="/new-patients">New Patients</a>
+  </div>
+</div>
+
+</Layout>
