@@ -7,18 +7,11 @@ interface Props {
 }
 const {
   sub = 'Certified Provider',
-  href = 'https://www.invisalign.com/',
+  href = '/services#svc=invisalign',
   class: cls = '',
 } = Astro.props;
-const isExternal = href.startsWith('http');
 ---
-<a
-  class={`invis-badge ${cls}`.trim()}
-  href={href}
-  aria-label={`Invisalign ${sub}`}
-  target={isExternal ? '_blank' : undefined}
-  rel={isExternal ? 'noopener' : undefined}
->
+<a class={`invis-badge ${cls}`.trim()} href={href} aria-label={`Invisalign ${sub}`}>
   <InvisalignLogo height={22} />
   {sub && <span class="invis-sub">{sub}</span>}
 </a>
