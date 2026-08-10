@@ -3,9 +3,10 @@ export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 
-// Served by Apache via `ErrorDocument 404` with a real 404 status. It is also
-// reachable directly at /404.html, which would return 200 — hence noindex, so
-// that path can never be indexed as though it were a real page.
+// Served automatically by Cloudflare Pages from dist/404.html with a real 404
+// status. It is also reachable directly at /404.html, which would return 200
+// — hence noindex, so that path can never be indexed as though it were a real
+// page.
 ---
 
 <Layout

@@ -156,6 +156,9 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
         btn.setAttribute('aria-expanded', String(open));
         // The icon animates into an X, so its accessible name has to follow.
         btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        // Hides the fixed mobile CTA bar while open — see .mobile-cta in
+        // global.css — so the two don't overlap on a short phone screen.
+        document.body.classList.toggle('mobile-nav-open', open);
       }
       function close() { setState(false); }
       btn.addEventListener('click', function () {
