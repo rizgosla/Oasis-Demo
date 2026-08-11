@@ -238,9 +238,9 @@ section.pad { padding: 56px 0; }
 .heromain h1 .hero-swap-item:nth-child(3) { animation-delay: 6s; }
 @keyframes heroTagSwap {
   0%   { opacity: 0; transform: translateY(0.3em); }
-  2%   { opacity: 1; transform: translateY(0); }
-  23%  { opacity: 1; transform: translateY(0); }
-  25%  { opacity: 0; transform: translateY(-0.3em); }
+  3%   { opacity: 1; transform: translateY(0); }
+  30%  { opacity: 1; transform: translateY(0); }
+  33%  { opacity: 0; transform: translateY(-0.3em); }
   100% { opacity: 0; transform: translateY(0.3em); }
 }
 @media (prefers-reduced-motion: reduce) {
