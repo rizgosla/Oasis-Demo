@@ -130,6 +130,9 @@ Submit the form at `/contact` with a real address and confirm:
 - the page shows the "Thanks — your request is in" confirmation
 - the email arrives at `oasisdentalcarehb@yahoo.com` — **check the spam folder**
 - hitting Reply in that email addresses the patient, not the website
+- a confirmation email also arrives at the address you submitted, letting the
+  patient know the request went through; this send is best-effort and won't
+  fail the submission if it doesn't go out
 
 A successful send is not proof of inbox placement, which is why the spam-folder
 check matters. If it fails, Cloudflare logs the exact Resend error: **Workers &
@@ -294,6 +297,13 @@ The form on `/contact` POSTs to `/api/appointment`
 (`src/pages/api/appointment.ts`). It validates the input, sends through
 **Resend**'s HTTP API, and redirects 303 back to `/contact?sent=1`. The page
 reports the outcome client-side in the existing note box.
+
+Two emails go out on a successful submission: the request itself to the
+practice (`APPOINTMENT_TO`), and a best-effort confirmation back to the
+patient's own address letting them know the request was received. The
+confirmation send never fails the submission — if it errors, the error is
+logged but the patient still sees the success page, since their request is
+already safely in the practice's inbox.
 
 It calls the Resend REST endpoint with `fetch` rather than using the SDK: the
 SDK pulls in Node builtins and would require the `nodejs_compat` flag on the

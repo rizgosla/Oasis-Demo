@@ -60,6 +60,21 @@ const escapeHtml = (value: string) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
   );
 
+/** POSTs one message to Resend's API. Throws on a non-2xx response or a network failure. */
+async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
+  const response = await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error(`Resend responded ${response.status}: ${await response.text()}`);
+  }
+}
+
 export const POST: APIRoute = async ({ request, locals }) => {
   // On Cloudflare, bindings and env vars arrive on locals.runtime.env; falling
   // back to import.meta.env keeps `astro dev` working from a local .env file.
@@ -146,32 +161,40 @@ export const POST: APIRoute = async ({ request, locals }) => {
     return back('error=server');
   }
 
-  let response: Response;
   try {
-    response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: `Oasis Dental Care <${from}>`,
-        to: [to],
-        reply_to: headerSafe(email),
-        subject: headerSafe(`Appointment request: ${first} ${last}`),
-        html,
-      }),
+    await sendEmail(apiKey, {
+      from: `Oasis Dental Care <${from}>`,
+      to: [to],
+      reply_to: headerSafe(email),
+      subject: headerSafe(`Appointment request: ${first} ${last}`),
+      html,
     });
   } catch (err) {
-    console.error(`appointment: fetch to Resend failed for ${email} — ${err}`);
+    console.error(`appointment: send to practice failed for ${email} — ${err}`);
     return back('error=server');
   }
 
-  if (!response.ok) {
-    console.error(
-      `appointment: Resend returned ${response.status} for ${email} — ${await response.text()}`,
-    );
-    return back('error=server');
+  // Confirmation to the patient. Best-effort: the request is already safely
+  // in the practice's inbox, so a failure here must not tell the patient
+  // their request failed.
+  try {
+    await sendEmail(apiKey, {
+      from: `Oasis Dental Care <${from}>`,
+      to: [headerSafe(email)],
+      reply_to: to,
+      subject: 'We got your appointment request — Oasis Dental Care',
+      html:
+        `<html><body style="font-family:system-ui,sans-serif;font-size:15px;color:#0d1f1d">` +
+        `<h2 style="font-size:17px">Thanks, ${escapeHtml(first)}.</h2>` +
+        `<p style="margin:6px 0">We received your appointment request and will reach out shortly ` +
+        `to confirm a time${field(data, 'preferred_time') !== '—' ? ' near your preferred time' : ''}.</p>` +
+        `<p style="margin:6px 0">If anything about your request needs updating in the meantime, ` +
+        `just reply to this email.</p>` +
+        `<p style="margin-top:18px;color:#4a6b65;font-size:13px">Oasis Dental Care</p>` +
+        `</body></html>`,
+    });
+  } catch (err) {
+    console.error(`appointment: confirmation to patient failed (request itself was delivered) — ${err}`);
   }
 
   return success();
