@@ -47,13 +47,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="practice-media">
         <div class="ph-block">
-          <div class="ph-inner">
-            <div class="ph-ic">
-              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-            </div>
-            <div class="ph-title">Office photo</div>
-            <div class="ph-sub">Our practice on Bolsa Ave, Huntington Beach.</div>
-          </div>
+          <img src="/practice-office.jpg" alt="The reception and waiting area at Oasis Dental Care, Huntington Beach" width="1800" height="1200" loading="lazy" />
           <div class="ph-badge">
             <span class="pulse" style="width:6px;height:6px;border-radius:50%;background:var(--teal-300)"></span>
             Huntington Beach, CA
@@ -80,7 +74,7 @@ import Layout from '../layouts/Layout.astro';
       <!-- Dr. Fu -->
       <div class="member">
         <div class="photo">
-          <img src="/dr-jason-fu.jpg" alt="Dr. Jason Fu, lead dentist and founder of Oasis Dental Care" width="600" height="800" loading="lazy" />
+          <img src="/dr-jason-fu.jpg" alt="Dr. Jason Fu, lead dentist and founder of Oasis Dental Care" width="1600" height="1067" loading="lazy" />
         </div>
         <div class="info">
           <h3 class="nm">Dr. Jason Fu</h3>
@@ -92,25 +86,19 @@ import Layout from '../layouts/Layout.astro';
       <!-- Leandre -->
       <div class="member">
         <div class="photo">
-          <div class="ph">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Leandre</span>
-          </div>
+          <img src="/team-leandre.jpg" alt="Leandre, Lead Back Office Manager at Oasis Dental Care" width="1199" height="1400" loading="lazy" />
         </div>
         <div class="info">
           <h3 class="nm">Leandre</h3>
           <div class="rl">Lead Back Office Manager</div>
-          <p>Leandre plays an essential role in the clinical flow of each day. From sterilisation protocols and preparing treatment rooms to coordinating chairside support alongside Dr. Fu, she helps ensure that appointments run smoothly and comfortably. Patients consistently note how calm and reassuring she is.</p>
+          <p>Leandre plays an essential role in the clinical flow of each day. From sterilisation protocols and preparing treatment rooms to coordinating chairside support alongside Dr. Fu, he helps ensure that appointments run smoothly and comfortably. Patients consistently note how calm and reassuring he is.</p>
         </div>
       </div>
 
       <!-- Edith -->
       <div class="member">
         <div class="photo">
-          <div class="ph">
-            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <span>Edith</span>
-          </div>
+          <img src="/team-edith.jpg" alt="Edith, Office Manager at Oasis Dental Care" width="1283" height="1400" loading="lazy" />
         </div>
         <div class="info">
           <h3 class="nm">Edith</h3>
@@ -252,51 +240,17 @@ import Layout from '../layouts/Layout.astro';
 .ph-block {
   flex: 1;
   min-height: 320px;
-  background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2);
   border-radius: 18px;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
 }
-.ph-inner {
+.ph-block img {
   position: absolute;
-  inset: 24px;
-  border: 1.5px dashed rgba(95,208,192,.32);
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  text-align: center;
-  padding: 24px;
-}
-.ph-ic {
-  width: 58px;
-  height: 58px;
-  border-radius: 14px;
-  border: 1.5px solid rgba(95,208,192,.4);
-  display: grid;
-  place-items: center;
-}
-.ph-ic svg {
-  width: 28px;
-  height: 28px;
-  stroke: var(--teal-300);
-  fill: none;
-  stroke-width: 1.5;
-}
-.ph-title {
-  font-family: var(--disp);
-  font-weight: 600;
-  font-size: 20px;
-  color: #eaf6f3;
-}
-.ph-sub {
-  font-size: 13.5px;
-  color: #86b3ab;
-  max-width: 230px;
-  line-height: 1.55;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .ph-badge {
   position: absolute;
