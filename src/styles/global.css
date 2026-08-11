@@ -531,11 +531,8 @@ section.pad { padding: 56px 0; }
 @media(max-width: 900px) { .team { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width: 560px) { .team { grid-template-columns: 1fr; } }
 .member { border: 1px solid var(--line-l); border-radius: 16px; background: var(--panel); overflow: hidden; }
-.member .photo { aspect-ratio: 1/1; background: repeating-linear-gradient(135deg, rgba(11,129,116,.05) 0 14px, transparent 14px 28px), var(--bg); position: relative; display: grid; place-items: center; text-align: center; border-bottom: 1px solid var(--line-l); }
+.member .photo { aspect-ratio: 1/1; position: relative; border-bottom: 1px solid var(--line-l); }
 .member .photo img { width: 100%; height: 100%; object-fit: cover; }
-.member .photo .ph { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--teal); padding: 20px; }
-.member .photo .ph svg { width: 40px; height: 40px; stroke: currentColor; fill: none; stroke-width: 1.4; }
-.member .photo .ph span { font-size: 12.5px; color: var(--ink-soft); max-width: 170px; }
 .member .info { padding: 20px 22px; }
 /* Retagged div -> h3 so team members appear in the heading outline. As a div it
    inherited the body line-height and normal tracking; the base h1-h4 rule would
