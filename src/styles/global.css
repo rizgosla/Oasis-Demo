@@ -108,7 +108,7 @@ main:focus { outline: none; }
    --teal-700 on the same tile is 6.62:1. */
 .nav a.active { color: var(--teal-700); background: rgba(11,129,116,.08); }
 .hcta { display: flex; align-items: center; gap: 14px; }
-.hcta .btn { white-space: nowrap; gap: 0; font-size: 15.5px; padding: 15px 24px; }
+.hcta .btn { white-space: nowrap; gap: 0; padding: 15px 24px; }
 .menu-toggle { display: none; background: transparent; border: 1px solid var(--line-ctrl); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); padding: 0; transition: .16s; }
 .menu-toggle:hover { border-color: var(--teal); color: var(--teal); }
 .menu-toggle svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
@@ -207,7 +207,7 @@ section.pad { padding: 56px 0; }
 .phero h1 { font-size: clamp(36px, 4.2vw, 54px); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); margin-top: 14px; max-width: 24ch; }
 .phero p { color: var(--ink-soft); font-size: 18px; max-width: 560px; margin-top: 18px; }
 .phero .acts { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
-.phero .acts .btn { font-size: 16.5px; padding: 17px 28px; }
+.phero .acts .btn { padding: 17px 28px; }
 .phero .acts .btn .ico { width: 19px; height: 19px; }
 @media (max-width: 720px) {
   .phero::after { display: none; }
@@ -249,7 +249,7 @@ section.pad { padding: 56px 0; }
 .heromain h1 span { color: var(--teal); }
 .heromain p { color: var(--ink-soft); font-size: 18.5px; max-width: 720px; margin-top: 22px; }
 .heromain .acts { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-.heromain .acts .btn { font-size: 16.5px; padding: 17px 28px; }
+.heromain .acts .btn { padding: 17px 28px; }
 .heromain .acts .btn .ico { width: 19px; height: 19px; }
 /* .btn-ghost defaults to white text on a transparent background for the dark
    sections. These three all sit on white/light backgrounds, so they need the
@@ -265,7 +265,7 @@ section.pad { padding: 56px 0; }
 .heromain .media .ph .s { font-size: 13.5px; color: #86b3ab; max-width: 230px; line-height: 1.5; }
 .heromain .media .badge { position: absolute; top: 18px; right: 18px; background: rgba(8,34,31,.82); backdrop-filter: blur(4px); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: 11.5px; letter-spacing: .01em; color: var(--teal-300); display: flex; align-items: center; gap: 8px; }
 @media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); } }
-@media(max-width: 480px) { .heromain .acts .btn, .phero .acts .btn { font-size: 15px; padding: 15px 22px; } }
+@media(max-width: 480px) { .heromain .acts .btn, .phero .acts .btn { padding: 15px 22px; } }
 
 /* ---------- page section links ---------- */
 .page-links { background: var(--panel); border-bottom: 1px solid var(--line-l); padding: 14px 0; overflow-x: auto; scrollbar-width: none; }
