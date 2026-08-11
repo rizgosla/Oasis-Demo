@@ -33,10 +33,11 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
         <div style="margin-top:28px"><InvisalignBadge /></div>
       </div>
       <div class="media">
-        <div class="ph">
-          <div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.6"/><path d="m21 16-4.5-4.5L7 21"/></svg></div>
-          <div class="t">Team photo</div>
-          <div class="s">The team who'll know you by name, every visit.</div>
+        <div class="ph" id="teamCycle">
+          <div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="t" id="teamCycleName">Dr. Jason Fu</div>
+          <div class="s" id="teamCycleRole">Lead Dentist &amp; Founder</div>
+          <div class="tc-dots" id="teamCycleDots" aria-hidden="true"></div>
         </div>
         <div class="badge" style="font-size:12px"><span class="pulse" style="width:6px;height:6px;border-radius:50%;background:var(--teal-300)"></span>Our Team</div>
       </div>
@@ -408,6 +409,54 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
   scroller.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
   update();
+})();
+
+(function () {
+  const box = document.getElementById('teamCycle');
+  const nameEl = document.getElementById('teamCycleName');
+  const roleEl = document.getElementById('teamCycleRole');
+  const dotsEl = document.getElementById('teamCycleDots');
+  if (!box || !nameEl || !roleEl || !dotsEl) return;
+
+  const team = [
+    { name: 'Dr. Jason Fu', role: 'Lead Dentist & Founder' },
+    { name: 'Leandre', role: 'Lead Back Office Manager' },
+    { name: 'Edith', role: 'Office Manager' },
+  ];
+
+  team.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'tc-dot' + (i === 0 ? ' on' : '');
+    dotsEl.appendChild(d);
+  });
+  const dots = [...dotsEl.children];
+
+  let cur = 0;
+  function show(next) {
+    cur = next;
+    nameEl.style.opacity = '0';
+    roleEl.style.opacity = '0';
+    setTimeout(() => {
+      nameEl.textContent = team[cur].name;
+      roleEl.textContent = team[cur].role;
+      nameEl.style.opacity = '1';
+      roleEl.style.opacity = '1';
+      dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    }, 260);
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let timer = null;
+  function startAuto() {
+    if (reduceMotion.matches || timer) return;
+    timer = setInterval(() => show((cur + 1) % team.length), 3200);
+  }
+  function stopAuto() { clearInterval(timer); timer = null; }
+  startAuto();
+  box.addEventListener('mouseenter', stopAuto);
+  box.addEventListener('mouseleave', startAuto);
+  box.addEventListener('focusin', stopAuto);
+  box.addEventListener('focusout', (e) => { if (!box.contains(e.relatedTarget)) startAuto(); });
 })();
 </script>
 

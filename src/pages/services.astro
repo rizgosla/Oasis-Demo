@@ -78,12 +78,8 @@ import { services } from '../data/services.js';
       </div>
 
       <div class="sm-right">
-        <div class="img-ph sm-img">
-          <div class="img-ph-ic">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-          </div>
-          <span class="img-ph-lbl">Photo coming soon</span>
-          <span class="img-ph-desc" id="sm-img-desc"></span>
+        <div class="sm-img">
+          <svg id="sm-icon" class="sm-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"></svg>
         </div>
         <div class="sm-cta">
           <a class="btn" id="sm-book-btn" href="/contact">Book a Consultation</a>
@@ -269,6 +265,19 @@ import { services } from '../data/services.js';
 .sm-img {
   margin: 0 !important;
   aspect-ratio: 4/3;
+  background: #fff;
+  border: 1px solid var(--line-l);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sm-icon {
+  width: 30%;
+  height: 30%;
+  stroke: var(--teal);
+  fill: none;
+  stroke-width: 1.3;
 }
 
 .sm-cta {
@@ -349,8 +358,8 @@ import { services } from '../data/services.js';
       `<details${i === 0 ? ' open' : ''}><summary>${f.q}</summary><p>${f.a}</p></details>`
     ).join('');
 
-    // Populate image desc
-    document.getElementById('sm-img-desc').textContent = s.imgDesc;
+    // Populate service icon
+    document.getElementById('sm-icon').innerHTML = s.icon;
 
     // Populate CTA
     const bookBtn = document.getElementById('sm-book-btn');
