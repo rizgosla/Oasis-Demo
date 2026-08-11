@@ -258,14 +258,8 @@ section.pad { padding: 56px 0; }
 .heromain .btn-ghost:hover, .phero .btn-ghost:hover, .mobile-cta .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
 .heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); }
 .heromain .media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.heromain .media .ph { position: absolute; inset: 24px; border: 1.5px dashed rgba(95,208,192,.32); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 20px; }
-.heromain .media .ph .ic { width: 56px; height: 56px; border-radius: 13px; border: 1.5px solid rgba(95,208,192,.4); display: grid; place-items: center; }
-.heromain .media .ph .ic svg { width: 27px; height: 27px; stroke: var(--teal-300); fill: none; stroke-width: 1.5; }
-.heromain .media .ph .t { font-family: var(--disp); font-weight: 600; font-size: 19px; color: #eaf6f3; transition: opacity .26s ease; }
-.heromain .media .ph .s { font-size: 13.5px; color: #86b3ab; max-width: 230px; line-height: 1.5; transition: opacity .26s ease; }
-.heromain .media .ph .tc-dots { display: flex; gap: 7px; margin-top: 4px; }
-.heromain .media .ph .tc-dot { width: 6px; height: 6px; border-radius: 50%; border: none; padding: 0; background: rgba(95,208,192,.3); transition: background .22s, transform .22s; }
-.heromain .media .ph .tc-dot.on { background: var(--teal-300); transform: scale(1.35); }
+.heromain .media .ph { position: absolute; inset: 24px; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); }
+.heromain .media .ph img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .heromain .media .badge { position: absolute; top: 18px; right: 18px; background: rgba(8,34,31,.82); backdrop-filter: blur(4px); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; font-size: 11.5px; letter-spacing: .01em; color: var(--teal-300); display: flex; align-items: center; gap: 8px; }
 @media(max-width: 880px) { .heromain { min-height: 0; } .heromain .inner { grid-template-columns: 1fr; } .heromain .copy { padding: 48px 24px 44px; } .heromain .media { min-height: 420px; border-left: 0; border-top: 1px solid var(--line); } }
 @media(max-width: 480px) { .heromain .acts .btn, .phero .acts .btn { padding: 15px 22px; } }
@@ -532,7 +526,7 @@ section.pad { padding: 56px 0; }
 @media(max-width: 560px) { .team { grid-template-columns: 1fr; } }
 .member { border: 1px solid var(--line-l); border-radius: 16px; background: var(--panel); overflow: hidden; }
 .member .photo { aspect-ratio: 1/1; position: relative; border-bottom: 1px solid var(--line-l); }
-.member .photo img { width: 100%; height: 100%; object-fit: cover; }
+.member .photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .member .info { padding: 20px 22px; }
 /* Retagged div -> h3 so team members appear in the heading outline. As a div it
    inherited the body line-height and normal tracking; the base h1-h4 rule would
