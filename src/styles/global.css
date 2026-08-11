@@ -226,17 +226,16 @@ section.pad { padding: 56px 0; }
    in the same area) so nothing else in the hero reflows as it changes, and
    the swapped text inherits the surrounding h1/span font exactly as the
    static text it replaced did. */
-.heromain h1 .hero-swap { display: inline-grid; max-width: 100%; vertical-align: top; }
+.heromain h1 .hero-swap { display: inline-grid; align-items: center; max-width: 100%; vertical-align: top; }
 .heromain h1 .hero-swap-item {
   grid-area: 1 / 1;
   justify-self: start;
   opacity: 0;
-  animation: heroTagSwap 12s ease infinite;
+  animation: heroTagSwap 9s ease infinite;
 }
 .heromain h1 .hero-swap-item:nth-child(1) { animation-delay: 0s; }
 .heromain h1 .hero-swap-item:nth-child(2) { animation-delay: 3s; }
 .heromain h1 .hero-swap-item:nth-child(3) { animation-delay: 6s; }
-.heromain h1 .hero-swap-item:nth-child(4) { animation-delay: 9s; }
 @keyframes heroTagSwap {
   0%   { opacity: 0; transform: translateY(0.3em); }
   2%   { opacity: 1; transform: translateY(0); }
