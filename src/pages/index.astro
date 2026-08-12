@@ -31,7 +31,10 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
       </div>
       <div class="media">
         <div class="ph">
-          <img src="/practice-office.jpg" alt="The reception and waiting area at Oasis Dental Care, Huntington Beach" width="1800" height="1200" />
+          <picture>
+            <source media="(max-width: 640px)" srcset="/practice-office-sm.jpg" />
+            <img src="/practice-office.jpg" alt="The reception and waiting area at Oasis Dental Care, Huntington Beach" width="3000" height="2000" />
+          </picture>
         </div>
         <div class="badge" style="font-size:12px"><span class="pulse" style="width:6px;height:6px;border-radius:50%;background:var(--teal-300)"></span>Our Practice</div>
       </div>
@@ -190,7 +193,10 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
 <section class="pad doc" id="doctor">
   <div class="wrap">
     <div class="pic reveal">
-      <img src="/dr-jason-fu.jpg" alt="Dr. Jason Fu, lead dentist at Oasis Dental Care in Huntington Beach" width="1600" height="1067" loading="lazy" />
+      <picture>
+        <source media="(max-width: 640px)" srcset="/dr-jason-fu-sm.jpg" />
+        <img src="/dr-jason-fu.jpg" alt="Dr. Jason Fu, lead dentist at Oasis Dental Care in Huntington Beach" width="3000" height="2000" loading="lazy" />
+      </picture>
       <div class="ovl"><span class="nm">Dr. Jason Fu</span><span class="rl" style="font-size:15px">Lead Dentist</span></div>
     </div>
     <div class="reveal">
