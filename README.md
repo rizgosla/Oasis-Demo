@@ -329,7 +329,50 @@ Set in Cloudflare Pages → Settings → Environment variables. Copy
 |---|---|---|---|
 | `RESEND_API_KEY` | **yes** | — | From resend.com. Mark as a secret. Without it the form returns `error=server`. |
 | `APPOINTMENT_TO` | no | `oasisdentalcarehb@yahoo.com` | Where requests are delivered. |
-| `APPOINTMENT_FROM` | no | `website@<host>` | Must be on the domain verified with Resend. The patient's address goes in `reply_to`, so replying still reaches them. |
+| `APPOINTMENT_FROM` | no | `website@oasisdentalcarehb.com` | Must be on the domain verified with Resend. The patient's address goes in `reply_to`, so replying still reaches them. |
+
+> **`wrangler deploy` deletes dashboard variables.** Wrangler treats
+> `wrangler.jsonc` as the complete definition of the Worker's plain-text vars,
+> so a var set only in the dashboard is removed on the next deploy — while
+> **secrets are never removed**. That split is why `RESEND_API_KEY` (a secret)
+> keeps working while `APPOINTMENT_TO` / `APPOINTMENT_FROM` (plain variables)
+> silently revert to the defaults above, with the dashboard still showing the
+> values you typed. `"keep_vars": true` in `wrangler.jsonc` disables the
+> deletion; leave it there.
+
+### Troubleshooting: `422 Invalid \`to\` field`
+
+```
+Resend responded 422: {"statusCode":422,"name":"validation_error",
+"message":"Invalid `to` field. Please use our testing email address
+instead of domains like `example.com`."}
+```
+
+Despite what it says, this is almost never about the recipient's domain. It
+means the Resend account **is not cleared to send to arbitrary recipients yet**,
+which happens in two situations:
+
+1. **`APPOINTMENT_FROM` is `onboarding@resend.dev`.** The sandbox sender
+   delivers *only* to the email address on the Resend account itself. Sending
+   to `oasisdentalcarehb@yahoo.com` from it is rejected with exactly this
+   error. Sending to your own address from the terminal succeeds — which is
+   what makes the key look fine while the form stays broken.
+2. **No domain is verified.** Same restriction, same message.
+
+The fix is [Step 2](#step-2--verify-the-domain-in-resend): verify
+`oasisdentalcarehb.com`, then set `APPOINTMENT_FROM` to an address on it (or
+delete the variable and let the default apply). To confirm the plumbing before
+DNS propagates, keep `APPOINTMENT_FROM=onboarding@resend.dev` and set
+`APPOINTMENT_TO` to **your own Resend account address** — both, not just one.
+
+The failure log names the addresses actually used, so start there:
+
+```
+appointment: send to practice failed — from="…" to="…" patient="…" — Resend responded 422: …
+```
+
+If `from`/`to` are not what the dashboard shows, it's the `keep_vars` problem
+above.
 
 ### ⚠️ Deliverability
 
