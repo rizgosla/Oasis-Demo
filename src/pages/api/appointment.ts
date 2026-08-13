@@ -100,7 +100,15 @@ const escapeHtml = (value: string) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
   );
 
-/** POSTs one message to Resend's API. Throws on a non-2xx response or a network failure. */
+/**
+ * POSTs one message to Resend's API. Throws on a non-2xx response or a network
+ * failure; otherwise returns the message id Resend assigns.
+ *
+ * The id is worth carrying back out: nobody on the web team has access to the
+ * practice's mailbox, so the id is the only way to follow a specific
+ * submission through to a delivery result — paste it into the Emails view at
+ * resend.com/emails and it reports what Yahoo's servers actually did with it.
+ */
 async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
   const response = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -110,8 +118,14 @@ async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
     },
     body: JSON.stringify(payload),
   });
+  const body = await response.text();
   if (!response.ok) {
-    throw new Error(`Resend responded ${response.status}: ${await response.text()}`);
+    throw new Error(`Resend responded ${response.status}: ${body}`);
+  }
+  try {
+    return String((JSON.parse(body) as { id?: string }).id ?? '') || 'unknown';
+  } catch {
+    return 'unknown';
   }
 }
 
@@ -207,13 +221,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
   }
 
   try {
-    await sendEmail(apiKey, {
+    const id = await sendEmail(apiKey, {
       from: `Oasis Dental Care <${from}>`,
       to: [to],
       reply_to: headerSafe(email),
       subject: headerSafe(`Appointment request: ${first} ${last}`),
       html,
     });
+    // Successes are logged as well as failures, because "the form is silently
+    // eating requests" is otherwise unfalsifiable from outside the practice's
+    // mailbox. Deliberately no patient name or address here — this line says
+    // a request was accepted, not who sent it; the failure paths below carry
+    // the address only because you cannot chase a bounce without it.
+    console.log(`appointment: accepted by Resend for ${to} — id=${id}`);
   } catch (err) {
     // The effective from/to are logged, not just the error: every realistic
     // cause of a failure here is one of those two values being something other
@@ -231,7 +251,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // in the practice's inbox, so a failure here must not tell the patient
   // their request failed.
   try {
-    await sendEmail(apiKey, {
+    const id = await sendEmail(apiKey, {
       from: `Oasis Dental Care <${from}>`,
       to: [headerSafe(email)],
       reply_to: to,
@@ -246,6 +266,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
         `<p style="margin-top:18px;color:#4a6b65;font-size:13px">Oasis Dental Care</p>` +
         `</body></html>`,
     });
+    // Id only, no address: the patient's own copy is not something anyone
+    // needs to chase, and this line would otherwise put a patient's email in
+    // the Cloudflare log on every single successful submission.
+    console.log(`appointment: patient confirmation accepted by Resend — id=${id}`);
   } catch (err) {
     const failure = String(err);
     console.error(
