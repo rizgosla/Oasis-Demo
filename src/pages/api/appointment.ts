@@ -56,22 +56,44 @@ const field = (data: FormData, key: string) => {
 const headerSafe = (value: string) => value.replace(/[\r\n]/g, '').trim();
 
 /**
+ * Names reserved by RFC 2606 / RFC 6761, plus the test.com that Resend also
+ * refuses. Nothing here is a mailbox — an address at one of these is a
+ * placeholder somebody meant to replace before going live.
+ */
+const PLACEHOLDER_HOST =
+  /(^|\.)(example\.(com|net|org|edu)|test\.com|test|invalid|localhost)$/i;
+
+/**
  * Reads a configured address, unwrapping the shapes a dashboard paste tends to
  * arrive in — "a@b.com", <a@b.com>, Name <a@b.com> — and falling back to the
- * built-in default when what is left is not a single address.
+ * built-in default when what is left is not a usable destination.
  *
- * Worth the trouble because Resend rejects the entire payload with a bare 422
- * for any of those, and the message it returns blames `example.com`, which
- * sends you looking at something that is not the problem.
+ * The placeholder check earns its keep: APPOINTMENT_TO=test@example.com is
+ * syntactically a perfectly good address, so it sails through validation and
+ * straight into Resend, which rejects the entire send with a 422. Left alone,
+ * a variable someone set while testing and forgot to clear silently discards
+ * every real appointment request that arrives afterwards. Falling back to the
+ * practice's own address is the safe failure: worst case they receive a test
+ * message, rather than a patient's request going nowhere at all.
  */
 const address = (label: string, configured: string | undefined, fallback: string) => {
   const raw = headerSafe(configured ?? '').replace(/^["'\s]+|["'\s]+$/g, '');
   const bare = /<([^>]*)>[^>]*$/.exec(raw)?.[1].trim() ?? raw;
-  if (/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(bare)) return bare;
-  if (raw !== '') {
-    console.error(`appointment: ${label}="${raw}" is not a single email address — using ${fallback}`);
+
+  if (!/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(bare)) {
+    if (raw !== '') {
+      console.error(`appointment: ${label}="${raw}" is not a single email address — using ${fallback}`);
+    }
+    return fallback;
   }
-  return fallback;
+  if (PLACEHOLDER_HOST.test(bare.slice(bare.lastIndexOf('@') + 1))) {
+    console.error(
+      `appointment: ${label}="${raw}" is a placeholder domain that cannot receive mail — ` +
+        `using ${fallback}. Clear or correct ${label} in the Cloudflare dashboard.`,
+    );
+    return fallback;
+  }
+  return bare;
 };
 
 /**
