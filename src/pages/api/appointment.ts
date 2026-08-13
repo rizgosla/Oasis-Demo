@@ -55,6 +55,46 @@ const field = (data: FormData, key: string) => {
 /** Strip CR/LF so submitted values cannot smuggle anything into headers. */
 const headerSafe = (value: string) => value.replace(/[\r\n]/g, '').trim();
 
+/**
+ * Reads a configured address, unwrapping the shapes a dashboard paste tends to
+ * arrive in — "a@b.com", <a@b.com>, Name <a@b.com> — and falling back to the
+ * built-in default when what is left is not a single address.
+ *
+ * Worth the trouble because Resend rejects the entire payload with a bare 422
+ * for any of those, and the message it returns blames `example.com`, which
+ * sends you looking at something that is not the problem.
+ */
+const address = (label: string, configured: string | undefined, fallback: string) => {
+  const raw = headerSafe(configured ?? '').replace(/^["'\s]+|["'\s]+$/g, '');
+  const bare = /<([^>]*)>[^>]*$/.exec(raw)?.[1].trim() ?? raw;
+  if (/^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(bare)) return bare;
+  if (raw !== '') {
+    console.error(`appointment: ${label}="${raw}" is not a single email address — using ${fallback}`);
+  }
+  return fallback;
+};
+
+/**
+ * Turns Resend's least useful rejection into an actionable log line.
+ *
+ * A 422 on the `to` field reads "Please use our testing email address instead
+ * of domains like `example.com`" even when the recipient is an ordinary
+ * mailbox. What it actually means is that the account is not cleared to send
+ * to arbitrary recipients: either the From domain is not verified, or From is
+ * the shared onboarding@resend.dev sandbox sender. In both states Resend
+ * delivers only to the Resend account owner's own address and refuses every
+ * other recipient with this same misleading message.
+ */
+const hint = (failure: string, from: string) => {
+  if (!/invalid `to` field/i.test(failure)) return '';
+  return from.endsWith('@resend.dev')
+    ? ' — APPOINTMENT_FROM is the resend.dev sandbox sender, which only delivers to the Resend' +
+        ' account owner\'s own address. Verify a domain at resend.com/domains and move' +
+        ' APPOINTMENT_FROM onto it, or set APPOINTMENT_TO to that account address to smoke-test.'
+    : ' — this Resend account is not cleared to send to arbitrary recipients. Check that the' +
+        ' From domain is verified at resend.com/domains.';
+};
+
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
@@ -150,8 +190,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
   // `website@${host}` would silently point at an unverified pages.dev/preview
   // host on any deploy other than production, and Resend would reject every
   // send with no visible cause besides the generic error=server redirect.
-  const from = headerSafe(env.APPOINTMENT_FROM || 'website@oasisdentalcarehb.com');
-  const to = headerSafe(env.APPOINTMENT_TO || 'oasisdentalcarehb@yahoo.com');
+  //
+  // Both go through address() rather than being read raw: these are the two
+  // values most likely to have been typed into a dashboard field, and a stray
+  // pair of quotes around one of them is otherwise indistinguishable from a
+  // genuine Resend outage.
+  const from = address('APPOINTMENT_FROM', env.APPOINTMENT_FROM, 'website@oasisdentalcarehb.com');
+  const to = address('APPOINTMENT_TO', env.APPOINTMENT_TO, 'oasisdentalcarehb@yahoo.com');
 
   // Checked last so a misconfigured deploy still reports validation errors
   // correctly rather than masking every outcome as a server error.
@@ -170,7 +215,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
       html,
     });
   } catch (err) {
-    console.error(`appointment: send to practice failed for ${email} — ${err}`);
+    // The effective from/to are logged, not just the error: every realistic
+    // cause of a failure here is one of those two values being something other
+    // than what the dashboard appears to say, and without them in the log
+    // there is no way to tell a bad address from a bad API key from an outage.
+    const failure = String(err);
+    console.error(
+      `appointment: send to practice failed — from="${from}" to="${to}" ` +
+        `patient="${email}" — ${failure}${hint(failure, from)}`,
+    );
     return back('error=server');
   }
 
@@ -194,7 +247,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
         `</body></html>`,
     });
   } catch (err) {
-    console.error(`appointment: confirmation to patient failed (request itself was delivered) — ${err}`);
+    const failure = String(err);
+    console.error(
+      `appointment: confirmation to patient failed (the request itself was delivered) — ` +
+        `from="${from}" to="${email}" — ${failure}${hint(failure, from)}`,
+    );
   }
 
   return success();

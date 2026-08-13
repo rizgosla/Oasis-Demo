@@ -21,12 +21,40 @@ import Layout from '../layouts/Layout.astro';
     <h1>Thanks — you're all set.</h1>
     <p>Your request is in. Someone from our team will reach out, usually the same day, to confirm a time that works for you.</p>
     <p>If this is urgent, please call us directly at <a href="tel:7148932106" style="color:var(--teal)">(714) 893-2106</a> rather than waiting for a reply.</p>
+    {/* The confirmation is sent from a website address the patient has never
+        corresponded with, so it lands in spam often enough that people assume
+        the form failed and submit again. Saying so here costs nothing and
+        heads off the duplicate. */}
+    <p class="spam-note">
+      <b>Check your spam folder.</b> We just emailed you a confirmation, and it
+      often gets filtered there. If you find it, marking it “not spam” makes
+      sure our reply about your appointment reaches you.
+    </p>
     <div class="acts">
       <a class="btn" href="/">Back to home <svg aria-hidden="true" focusable="false" class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-ghost" href="tel:7148932106">Call (714) 893-2106</a>
     </div>
   </div>
 </section>
+
+<style>
+  /* Deliberately quieter than .phero p: this is a practical aside, not part of
+     the confirmation itself, and it should not compete with the headline. The
+     teal rule ties it to the .formcard .note it echoes over on /contact. */
+  .phero p.spam-note {
+    max-width: 560px;
+    margin-top: 24px;
+    padding: 13px 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    background: rgba(11, 129, 116, 0.06);
+    border: 1px solid var(--line-l);
+    border-left: 3px solid var(--teal);
+    border-radius: 8px;
+  }
+  .phero p.spam-note b { color: var(--ink); }
+</style>
 
 <div class="page-links">
   <div class="wrap">

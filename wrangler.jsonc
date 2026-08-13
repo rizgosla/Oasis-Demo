@@ -28,7 +28,17 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"
-  }
+  },
+  // `wrangler deploy` treats this file as the whole truth about the Worker's
+  // plain-text vars, so with no "vars" block here it DELETES every variable
+  // set through the dashboard on each deploy. Secrets are exempt — Wrangler
+  // never removes those — which produces a genuinely confusing split for the
+  // appointment form: RESEND_API_KEY is added as a Secret and survives, while
+  // APPOINTMENT_TO / APPOINTMENT_FROM are added as plain variables and are
+  // silently wiped, so the handler quietly falls back to its built-in
+  // defaults and the dashboard still shows the values you typed.
+  // keep_vars stops the deletion and leaves the dashboard authoritative.
+  "keep_vars": true
   // The build logs "Enabling sessions with Cloudflare KV with the SESSION KV
   // binding" — the @astrojs/cloudflare adapter wires this up by default and
   // this version has no config flag to turn it off, only to rename it via
