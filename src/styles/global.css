@@ -225,8 +225,16 @@ section.pad { padding: 56px 0; }
    at a time — every phrase occupies the same grid cell (inline-grid, stacked
    in the same area) so nothing else in the hero reflows as it changes, and
    the swapped text inherits the surrounding h1/span font exactly as the
-   static text it replaced did. */
-.heromain h1 .hero-swap { display: inline-grid; align-items: center; max-width: 100%; vertical-align: top; }
+   static text it replaced did.
+
+   The cell is as tall as the tallest phrase, so on narrow screens — where the
+   longest phrase wraps to two lines and the shortest still fits on one — the
+   short phrase has spare height around it. Top-aligning spends that slack
+   below the headline instead of splitting it above and below, so every phrase
+   starts on the same baseline directly under "Oasis Dental Care." and the
+   leftover reads as breathing room before the paragraph rather than a line
+   floating in a gap. */
+.heromain h1 .hero-swap { display: inline-grid; align-items: start; max-width: 100%; vertical-align: top; }
 .heromain h1 .hero-swap-item {
   grid-area: 1 / 1;
   justify-self: start;
