@@ -1,51 +1,75 @@
 {
-  // Cloudflare deploy config. The build log showed:
-  //
-  //   Executing user deploy command: npx wrangler deploy
-  //   ✘ [ERROR] Missing entry-point to Worker script or to assets directory
-  //
-  // The Cloudflare project's "Deploy command" is set to `npx wrangler deploy`
-  // (the Workers deploy path), which needs this file to know what to deploy --
-  // it has no default to fall back on the way plain `wrangler pages deploy`
-  // does. `astro build` itself was completing fine; only this deploy step
-  // failed.
-  //
-  // `main` is the on-demand worker Astro's Cloudflare adapter builds for
-  // src/pages/api/appointment.ts. `assets.binding` must be exactly "ASSETS" --
-  // the adapter's request handler calls `env.ASSETS.fetch(...)` to serve every
-  // prerendered page, so deploys without this binding would serve the API
-  // route fine but 404 the rest of the site.
-  //
-  // "name" must match this project's actual Worker name in the Cloudflare
-  // dashboard -- confirmed as "oasisdemo" from a build log warning:
-  // "Failed to match Worker name. Your config file is using the Worker name
-  // "oasis-dental-care", but the CI system expected "oasisdemo"."
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "oasisdemo",
-  "compatibility_date": "2026-08-09",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "./dist/_worker.js/index.js",
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS"
-  },
-  // `wrangler deploy` treats this file as the whole truth about the Worker's
-  // plain-text vars, so with no "vars" block here it DELETES every variable
-  // set through the dashboard on each deploy. Secrets are exempt — Wrangler
-  // never removes those — which produces a genuinely confusing split for the
-  // appointment form: RESEND_API_KEY is added as a Secret and survives, while
-  // APPOINTMENT_TO / APPOINTMENT_FROM are added as plain variables and are
-  // silently wiped, so the handler quietly falls back to its built-in
-  // defaults and the dashboard still shows the values you typed.
-  // keep_vars stops the deletion and leaves the dashboard authoritative.
-  "keep_vars": true
-  // The build logs "Enabling sessions with Cloudflare KV with the SESSION KV
-  // binding" — the @astrojs/cloudflare adapter wires this up by default and
-  // this version has no config flag to turn it off, only to rename it via
-  // `sessionKVBindingName`. No page calls Astro.session, so it's inert today.
-  // It only becomes a real error ("Invalid binding `SESSION`") the moment
-  // something does call Astro.session while this file has no matching
-  // kv_namespaces entry. If that happens, run
-  // `npx wrangler kv namespace create SESSION` and add the id it prints here:
-  //   "kv_namespaces": [{ "binding": "SESSION", "id": "<id from that command>" }]
+	// Cloudflare deploy config. The build log showed:
+	//
+	//   Executing user deploy command: npx wrangler deploy
+	//   ✘ [ERROR] Missing entry-point to Worker script or to assets directory
+	//
+	// The Cloudflare project's "Deploy command" is set to `npx wrangler deploy`
+	// (the Workers deploy path), which needs this file to know what to deploy --
+	// it has no default to fall back on the way plain `wrangler pages deploy`
+	// does. `astro build` itself was completing fine; only this deploy step
+	// failed.
+	//
+	// `main` is the on-demand worker Astro's Cloudflare adapter builds for
+	// src/pages/api/appointment.ts. `assets.binding` must be exactly "ASSETS" --
+	// the adapter's request handler calls `env.ASSETS.fetch(...)` to serve every
+	// prerendered page, so deploys without this binding would serve the API
+	// route fine but 404 the rest of the site.
+	//
+	// "name" must match this project's actual Worker name in the Cloudflare
+	// dashboard -- confirmed as "oasisdemo" from a build log warning:
+	// "Failed to match Worker name. Your config file is using the Worker name
+	// "oasis-dental-care", but the CI system expected "oasisdemo"."
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "oasisdemo",
+	"compatibility_date": "2026-08-09",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "./dist/_worker.js/index.js",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	// `wrangler deploy` treats this file as the whole truth about the Worker's
+	// plain-text vars, so with no "vars" block here it DELETES every variable
+	// set through the dashboard on each deploy. Secrets are exempt — Wrangler
+	// never removes those — which produces a genuinely confusing split for the
+	// appointment form: RESEND_API_KEY is added as a Secret and survives, while
+	// APPOINTMENT_TO / APPOINTMENT_FROM are added as plain variables and are
+	// silently wiped, so the handler quietly falls back to its built-in
+	// defaults and the dashboard still shows the values you typed.
+	// keep_vars stops the deletion and leaves the dashboard authoritative.
+	"keep_vars": true,
+	"routes": [
+		{
+			"pattern": "oasisdentalcarehb.com",
+			"zone_name": "oasisdentalcarehb.com",
+			"custom_domain": true
+		},
+		{
+			"pattern": "www.oasisdentalcarehb.com",
+			"zone_name": "oasisdentalcarehb.com",
+			"custom_domain": true
+		}
+	],
+	"observability": {
+		"logs": {
+			"enabled": true
+		}
+	},
+	"workers_dev": true,
+	"preview_urls": true,
+	"vars": {
+		"APPOINTMENT_TO": "oasisdentalcarehb@yahoo.com"
+	}
+	// The build logs "Enabling sessions with Cloudflare KV with the SESSION KV
+	// binding" — the @astrojs/cloudflare adapter wires this up by default and
+	// this version has no config flag to turn it off, only to rename it via
+	// `sessionKVBindingName`. No page calls Astro.session, so it's inert today.
+	// It only becomes a real error ("Invalid binding `SESSION`") the moment
+	// something does call Astro.session while this file has no matching
+	// kv_namespaces entry. If that happens, run
+	// `npx wrangler kv namespace create SESSION` and add the id it prints here:
+	//   "kv_namespaces": [{ "binding": "SESSION", "id": "<id from that command>" }]
 }
