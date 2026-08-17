@@ -64,4 +64,16 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </div>
 
+{/* This page is reached only via the 303 from a successful /api/appointment
+    POST (see the success() redirect there), so a view here means the request
+    actually sent — the right place to count the conversion, and it needs no
+    JS on the form itself. gtag is absent in `astro dev`, where Layout.astro
+    skips the tag, so this optional-calls rather than throwing. */}
+<script>
+  window.gtag?.('event', 'generate_lead', {
+    event_category: 'appointment',
+    event_label: 'contact_form',
+  });
+</script>
+
 </Layout>
