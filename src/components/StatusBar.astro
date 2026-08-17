@@ -3,7 +3,14 @@ const PHONE = '(714) 893-2106';
 const TEL = 'tel:7148932106';
 ---
 
-<div class="sbar">
+{/* <aside> rather than a bare <div>: as a plain div sitting before <header>,
+    the phone number and hours here belonged to no landmark, so a screen-reader
+    user navigating by region skipped them entirely. It stays a sibling of
+    <header> rather than moving inside it because .site-head is position:sticky
+    — nesting this in it would grow the sticky box from 72px to 110px, and
+    wrapping both in an outer <header> would cap the sticky range to that
+    wrapper's height and stop the nav sticking at all. */}
+<aside class="sbar" aria-label="Practice status and contact">
   <div class="wrap">
     <div class="l">
       <span class="live"><span class="pulse"></span>Accepting new patients</span>
@@ -14,4 +21,4 @@ const TEL = 'tel:7148932106';
       <a href={TEL}>Call {PHONE}</a>
     </div>
   </div>
-</div>
+</aside>

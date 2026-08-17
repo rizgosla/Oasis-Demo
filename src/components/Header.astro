@@ -25,7 +25,7 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
 <header class="site-head">
   <div class="wrap">
     <a class="brand" href="/"><img src={LOGO} alt="Oasis Dental Care" width="1032" height="261" /></a>
-    <nav class="nav">
+    <nav class="nav" aria-label="Primary">
       {nav.filter(n => n.key !== 'home').map(n => (
         n.key === 'services' ? (
           <div class="nav-dd">
@@ -33,7 +33,6 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
               href={n.href}
               class={`nav-dd-trigger ${n.key === page ? 'active' : ''}`}
               aria-current={n.key === page ? 'page' : undefined}
-              aria-haspopup="true"
               aria-expanded="false"
               aria-controls="services-menu"
             >
@@ -42,7 +41,11 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
             </a>
             {/* Deliberately no role="menu"/"menuitem": those roles promise
                 arrow-key navigation and a roving tabindex that this disclosure
-                does not implement. A list of links needs no role. */}
+                does not implement. A list of links needs no role.
+                aria-haspopup was dropped from the trigger above for the same
+                reason — "true" is an alias for "menu", so it made exactly the
+                promise this comment exists to disclaim. aria-expanded alone
+                fully describes a disclosure. */}
             <div class="nav-dd-menu" id="services-menu">
               {servicesDropdown.map(s => (
                 <a
@@ -94,8 +97,25 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
     transition: transform 0.18s ease;
   }
   .nav-dd:hover .nav-dd-caret,
-  .nav-dd.open .nav-dd-caret {
+  .nav-dd:focus-within .nav-dd-caret {
     transform: rotate(180deg);
+  }
+  .nav-dd.nav-dd-hidden:hover .nav-dd-caret,
+  .nav-dd.nav-dd-hidden:focus-within .nav-dd-caret {
+    transform: none;
+  }
+
+  /* The 8px offset below is a gap the pointer has to cross, and crossing it
+     drops :hover and closes the menu under the user's cursor. This bridges it
+     with a transparent strip so the hover target is continuous — the
+     "hoverable" half of 1.4.13. */
+  .nav-dd-menu::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
   }
 
   .nav-dd-menu {
@@ -118,11 +138,20 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
     z-index: 200;
   }
   .nav-dd:hover .nav-dd-menu,
-  .nav-dd:focus-within .nav-dd-menu,
-  .nav-dd.open .nav-dd-menu {
+  .nav-dd:focus-within .nav-dd-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+  }
+  /* Set by the Escape handler. Carries an extra class over the rules above, so
+     it wins on specificity and can dismiss a flyout the pointer is still
+     sitting on. Cleared on mouseleave/focusout so the next hover opens
+     normally. */
+  .nav-dd.nav-dd-hidden:hover .nav-dd-menu,
+  .nav-dd.nav-dd-hidden:focus-within .nav-dd-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
   }
 
   .nav-dd-item {
@@ -179,13 +208,29 @@ const servicesDropdown = services.map(({ id, title }) => ({ id, label: title }))
     if (dd) {
       var trigger = dd.querySelector('.nav-dd-trigger');
       if (trigger) {
-        trigger.addEventListener('click', function (e) {
-          // On desktop, let hover handle. On click (touch), toggle.
-          if (window.innerWidth > 1020) return;
-          e.preventDefault();
-          dd.classList.toggle('open');
-          var expanded = dd.classList.contains('open');
-          trigger.setAttribute('aria-expanded', String(expanded));
+        // 1.4.13 wants content revealed on hover or focus to be dismissible
+        // without moving the pointer or the focus. Escape is that mechanism.
+        // .nav-dd-hidden beats the :hover/:focus-within rules, so it can close a
+        // flyout the pointer is still sitting on; it is cleared as soon as the
+        // pointer or focus leaves, so the next hover opens normally.
+        // On document, not on dd: when the flyout is open because the pointer is
+        // hovering it, focus is still wherever it was, so a keydown bound to dd
+        // would never fire — which is exactly the case 1.4.13 is about.
+        document.addEventListener('keydown', function (e) {
+          if (e.key !== 'Escape') return;
+          var hovered = dd.matches(':hover');
+          var focused = dd.contains(document.activeElement);
+          if (!hovered && !focused) return;
+          dd.classList.add('nav-dd-hidden');
+          trigger.setAttribute('aria-expanded', 'false');
+          // Only pull focus if it was already inside the flyout; stealing it
+          // from elsewhere on the page would be worse than the problem.
+          if (focused) trigger.focus();
+        });
+        var unhide = function () { dd.classList.remove('nav-dd-hidden'); };
+        dd.addEventListener('mouseleave', unhide);
+        dd.addEventListener('focusout', function (e) {
+          if (!dd.contains(e.relatedTarget)) unhide();
         });
 
         // Above 1020px the flyout is opened purely by CSS :hover/:focus-within,

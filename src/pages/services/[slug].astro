@@ -74,7 +74,10 @@ const procedureSchema = {
 
 <section class="phero">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/services">Services</a><span class="sep" aria-hidden="true">/</span><span style="color:#cfe6e2" aria-current="page">{service.title}</span></nav>
+    {/* No inline colour on the current crumb: it used to be #cfe6e2, which was
+        1.31:1 on this hero's white background — a leftover from when .phero was
+        dark. It now inherits .crumbs (--ink-soft) at 5.89:1. */}
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">/</span><a href="/services">Services</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">{service.title}</span></nav>
     <span class="tag">{service.category}</span>
     <h1>{service.title}</h1>
     <p>{service.heroIntro ?? service.desc}</p>
@@ -149,7 +152,7 @@ const procedureSchema = {
           <div class="ic"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" set:html={r.icon} /></div>
           <h3>{r.title}</h3>
           <p>{r.cardDesc}</p>
-          <span class="arr">Learn more →</span>
+          <span class="arr">Learn more <span aria-hidden="true">→</span></span>
           <div class="bgico"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" set:html={r.bgIcon} /></div>
         </a>
       ))}
