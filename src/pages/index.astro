@@ -9,6 +9,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
 <Layout
   title="Oasis Dental Care — Your Orange County dentist for 25+ years"
   description="Dentist in Huntington Beach, CA. See the same trusted dentist every visit — Dr. Jason Fu has cared for Orange County families for 25+ years. (714) 893-2106."
+  page="home"
 >
 
 <!-- hero -->
@@ -83,7 +84,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">01 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>General Dentistry</h3>
+            <h2>General Dentistry</h2>
             <p>Cleanings, exams and checkups that keep your smile strong — for patients of every age, from first visits to lifelong care.</p>
           </div>
           <a class="svc-cta" href="/services/general-dentistry" aria-label="Learn more about General Dentistry">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -95,7 +96,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">02 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>Cosmetic Dentistry</h3>
+            <h2>Cosmetic Dentistry</h2>
             <p>Whitening, veneers and bonding tailored to your goals — creating results that look and feel naturally like you.</p>
           </div>
           <a class="svc-cta" href="/services/cosmetic-dentistry" aria-label="Learn more about Cosmetic Dentistry">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -107,7 +108,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">03 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>Emergency Dentistry</h3>
+            <h2>Emergency Dentistry</h2>
             <p>Same-day relief for toothaches, broken teeth and dental infections. We set aside time daily for urgent needs so you're never left waiting.</p>
           </div>
           <a class="svc-cta" href="/services/emergency-dentistry" aria-label="Learn more about Emergency Dentistry">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -119,7 +120,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">04 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>Crowns &amp; Bridges</h3>
+            <h2>Crowns &amp; Bridges</h2>
             <p>Custom restorations that repair damaged teeth and replace missing ones — built to blend seamlessly, many completed in a single visit.</p>
           </div>
           <a class="svc-cta" href="/services/crowns-bridges" aria-label="Learn more about Crowns &amp; Bridges">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -131,7 +132,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">05 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>Dental Implants</h3>
+            <h2>Dental Implants</h2>
             <p>A permanent, secure solution for missing teeth that looks and feels just like the real thing — backed by cutting-edge technology and expert placement.</p>
           </div>
           <a class="svc-cta" href="/services/dental-implants" aria-label="Learn more about Dental Implants">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -143,7 +144,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
             <span class="svc-num">06 / 06</span>
           </div>
           <div class="svc-body">
-            <h3>Invisalign Treatment</h3>
+            <h2>Invisalign Treatment</h2>
             <p>Clear, removable aligners that gradually move your teeth into place — nearly invisible and built around your lifestyle.</p>
           </div>
           <a class="svc-cta" href="/services/invisalign" aria-label="Learn more about Invisalign Treatment">Learn more <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -185,7 +186,10 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
       <div class="tcard"><div class="num">05 — Community</div><h3>Rooted in Community</h3><p>From Surf City families to local business owners and weekend beachgoers, we're proud to serve the community we call home.</p></div>
       <div class="tcard"><div class="num">06 — Services</div><h3>Full-Service Dentistry</h3><p>Whether you need a routine checkup, a smile makeover, or a helping hand in an emergency, you won't need to travel far.</p></div>
     </div>
-    <div class="tdots" id="tgridDots" aria-hidden="true"></div>
+    {/* Not aria-hidden: script fills this with real <button>s, and below 860px
+        .tdots is display:flex — so hiding it put focusable, operable controls
+        inside an aria-hidden subtree, which is where they announce nothing. */}
+    <div class="tdots" id="tgridDots" role="group" aria-label="Section slides"></div>
   </div>
 </section>
 
@@ -246,7 +250,7 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
     <div class="info">
       <span class="tag">Visit us</span>
       <h2>6552 Bolsa Ave, Suite J</h2>
-      <div class="addr">Huntington Beach, CA 92647<br /><a href="tel:7148932106" style="color:var(--teal);font-weight:600">(714) 893-2106</a> · oasisdentalcarehb@yahoo.com</div>
+      <div class="addr">Huntington Beach, CA 92647<br /><a href="tel:7148932106" style="font-weight:600">(714) 893-2106</a> · oasisdentalcarehb@yahoo.com</div>
       {/* A description list pairs each day with its hours programmatically;
           plain spans left them as one run-on string. The global reset zeroes
           the dd indent, so this renders identically. */}
@@ -304,7 +308,13 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
   }
 
   function setDots() {
-    [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === cur));
+    // aria-current alongside the class: the visual state is a teal fill and a
+    // 1.35x scale, neither of which reaches assistive tech, so without this the
+    // dots announce as six identical buttons with no sense of position.
+    [...dotsEl.children].forEach((d, i) => {
+      d.classList.toggle('on', i === cur);
+      d.setAttribute('aria-current', String(i === cur));
+    });
   }
 
   // The backing cards are hidden with opacity/pointer-events, neither of which
@@ -401,10 +411,33 @@ import InvisalignLogo from '../components/InvisalignLogo.astro';
     });
     dotsEl.appendChild(d);
   }
+  // Below 860px .tgrid becomes an overflow-x carousel, and a scroll container
+  // that nothing can focus is unreachable by keyboard — you can see there is
+  // more to the right but have no way to get there. Above 860px it is a plain
+  // grid with nothing to scroll, so the tab stop is removed again rather than
+  // left sitting in the tab order doing nothing. Same treatment as the .strip
+  // marquee above, which is focusable for the same reason.
+  function setScrollAccess() {
+    const scrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+    if (scrollable) {
+      scroller.setAttribute('tabindex', '0');
+      scroller.setAttribute('role', 'group');
+      scroller.setAttribute('aria-label', 'What sets the practice apart — scrollable');
+    } else {
+      scroller.removeAttribute('tabindex');
+      scroller.removeAttribute('role');
+      scroller.removeAttribute('aria-label');
+    }
+  }
+
   function update() {
     const w = scroller.clientWidth || 1;
     const idx = Math.round(scroller.scrollLeft / w);
-    [...dotsEl.children].forEach((d, i) => d.classList.toggle('on', i === idx));
+    [...dotsEl.children].forEach((d, i) => {
+      d.classList.toggle('on', i === idx);
+      d.setAttribute('aria-current', String(i === idx));
+    });
+    setScrollAccess();
   }
   scroller.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);

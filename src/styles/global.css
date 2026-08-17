@@ -6,7 +6,14 @@
   --panel: #ffffff;
   --ink: #0a1a18;
   --ink-soft: #56655f;
-  --teal: #0b8174;
+  /* Was #0b8174, which computed to 4.74:1 on white and 4.56:1 on --bg — passing
+     4.5:1, but with so little margin that any tint underneath tipped it over.
+     That is what put .page-links a:hover at 4.26:1 over a 7% teal wash and
+     .nav a.active at 4.28:1 over an 8% one. #0a7368 is the same hue ~4% darker
+     and lifts every pair at once: teal text 5.73:1 on white and 5.50:1 on --bg,
+     and white-on-teal button labels 5.73:1. The rgba(10,115,104,…) washes below
+     are this colour at low alpha and must be kept in step with it. */
+  --teal: #0a7368;
   --teal-700: #076156;
   --teal-300: #5fd0c0;
   --dark: #08221f;
@@ -57,13 +64,31 @@ h1, h2, h3, h4 { font-family: var(--disp); font-weight: 600; line-height: 1.04; 
 /* :focus-visible never matches a mouse click, so the resting design is
    untouched for pointer users and only keyboard focus draws a ring. */
 :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
-/* The teal ring has too little contrast against teal and dark surfaces. */
-.cell.dark :focus-visible, .cell.teal :focus-visible, .site-foot :focus-visible,
+/* The teal ring has too little contrast against dark surfaces. */
+.cell.dark :focus-visible, .site-foot :focus-visible,
 .sbar :focus-visible, .team-band :focus-visible, .tech :focus-visible,
-.ctacard :focus-visible, .bookcard :focus-visible,
 .np-faq-section :focus-visible, .np-aside-card :focus-visible { outline-color: var(--teal-300); }
+/* These cards are not dark, they are --teal, and --teal-300 on them is only
+   2.56:1 — so the focus indicator on the primary conversion buttons was
+   effectively invisible. outline-offset:2px puts the whole ring outside the
+   button, on the card, so the card is the only background it has to clear:
+   white is 5.73:1 there. (--dark was the first choice at 3.50:1, but darkening
+   --teal darkened the card with it and took that pairing down to 2.91:1.) */
+.cell.teal :focus-visible, .ctacard :focus-visible,
+.bookcard :focus-visible { outline-color: #fff; }
 /* Focused only as the skip-link target, never by Tab — no ring needed. */
 main:focus { outline: none; }
+
+/* `a { text-decoration: none }` above is right for nav and buttons, where
+   position and shape already say "control". It is wrong for a link sitting
+   inside a sentence: teal against the surrounding --ink-soft prose is 1.29:1,
+   so colour is doing all the work and doing it invisibly (1.4.1). These are the
+   places a link is embedded in running text, so they get the underline back. */
+.prose p a, .phero p a, .loc .addr a, .infocard .row dd a, .site-foot .fbot a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose p a, .phero p a, .loc .addr a, .infocard .row dd a { color: var(--teal); }
 
 .wrap { max-width: none; margin: 0 auto; padding: 0 var(--gutter); }
 .wrap-narrow { max-width: 920px; margin: 0 auto; padding: 0 var(--gutter); }
@@ -77,7 +102,7 @@ main:focus { outline: none; }
 .btn-ghost:hover { border-color: var(--teal-300); color: var(--teal-300); }
 .ico { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .grid-ov { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 46px 46px; pointer-events: none; }
-.grid-ov-light { position: absolute; inset: 0; background-image: linear-gradient(rgba(11,129,116,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(11,129,116,.07) 1px, transparent 1px); background-size: 46px 46px; pointer-events: none; }
+.grid-ov-light { position: absolute; inset: 0; background-image: linear-gradient(rgba(10,115,104,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(10,115,104,.07) 1px, transparent 1px); background-size: 46px 46px; pointer-events: none; }
 
 /* ---------- status bar ---------- */
 .sbar { background: var(--dark); color: #bfe0da; font-size: 11.5px; letter-spacing: .01em; }
@@ -86,6 +111,9 @@ main:focus { outline: none; }
 .sbar .live { display: flex; align-items: center; gap: 7px; color: var(--teal-300); }
 .sbar .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-300); box-shadow: 0 0 0 0 rgba(95,208,192,.6); animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(95,208,192,.5); } 70% { box-shadow: 0 0 0 7px rgba(95,208,192,0); } 100% { box-shadow: 0 0 0 0 rgba(95,208,192,0); } }
+/* Runs indefinitely from page load, so it needs the same guard every other
+   animation in this file has. The dot stays, it just stops breathing. */
+@media(prefers-reduced-motion: reduce) { .pulse { animation: none; } }
 .sbar a:hover { color: #fff; }
 @media(max-width: 780px) { .sbar .hide { display: none; } }
 
@@ -103,10 +131,11 @@ main:focus { outline: none; }
 .nav { display: flex; gap: 8px; align-items: center; }
 .nav a { font-family: var(--disp); font-weight: 500; font-size: 14.5px; color: var(--ink-soft); padding: 8px 14px; border-radius: 6px; }
 .nav a:hover { color: var(--ink); background: var(--line-l); }
-/* --teal on this tile computes to 4.28:1 — the 8% teal wash lifts the effective
-   background to #ebf5f4, which is just enough to drop it under 4.5:1.
-   --teal-700 on the same tile is 6.62:1. */
-.nav a.active { color: var(--teal-700); background: rgba(11,129,116,.08); }
+/* The 8% teal wash lifts the effective background to #ebf4f3, which used to
+   drop --teal to 4.28:1. The darker --teal now clears it at 5.03:1, but
+   --teal-700 stays here at 7.0:1 — an active nav item should read as the
+   most emphatic thing in the row, not merely as passing. */
+.nav a.active { color: var(--teal-700); background: rgba(10,115,104,.08); }
 .hcta { display: flex; align-items: center; gap: 14px; }
 .hcta .btn { white-space: nowrap; gap: 0; padding: 15px 24px; }
 .menu-toggle { display: none; background: transparent; border: 1px solid var(--line-ctrl); border-radius: 8px; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); padding: 0; transition: .16s; }
@@ -241,7 +270,7 @@ section.pad { padding: 56px 0; }
    light-background treatment — kept in one rule so they cannot drift apart. */
 .heromain .btn-ghost, .phero .btn-ghost { background: transparent; border-color: var(--line-ctrl); color: var(--ink); }
 .heromain .btn-ghost:hover, .phero .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
-.heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); }
+.heromain .media { position: relative; border-left: 1px solid var(--line-l); background: repeating-linear-gradient(135deg, rgba(10,115,104,.04) 0 14px, transparent 14px 28px), var(--dark-2); }
 .heromain .media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .heromain .media .ph { position: absolute; inset: 0; }
 .heromain .media .ph img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
@@ -254,7 +283,9 @@ section.pad { padding: 56px 0; }
 .page-links::-webkit-scrollbar { display: none; }
 .page-links .wrap { display: flex; gap: 6px; flex-wrap: nowrap; }
 .page-links a { font-family: var(--disp); font-size: 13.5px; font-weight: 600; color: var(--ink-soft); padding: 8px 16px; border-radius: 6px; transition: .16s; white-space: nowrap; }
-.page-links a:hover { color: var(--teal); background: rgba(11,129,116,.07); }
+/* Same trap as .nav a.active above: the 7% teal wash lifts the effective
+   background to #eef6f5, where --teal is only 4.26:1. --teal-700 is 6.5:1. */
+.page-links a:hover { color: var(--teal-700); background: rgba(10,115,104,.07); }
 
 /* ---------- marquee strip ---------- */
 .strip { background: #fff; border-top: 1px solid var(--line-l); border-bottom: 1px solid var(--line-l); overflow: hidden; }
@@ -269,7 +300,7 @@ section.pad { padding: 56px 0; }
 .strip:hover .track, .strip:focus-within .track { animation-play-state: paused; }
 
 /* ---------- stat band ---------- */
-.stat-band { background: repeating-linear-gradient(135deg, rgba(11,129,116,.04) 0 14px, transparent 14px 28px), var(--dark-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; }
+.stat-band { background: repeating-linear-gradient(135deg, rgba(10,115,104,.04) 0 14px, transparent 14px 28px), var(--dark-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 24px 0; }
 .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
 .stat { padding: 0 32px; border-right: 1px solid var(--line); text-align: center; }
 .stat:last-child { border-right: 0; }
@@ -443,7 +474,9 @@ section.pad { padding: 56px 0; }
 .bookcard .acts { position: relative; display: flex; flex-direction: column; gap: 12px; }
 .bookcard .btn { background: #fff; color: var(--teal-700); border-color: #fff; justify-content: center; }
 .bookcard .btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
-.bookcard .btn-o { background: transparent; border-color: rgba(255,255,255,.5); color: #fff; }
+.bookcard /* .5 white composites to #85c0ba on teal — 2.33:1, under the 3:1 that 1.4.11
+   wants for the boundary of a control. .7 lands at ~3.1:1. */
+.btn-o { background: transparent; border-color: rgba(255,255,255,.7); color: #fff; }
 .bookcard .btn-o:hover { background: #fff; color: var(--teal-700); }
 @media(max-width: 760px) { .bookcard { grid-template-columns: 1fr; padding: 44px 30px; } }
 
@@ -455,7 +488,7 @@ section.pad { padding: 56px 0; }
 .prose p { color: var(--ink-soft); margin-top: 14px; font-size: 16.5px; }
 .prose ul { margin: 16px 0 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .prose ul li { position: relative; padding-left: 30px; color: var(--ink-soft); }
-.prose ul li::before { content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 5px; background: rgba(11,129,116,.12); }
+.prose ul li::before { content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px; border-radius: 5px; background: rgba(10,115,104,.12); }
 .prose ul li::after { content: ""; position: absolute; left: 5px; top: 11px; width: 6px; height: 3px; border-left: 1.6px solid var(--teal); border-bottom: 1.6px solid var(--teal); transform: rotate(-45deg); }
 
 /* steps */
@@ -483,7 +516,10 @@ section.pad { padding: 56px 0; }
 .faq details { border: 1px solid var(--line-l); border-radius: 12px; background: var(--panel); overflow: hidden; }
 .faq summary { padding: 18px 22px; font-family: var(--disp); font-weight: 600; font-size: 16.5px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: "+"; font-size: 22px; color: var(--teal); font-weight: 400; transition: .2s; }
+/* The "/ \"\"" is the alt text of the generated content: Chrome exposes ::after
+   content to the a11y tree, so without it every question is read "… plus".
+   <details> already reports open/closed state, so the glyph is purely visual. */
+.faq summary::after { content: "+" / ""; font-size: 22px; color: var(--teal); font-weight: 400; transition: .2s; }
 .faq details[open] summary::after { transform: rotate(45deg); }
 .faq p { padding: 0 22px 20px; color: var(--ink-soft); font-size: 15.5px; }
 
@@ -502,7 +538,11 @@ section.pad { padding: 56px 0; }
 .scell p { color: var(--ink-soft); font-size: 14.5px; margin-top: 8px; }
 .scell .arr { margin-top: 14px; font-size: 13px; color: var(--teal); display: inline-flex; gap: 6px; font-weight: 600; }
 .scell:hover .arr { gap: 10px; }
-.scell .bgico { position: absolute; right: -18px; bottom: -22px; width: 112px; height: 112px; color: var(--teal); opacity: .07; pointer-events: none; }
+/* Same guard the .cell bento system has: .bgico is absolutely positioned and
+   last in source, so without this it paints in the positioned layer above the
+   in-flow copy and the "Learn more" link it overlaps. */
+.scell > *:not(.bgico) { position: relative; z-index: 1; }
+.scell .bgico { position: absolute; right: -18px; bottom: -22px; width: 112px; height: 112px; color: var(--teal); opacity: .07; pointer-events: none; z-index: 0; }
 .scell .bgico svg { width: 100%; height: 100%; stroke: currentColor; fill: none; stroke-width: 1.1; }
 
 /* ---------- team ---------- */
@@ -530,7 +570,7 @@ section.pad { padding: 56px 0; }
 @media(max-width: 900px) { .contact-grid { grid-template-columns: 1fr; } }
 .formcard { border: 1px solid var(--line-l); border-radius: 18px; background: var(--panel); padding: 34px; }
 .formcard h2 { font-size: 26px; }
-.formcard .note { font-size: 13px; color: var(--ink-soft); margin-top: 8px; background: rgba(11,129,116,.06); border-radius: 8px; padding: 12px 14px; border: 1px solid var(--line-l); }
+.formcard .note { font-size: 13px; color: var(--ink-soft); margin-top: 8px; background: rgba(10,115,104,.06); border-radius: 8px; padding: 12px 14px; border: 1px solid var(--line-l); }
 .field { display: flex; flex-direction: column; gap: 7px; margin-top: 18px; }
 .field label { font-size: 13px; font-weight: 600; color: var(--ink); }
 .field input, .field textarea, .field select { font-family: var(--body); font-size: 15px; padding: 12px 14px; border: 1.5px solid var(--line-ctrl); border-radius: 9px; background: var(--bg); color: var(--ink); transition: .15s; }
@@ -580,7 +620,9 @@ section.pad { padding: 56px 0; }
 .ctacard .acts { position: relative; display: flex; flex-direction: column; gap: 12px; }
 .ctacard .btn { background: #fff; color: var(--teal-700); border-color: #fff; justify-content: center; }
 .ctacard .btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
-.ctacard .btn-o { background: transparent; border-color: rgba(255,255,255,.5); color: #fff; }
+.ctacard /* .5 white composites to #85c0ba on teal — 2.33:1, under the 3:1 that 1.4.11
+   wants for the boundary of a control. .7 lands at ~3.1:1. */
+.btn-o { background: transparent; border-color: rgba(255,255,255,.7); color: #fff; }
 .ctacard .btn-o:hover { background: #fff; color: var(--teal-700); }
 @media(max-width: 760px) { .ctacard { grid-template-columns: 1fr; padding: 40px 28px; } }
 
@@ -598,7 +640,11 @@ section.pad { padding: 56px 0; }
 
 /* ---------- soft glow (replaces grid overlay in dark/teal sections) ---------- */
 .bg-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 70% at 62% 42%, rgba(95,208,192,.18) 0%, transparent 68%); pointer-events: none; }
-.bg-glow-teal { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 72% 48%, rgba(255,255,255,.16) 0%, transparent 62%); pointer-events: none; }
+/* .16 composited to #329591, where the white button labels sitting right on the
+   glow's centre (72% is the .acts column) fell to 3.62:1. At .06 the composite
+   is #197b71 and white is back to 5.10:1. Used only by the homepage .bookcard —
+   .bg-glow above is the separate teal-300-on-dark one and is unaffected. */
+.bg-glow-teal { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 72% 48%, rgba(255,255,255,.06) 0%, transparent 62%); pointer-events: none; }
 
 /* ---------- services two-col layout ---------- */
 .services-layout { display: grid; grid-template-columns: .88fr 1.12fr; gap: 64px; align-items: center; }
@@ -638,11 +684,15 @@ section.pad { padding: 56px 0; }
 .svc-card:not([data-pos="0"]) > * { opacity: 0; }
 .svc-card[data-pos="0"] > * { opacity: 1; transition: opacity .24s ease-in .1s; }
 .svc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
-.svc-ic { width: 46px; height: 46px; border-radius: 12px; background: rgba(11,129,116,.09); display: grid; place-items: center; color: var(--teal); flex-shrink: 0; }
+.svc-ic { width: 46px; height: 46px; border-radius: 12px; background: rgba(10,115,104,.09); display: grid; place-items: center; color: var(--teal); flex-shrink: 0; }
 .svc-ic svg { width: 23px; height: 23px; stroke: currentColor; fill: none; stroke-width: 1.7; }
 .svc-num { font-size: 11px; color: var(--ink-soft); letter-spacing: .04em; }
 .svc-body { flex: 1; }
-.svc-body h3 { font-size: clamp(21px, 2.3vw, 27px); color: var(--ink); letter-spacing: -0.02em; }
+/* Retagged h3 -> h2. The deck is source-ordered for mobile so it precedes the
+   section's own h2, which made the homepage outline run h1 -> h3 -> h2. Same
+   fix, and same reasoning, as .scell h3 -> h2 above; size is set here so the
+   change is invisible. */
+.svc-body h2 { font-size: clamp(21px, 2.3vw, 27px); color: var(--ink); letter-spacing: -0.02em; }
 .svc-body p { color: var(--ink-soft); font-size: 15px; margin-top: 8px; line-height: 1.62; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
 .svc-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--disp); font-weight: 600; font-size: 13.5px; color: var(--teal); margin-top: auto; padding-top: 14px; }
 .svc-cta svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s; }
@@ -652,7 +702,10 @@ section.pad { padding: 56px 0; }
 .deck-arrow:hover { border-color: var(--teal); color: var(--teal); }
 .deck-arrow svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .deck-dots { display: flex; gap: 7px; align-items: center; }
-.deck-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-l); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
+/* --line-ctrl, not --line-l: these are controls, and at 1.22:1 the resting dots
+   were invisible against --bg, so neither the position nor the count of the
+   deck could be perceived. --line-ctrl is 3.19:1 (1.4.11). */
+.deck-dot { position: relative; width: 7px; height: 7px; border-radius: 50%; border: none; background: var(--line-ctrl); cursor: pointer; padding: 0; transition: background .22s, transform .22s; }
 /* The visible dot is 7px, which is a very small thing to hit. This enlarges the
    clickable area to the full 14px pitch without changing what is drawn. It
    stops at 14px on purpose: the dots sit 14px apart, so a wider target would

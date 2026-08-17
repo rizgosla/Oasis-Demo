@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
     <span class="tag">/ Thank you</span>
     <h1>Thanks — you're all set.</h1>
     <p>Your request is in. Someone from our team will reach out, usually the same day, to confirm a time that works for you.</p>
-    <p>If this is urgent, please call us directly at <a href="tel:7148932106" style="color:var(--teal)">(714) 893-2106</a> rather than waiting for a reply.</p>
+    <p>If this is urgent, please call us directly at <a href="tel:7148932106">(714) 893-2106</a> rather than waiting for a reply.</p>
     {/* The confirmation is sent from a website address the patient has never
         corresponded with, so it lands in spam often enough that people assume
         the form failed and submit again. Saying so here costs nothing and
@@ -48,7 +48,7 @@ import Layout from '../layouts/Layout.astro';
     font-size: 14px;
     line-height: 1.6;
     color: var(--ink-soft);
-    background: rgba(11, 129, 116, 0.06);
+    background: rgba(10, 115, 104, 0.06);
     border: 1px solid var(--line-l);
     border-left: 3px solid var(--teal);
     border-radius: 8px;
@@ -56,13 +56,13 @@ import Layout from '../layouts/Layout.astro';
   .phero p.spam-note b { color: var(--ink); }
 </style>
 
-<div class="page-links">
+<nav class="page-links" aria-label="Page sections">
   <div class="wrap">
     <a href="/services">Services</a>
     <a href="/practice">Our Practice</a>
     <a href="/new-patients">New Patients</a>
   </div>
-</div>
+</nav>
 
 {/* This page is reached only via the 303 from a successful /api/appointment
     POST (see the success() redirect there), so a view here means the request
